@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "dependencies": [
+    "@radix-ui/react-slot"
+  ],
+  "files": [
+    {
+      "path": "registry/components/ui/button.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { cn } from \"../../lib/utils\"\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  asChild?: boolean\n}\n\nexport function Button({\n  asChild = false,\n  className,\n  ...props\n}: ButtonProps) {\n  const Comp = asChild ? Slot : \"button\"\n\n  return (\n    <Comp\n      className={cn(\n        \"inline-flex items-center justify-center rounded-md text-sm font-medium bg-amber-200\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

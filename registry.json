@@ -1,25 +1,25 @@
 {
     "$schema": "https://ui.shadcn.com/schema/registry.json",
-    "name": "tritronik/ui",
+    "name": "tritronik",
     "homepage": "https://github.com/huahaharis/ui.tritronik",
     "items": [
         {
             "name": "globals",
-            "type": "config",
+            "type": "registry:style",
             "files": [
                 {
-                    "path": "styles/globals.css",
-                    "type": "style"
+                    "path": "registry/styles/global.css",
+                    "type": "registry:style"
                 }
             ]
         },
         {
             "name": "utils",
-            "type": "utility",
+            "type": "registry:lib",
             "files": [
                 {
-                    "path": "lib/utils.ts",
-                    "type": "utility"
+                    "path": "registry/lib/utils.ts",
+                    "type": "registry:lib"
                 }
             ],
             "dependencies": [
@@ -29,11 +29,11 @@
         },
         {
             "name": "button",
-            "type": "component",
+            "type": "registry:component",
             "files": [
                 {
                     "path": "registry/components/ui/button.tsx",
-                    "type": "component"
+                    "type": "registry:component"
                 }
             ],
             "dependencies": [
@@ -42,11 +42,11 @@
         },
         {
             "name": "accordion",
-            "type": "component",
+            "type": "registry:component",
             "files": [
                 {
                     "path": "registry/components/ui/accordion.tsx",
-                    "type": "component"
+                    "type": "registry:component"
                 }
             ],
             "dependencies": [

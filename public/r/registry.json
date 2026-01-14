@@ -1,0 +1,57 @@
+{
+    "$schema": "https://ui.shadcn.com/schema/registry.json",
+    "name": "tritronik",
+    "homepage": "https://github.com/huahaharis/ui.tritronik",
+    "items": [
+        {
+            "name": "globals",
+            "type": "registry:style",
+            "files": [
+                {
+                    "path": "registry/styles/global.css",
+                    "type": "registry:style"
+                }
+            ]
+        },
+        {
+            "name": "utils",
+            "type": "registry:lib",
+            "files": [
+                {
+                    "path": "registry/lib/utils.ts",
+                    "type": "registry:lib"
+                }
+            ],
+            "dependencies": [
+                "clsx",
+                "tailwind-merge"
+            ]
+        },
+        {
+            "name": "button",
+            "type": "registry:component",
+            "files": [
+                {
+                    "path": "registry/components/ui/button.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": [
+                "@radix-ui/react-slot"
+            ]
+        },
+        {
+            "name": "accordion",
+            "type": "registry:component",
+            "files": [
+                {
+                    "path": "registry/components/ui/accordion.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": [
+                "@radix-ui/react-accordion"
+            ]
+        }
+    ]
+}
