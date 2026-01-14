@@ -29,18 +29,18 @@
         },
         {
             "name": "button",
-            "type": "registry:component",
-            "files": [
-                {
-                    "path": "registry/components/ui/button.tsx",
-                    "type": "registry:component"
-                }
-            ],
+            "type": "registry:ui",
             "dependencies": [
                 "@radix-ui/react-slot"
             ],
             "registryDependencies": [
                 "utils"
+            ],
+            "files": [
+                {
+                    "path": "registry/components/ui/button.tsx",
+                    "type": "registry:component"
+                }
             ]
         },
         {
