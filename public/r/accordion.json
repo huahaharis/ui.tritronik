@@ -4,6 +4,9 @@
   "dependencies": [
     "@radix-ui/react-accordion"
   ],
+  "registryDependencies": [
+    "utils"
+  ],
   "files": [
     {
       "path": "registry/components/ui/accordion.tsx",

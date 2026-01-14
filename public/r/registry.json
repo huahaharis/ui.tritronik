@@ -38,6 +38,9 @@
             ],
             "dependencies": [
                 "@radix-ui/react-slot"
+            ],
+            "registryDependencies": [
+                "utils"
             ]
         },
         {
@@ -51,6 +54,9 @@
             ],
             "dependencies": [
                 "@radix-ui/react-accordion"
+            ],
+            "registryDependencies": [
+                "utils"
             ]
         }
     ]
