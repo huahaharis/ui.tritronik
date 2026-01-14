@@ -13,9 +13,8 @@
     "moduleResolution": "Bundler",
     "esModuleInterop": true,
 
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"],

@@ -9,8 +9,8 @@ export function DocsSidebar() {
     {
       title: "Sections",
       items: [
-        { label: "Get Started", href: "#" },
-        { label: "Components", href: "#" },
+        { label: "Get Started", href: "/docs" },
+        { label: "Components", href: "/docs/components" },
         { label: "Directory", href: "#" },
         { label: "MCP Server", href: "#" },
         { label: "Forms", href: "#" },
@@ -20,8 +20,8 @@ export function DocsSidebar() {
     {
       title: "Get Started",
       items: [
-        { label: "Installation", href: "/docs/instalation" },
-        { label: "components.json", href: "/docs/components" },
+        { label: "Installation", href: "/docs/installation" },
+        { label: "components.json", href: "#" },
         { label: "Theming", href: "/docs/theming" },
         { label: "Dark Mode", href: "/docs/dark-mode" },
         { label: "CLI", href: "/docs/cli" },

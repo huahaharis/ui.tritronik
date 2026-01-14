@@ -4,8 +4,8 @@ import Link from "next/link"
 
 export function Header() {
   return (
-    <header className="border-b border-border bg-background">
-      <div className="container mx-auto flex items-center justify-between px-4 py-4">
+    <header className="bg-background">
+      <div className="flex items-center justify-between px-10 py-4">
         <div className="flex items-center gap-8">
           <a href="/" className="text-lg font-semibold text-foreground">Design System</a>
           <nav className="hidden gap-6 md:flex">

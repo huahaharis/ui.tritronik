@@ -5,6 +5,9 @@ import { DemoBlock } from "@/components/docs/demo-block"
 import { demoRegistry } from "@/components/demos"
 import { Copy, Check } from "lucide-react"
 import type { ComponentData } from "@/lib/component-data"
+import Link from "next/link"
+import { getComponentsList } from "@/lib/component-data"
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion"
 
 export default function ComponentDocClient({
     component,
@@ -15,7 +18,7 @@ export default function ComponentDocClient({
 }) {
     const [copiedId, setCopiedId] = useState<string | null>(null)
     const [installationTab, setInstallationTab] = useState("CLI")
-
+    const components = getComponentsList()
     const Demo = component.demo ? demoRegistry[component.demo] : null
 
     const copyToClipboard = (text: string, id: string) => {
@@ -23,6 +26,31 @@ export default function ComponentDocClient({
         setCopiedId(id)
         setTimeout(() => setCopiedId(null), 2000)
     }
+
+    function getPrevNext(
+        slug: string | undefined,
+        items: { slug: string }[]
+    ) {
+        if (!slug) {
+            return { prev: null, next: null }
+        }
+
+        const index = items.findIndex((i) => i.slug === slug)
+
+        if (index === -1) {
+            return { prev: null, next: null }
+        }
+
+        return {
+            prev: index > 0 ? items[index - 1].slug : null,
+            next:
+                index < items.length - 1
+                    ? items[index + 1].slug
+                    : null,
+        }
+    }
+
+    const { prev, next } = getPrevNext(slug, components)
 
     return (
         <div className="mx-auto max-w-3xl px-6 py-12 md:px-8 space-y-12">
@@ -34,10 +62,51 @@ export default function ComponentDocClient({
                         {component.description}
                     </p>
                 </div>
-                <button className="inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm hover:bg-muted">
-                    <Copy className="h-4 w-4" />
-                    Copy Page
-                </button>
+                <div className="flex justify-center place-items-center mt-3">
+                    <div
+                        onClick={() => copyToClipboard(window.location.href, "page")}
+                        className="inline-flex items-center h-6 w-28 gap-2 rounded-md cursor-pointer border border-border bg-card px-3 py-2 text-xs font-medium hover:bg-muted"
+                    >
+                        <Copy className="h-4 w-4" />
+                        Copy Page
+                    </div>
+                    <div className="flex">
+                        {prev ? (
+                            <Link
+                                href={`/docs/components/${prev}`}
+                                className="flex h-6 w-6 mx-2 items-center justify-center rounded-md border border-border bg-card text-xs font-semibold text-muted-foreground hover:text-foreground"
+                                title="Previous component"
+                            >
+                                ←
+                            </Link>
+                        ) : (
+                            <Link
+                                href="/docs/components"
+                                className="flex h-6 w-6 mx-2 items-center justify-center rounded-md border border-border bg-card text-xs font-semibold text-muted-foreground hover:text-foreground"
+                                title="Back to components"
+                            >
+                                ←
+                            </Link>
+                        )}
+                        {next ? (
+                            <Link
+                                href={`/docs/components/${next}`}
+                                className="ml-2 flex h-6 w-6 items-center justify-center rounded-md border border-border bg-card text-xs font-semibold text-muted-foreground hover:text-foreground"
+                                title="Next component"
+                            >
+                                →
+                            </Link>
+                        ) : (
+                            <Link
+                                href="/docs/components"
+                                className="flex h-6 w-6 items-center justify-center rounded-md border border-border bg-card text-xs font-semibold text-muted-foreground hover:text-foreground"
+                                title="Back to components"
+                            >
+                                →
+                            </Link>
+                        )}
+                    </div>
+                </div>
             </div>
 
             <div className="space-y-12">
@@ -51,7 +120,20 @@ export default function ComponentDocClient({
                         </DemoBlock>
                     </section>
                 )}
-
+    <Accordion type="single" collapsible>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Is it styled?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It comes with default styles you can customize.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
                 {component.installation && (
                     <section id="installation">
                         <h2 className="mb-6 text-2xl font-bold">Installation</h2>

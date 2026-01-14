@@ -19,7 +19,7 @@ export function TableOfContents({
 
   return (
     <aside className="hidden xl:block w-72 shrink-0 mr-10">
-      <div className="sticky top-20 space-y-6 px-4 py-8">
+      <div className="sticky top-20 space-y-6 px-4 py-8 overflow-y-auto max-h-[calc(100vh-6rem)]">
         <h3 className="text-sm font-semibold text-foreground">
           On This Page
         </h3>

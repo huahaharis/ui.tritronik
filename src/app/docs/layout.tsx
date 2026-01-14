@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { Header } from "@/components/layout/header"
 import { DocsSidebar } from "@/components/docs/docs-sidebar"
 import { TableOfContents } from "@/components/docs/table-of-contents"
+import { Footer } from "@/components/layout/footer"
 
 export default function DocsLayout({
   children,
@@ -76,7 +77,7 @@ export default function DocsLayout({
       <div className="flex h-[calc(100vh-3.5rem)]">
         <DocsSidebar />
 
-        <main ref={mainRef} className="flex-1 overflow-y-auto">
+        <main ref={mainRef} className="flex-1 overflow-y-auto scroll-smooth scrollbar-hide">
           {children}
         </main>
 
@@ -85,6 +86,8 @@ export default function DocsLayout({
           activeSection={activeSection}
         />
       </div>
+
+      <Footer />
     </>
   )
 }
