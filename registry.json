@@ -58,6 +58,23 @@
             "registryDependencies": [
                 "utils"
             ]
+        },
+        {
+            "name": "alert-dialog",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-alert-dialog"
+            ],
+            "registryDependencies": [
+                "utils",
+                "button"
+            ],
+            "files": [
+                {
+                    "path": "registry/components/ui/alert-dialog.tsx",
+                    "type": "registry:component"
+                }
+            ]
         }
     ]
 }
