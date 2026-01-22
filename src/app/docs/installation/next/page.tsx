@@ -6,7 +6,7 @@ import { CodeBlock, Command, Section, Pkg, Note } from "@/components/docs/code-b
 import Link from "next/link"
 
 export default function NextJsInstallationPage() {
-    const [pkg, setPkg] = useState<Pkg>("yarn")
+    const [pkg, setPkg] = useState<Pkg>("pnpm")
     const [copied, setCopied] = useState<string | null>(null)
 
     function copy(text: string, id: string) {
@@ -74,23 +74,39 @@ export default function NextJsInstallationPage() {
                     />
 
                     <p className="mt-3 text-sm text-muted-foreground">
-                        Choose between a Next.js project or a Monorepo.
+                        Add URL tritronik for install components to registry on components.json.
+                    </p>
+
+                    <CodeBlock
+                        filename="components.json"
+                        code={`.....
+
+"registries": {
+    "@tritronik": "https://ui-tritronik.vercel.app/r/{name}.json"
+}`}
+                        onCopy={copy}
+                        copied={copied}
+                        id="add"
+                    />
+
+                    <p className="mt-3 text-sm text-muted-foreground">
+                        The setup finished, now you can try it.
                     </p>
                 </Section>
 
                 <Section title="Add Components" id="add-components">
                     <p className="mt-2 text-base text-muted-foreground">
-                        You can now start adding components to your project.
+                        You can start adding components to your project.
                     </p>
 
                     <Command
                         pkg={pkg}
                         setPkg={setPkg}
                         code={{
-                            pnpm: "pnpm dlx shadcn@latest add button",
-                            npm: "npx shadcn@latest add button",
-                            yarn: "yarn shadcn@latest add button",
-                            bun: "bunx --bun shadcn@latest add button",
+                            pnpm: "pnpm dlx shadcn@latest add @tritronik/button",
+                            npm: "npx shadcn@latest add @tritronik/button",
+                            yarn: "yarn shadcn@latest add @tritronik/button",
+                            bun: "bunx --bun shadcn@latest add @tritronik/button",
                         }}
                         onCopy={copy}
                         copied={copied}

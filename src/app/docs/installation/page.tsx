@@ -11,41 +11,41 @@ const frameworks = [
         href: "/docs/installation/vite",
         icon: ViteIcon,
     },
-    {
-        name: "Laravel",
-        href: "/docs/installation/laravel",
-        icon: LaravelIcon,
-    },
-    {
-        name: "React Router",
-        href: "/docs/installation/react-router",
-        icon: ReactRouterIcon,
-    },
-    {
-        name: "Astro",
-        href: "/docs/installation/astro",
-        icon: AstroIcon,
-    },
-    {
-        name: "TanStack Start",
-        href: "/docs/installation/tanstack-start",
-        icon: TanStackIcon,
-    },
-    {
-        name: "TanStack Router",
-        href: "/docs/installation/tanstack-router",
-        icon: TanStackIcon,
-    },
-    {
-        name: "Manual",
-        href: "/docs/installation/manual",
-        icon: ManualIcon,
-    },
+    // {
+    //     name: "Laravel",
+    //     href: "/docs/installation/laravel",
+    //     icon: LaravelIcon,
+    // },
+    // {
+    //     name: "React Router",
+    //     href: "/docs/installation/react-router",
+    //     icon: ReactRouterIcon,
+    // },
+    // {
+    //     name: "Astro",
+    //     href: "/docs/installation/astro",
+    //     icon: AstroIcon,
+    // },
+    // {
+    //     name: "TanStack Start",
+    //     href: "/docs/installation/tanstack-start",
+    //     icon: TanStackIcon,
+    // },
+    // {
+    //     name: "TanStack Router",
+    //     href: "/docs/installation/tanstack-router",
+    //     icon: TanStackIcon,
+    // },
+    // {
+    //     name: "Manual",
+    //     href: "/docs/installation/manual",
+    //     icon: ManualIcon,
+    // },
 ]
 
 export default function InstallationPage() {
     return (
-        <div className="mx-auto max-w-4xl px-6 py-12 md:px-8">
+        <div className="mx-auto max-w-3xl px-6 py-12 md:px-8">
             <div className="mb-8">
                 <h1 className="text-4xl font-bold text-foreground">Installation</h1>
                 <p className="text-sm text-muted-foreground mt-4">

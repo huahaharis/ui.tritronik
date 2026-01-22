@@ -19,7 +19,8 @@ export function DemoBlock({
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
-
+  const lines = code.replace(/\n$/, "").split("\n")
+  
   return (
     <div className="overflow-hidden rounded-xl border bg-card">
 
@@ -27,10 +28,19 @@ export function DemoBlock({
         <div className="w-full max-w-xl">{children}</div>
       </div>
 
-      <div className="relative border-t bg-muted/50">
-        <pre className="max-h-100 overflow-x-auto p-4 text-sm">
-          <code className="font-mono">{code}</code>
-        </pre>
+      <div className="relative rounded-b-lg border border-border bg-card font-mono text-sm">
+        <div className="flex">
+          <div className="select-none border-r border-border bg-muted/50 px-3 py-4 text-right text-muted-foreground">
+            {lines.map((_, i) => (
+              <div key={i} className="leading-relaxed">
+                {i + 1}
+              </div>
+            ))}
+          </div>
+          <pre className="px-4 py-4 leading-relaxed overflow-x-auto">
+            <code className="font-mono">{code}</code>
+          </pre>
+        </div>
 
         <button
           onClick={copy}

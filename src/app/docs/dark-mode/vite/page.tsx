@@ -222,10 +222,10 @@ export default defineConfig({
                         pkg={pkg}
                         setPkg={setPkg}
                         code={{
-                            pnpm: "pnpm dlx shadcn@latest add @tritronik/button",
-                            npm: "npx shadcn@latest add @tritronik/button",
-                            yarn: "yarn shadcn@latest add @tritronik/button",
-                            bun: "bunx shadcn@latest add @tritronik/button",
+                            pnpm: "pnpm dlx shadcn@latest add button",
+                            npm: "npx shadcn@latest add button",
+                            yarn: "yarn shadcn@latest add button",
+                            bun: "bunx shadcn@latest add button",
                         }}
                         onCopy={copy}
                         copied={copied}

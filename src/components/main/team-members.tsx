@@ -8,13 +8,13 @@ export function TeamMembers() {
       <p className="mb-6 text-sm text-muted-foreground">Invite your team to collaborate on this project</p>
 
       <div className="mb-6 flex gap-2">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white text-sm font-semibold">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-purple-600 text-white text-sm font-semibold">
           A
         </div>
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-pink-500 to-red-600 text-white text-sm font-semibold">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-pink-500 to-red-600 text-white text-sm font-semibold">
           J
         </div>
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-teal-600 text-white text-sm font-semibold">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-green-500 to-teal-600 text-white text-sm font-semibold">
           M
         </div>
       </div>

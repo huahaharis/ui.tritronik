@@ -23,7 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans antialiased`}>
-        <ThemeProvider>
+        <ThemeProvider disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>

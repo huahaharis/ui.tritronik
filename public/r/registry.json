@@ -75,6 +75,39 @@
                     "type": "registry:component"
                 }
             ]
+        },
+        {
+            "name": "avatar",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-avatar"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "registry/components/ui/avatar.tsx",
+                    "type": "registry:component"
+                }
+            ]
+        },
+        {
+            "name": "calendar",
+            "type": "registry:ui",
+            "dependencies": [
+                "react-day-picker"
+            ],
+            "registryDependencies": [
+                "utils",
+                "button"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/calendar.tsx",
+                    "type": "registry:component"
+                }
+            ]
         }
     ]
 }

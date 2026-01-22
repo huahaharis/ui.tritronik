@@ -3,11 +3,11 @@
 import { useState } from "react"
 import { DemoBlock } from "@/components/docs/demo-block"
 import { demoRegistry } from "@/components/demos"
-import { Copy, Check } from "lucide-react"
+import { Copy, ArrowUpRight } from "lucide-react"
 import type { ComponentData } from "@/lib/component-data"
 import Link from "next/link"
 import { getComponentsList } from "@/lib/component-data"
-import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion"
+import { CodeBlock, Command, Pkg } from "@/components/docs/code-block"
 
 export default function ComponentDocClient({
     component,
@@ -16,6 +16,7 @@ export default function ComponentDocClient({
     slug?: string
     component: ComponentData
 }) {
+    const [pkg, setPkg] = useState<Pkg>("yarn")
     const [copiedId, setCopiedId] = useState<string | null>(null)
     const [installationTab, setInstallationTab] = useState("CLI")
     const components = getComponentsList()
@@ -61,6 +62,18 @@ export default function ComponentDocClient({
                     <p className="mt-2 text-sm text-muted-foreground">
                         {component.description}
                     </p>
+                    <div className="flex flex-row mt-2">
+                        {component.docs && (
+                            <Link href={`${component.urlDocs}`} className="flex flex-row justify-center place-items-center items-center rounded-xl text-xs bg-muted h-6 w-14">
+                                Docs <ArrowUpRight size={12} />
+                            </Link>
+                        )}
+                        {component.apiReference && (
+                            <Link href={`${component.urlReference}`} className="flex flex-row justify-center place-items-center items-center rounded-xl text-xs bg-muted h-6 w-28 ml-2">
+                                API Reference <ArrowUpRight size={12} />
+                            </Link>
+                        )}
+                    </div>
                 </div>
                 <div className="flex justify-center place-items-center mt-3">
                     <div
@@ -91,7 +104,7 @@ export default function ComponentDocClient({
                         {next ? (
                             <Link
                                 href={`/docs/components/${next}`}
-                                className="ml-2 flex h-6 w-6 items-center justify-center rounded-md border border-border bg-card text-xs font-semibold text-muted-foreground hover:text-foreground"
+                                className="flex h-6 w-6 items-center justify-center rounded-md border border-border bg-card text-xs font-semibold text-muted-foreground hover:text-foreground"
                                 title="Next component"
                             >
                                 →
@@ -120,20 +133,7 @@ export default function ComponentDocClient({
                         </DemoBlock>
                     </section>
                 )}
-    <Accordion type="single" collapsible>
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Is it accessible?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It adheres to the WAI-ARIA design pattern.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>Is it styled?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It comes with default styles you can customize.
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
+
                 {component.installation && (
                     <section id="installation">
                         <h2 className="mb-6 text-2xl font-bold">Installation</h2>
@@ -154,19 +154,44 @@ export default function ComponentDocClient({
                         </div>
 
                         {installationTab === "CLI" && (
-                            <CodeBlock
-                                code={component.installation.cli}
-                                id="cli-code"
-                                copiedId={copiedId}
+
+                            <Command
+                                pkg={pkg}
+                                setPkg={setPkg}
+                                code={{
+                                    pnpm: `pnpm dlx shadcn@latest add @tritronik/${component.title.toLocaleLowerCase()}`,
+                                    npm: `npm shadcn@latest add @tritronik/${component.title.toLocaleLowerCase()}`,
+                                    yarn: `yarn shadcn@latest add @tritronik/${component.title.toLocaleLowerCase()}`,
+                                    bun: `bunx --bun shadcn@latest add @tritronik/${component.title.toLocaleLowerCase()}`,
+                                }}
                                 onCopy={copyToClipboard}
-                                label="pnpm npm yarn bun"
+                                copied={copiedId}
+                                id="add-component"
                             />
                         )}
 
                         {installationTab === "Manual" && (
-                            <p className="text-muted-foreground">
-                                {component.installation.manual}
-                            </p>
+                            <>
+                                {component.installation.manual !== "" ? (
+                                    <Command
+                                        pkg={pkg}
+                                        setPkg={setPkg}
+                                        code={{
+                                            pnpm: `pnpm add ${component.installation.manual}`,
+                                            npm: `npm install ${component.installation.manual}`,
+                                            yarn: `yarn add ${component.installation.manual}`,
+                                            bun: `bunx add ${component.installation.manual}`,
+                                        }}
+                                        onCopy={copyToClipboard}
+                                        copied={copiedId}
+                                        id="add-component"
+                                    />
+                                ) : (
+                                    <p className="text-muted-foreground">
+                                        {component.installation.manual}
+                                    </p>
+                                )}
+                            </>
                         )}
                     </section>
                 )}
@@ -177,17 +202,17 @@ export default function ComponentDocClient({
                         <CodeBlock
                             code={component.usage}
                             id="usage-code"
-                            copiedId={copiedId}
+                            copied={copiedId}
                             onCopy={copyToClipboard}
-                            label="TypeScript"
+                            filename="TypeScript"
                         />
                         <div className="h-5" />
                         <CodeBlock
                             code={component.content}
                             id="usage-code"
-                            copiedId={copiedId}
+                            copied={copiedId}
                             onCopy={copyToClipboard}
-                            label="TypeScript"
+                            filename="TypeScript"
                         />
                     </section>
                 )}
@@ -200,47 +225,6 @@ export default function ComponentDocClient({
                         ← Components
                     </a>
                 </div>
-            </div>
-        </div>
-    )
-}
-
-function CodeBlock({
-    code,
-    id,
-    label,
-    copiedId,
-    onCopy,
-}: {
-    code: string
-    id: string
-    label: string
-    copiedId: string | null
-    onCopy: (text: string, id: string) => void
-}) {
-    return (
-        <div>
-            <div className="flex items-center gap-2 rounded-t-lg border border-b-0 bg-muted px-4 py-2">
-                <span className="text-xs font-medium text-muted-foreground">
-                    {label}
-                </span>
-            </div>
-
-            <div className="relative rounded-b-lg border bg-card p-4 font-mono text-sm">
-                <pre>
-                    <code>{code}</code>
-                </pre>
-
-                <button
-                    onClick={() => onCopy(code, id)}
-                    className="absolute right-4 top-4 rounded p-2 hover:bg-muted"
-                >
-                    {copiedId === id ? (
-                        <Check className="h-4 w-4 text-green-600" />
-                    ) : (
-                        <Copy className="h-4 w-4" />
-                    )}
-                </button>
             </div>
         </div>
     )
