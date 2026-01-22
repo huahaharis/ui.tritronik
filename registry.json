@@ -31,14 +31,15 @@
             "name": "button",
             "type": "registry:ui",
             "dependencies": [
-                "@radix-ui/react-slot"
+                "@radix-ui/react-slot",
+                "class-variance-authority"
             ],
             "registryDependencies": [
                 "utils"
             ],
             "files": [
                 {
-                    "path": "registry/components/ui/button.tsx",
+                    "path": "src/components/ui/button.tsx",
                     "type": "registry:component"
                 }
             ]
