@@ -14,7 +14,7 @@ export default function ThemingPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12 md:px-8 space-y-14">
+    <div className="mx-auto max-w-2xl px-6 py-12 md:px-8 space-y-14">
       <div>
         <h1 className="text-4xl font-bold text-foreground">Theming</h1>
         <p className="mt-2 text-sm text-muted-foreground">

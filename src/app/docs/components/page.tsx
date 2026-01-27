@@ -9,7 +9,7 @@ export default function ComponentsPage() {
 
   return (
     <>
-      <div className="mx-auto max-w-3xl px-6 py-12 md:px-8">
+      <div className="mx-auto max-w-2xl px-6 py-12 md:px-8">
         <div className="mb-12">
           <h1 className="text-4xl font-bold text-foreground">Components</h1>
           <p className="mt-2 text-base text-muted-foreground">

@@ -1,20 +1,30 @@
 export interface ComponentData {
   title: string
   description: string
-  docs?: boolean
-  apiReference?: boolean
-  urlDocs?: string | undefined
-  urlReference?: string
   links?: Array<{ label: string; href: string }>
   demo?: string
   installation?: {
     tabs: Array<{ label: string; active: boolean }>
     cli: string
-    manual: string
+    manual?: string
   }
-  usage?: string
+  usage?: string[]
   content?: string
-  examples?: string
+  examples?: string | {
+    title: string
+    description: string
+    code: string
+    demo: string
+  }[]
+  args?: {
+    name: string
+    description: string
+    props: {
+      prop: string
+      type: string
+      default: string
+    }[]
+  }[]
 }
 
 const components: Record<string, ComponentData> = {
@@ -29,21 +39,18 @@ const components: Record<string, ComponentData> = {
     installation: {
       tabs: [
         { label: "CLI", active: true },
-        { label: "Manual", active: false },
+        // { label: "Manual", active: false },
       ],
       cli: "npx shadcn@latest add accordion",
-      manual: "@radix-ui/react-accordion",
+      // manual: "@radix-ui/react-accordion",
     },
-    usage: `
-import {
+    usage: [`import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-`,
-    content: `
-<Accordion type="single" collapsible>
+`, `<Accordion type="single" collapsible>
     <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
@@ -51,10 +58,8 @@ import {
         </AccordionContent>
     </AccordionItem>
 </Accordion>
-
-`,
-    examples: `
-import {
+`],
+    content: `import {
     Accordion,
     AccordionItem,
     AccordionTrigger,
@@ -79,7 +84,176 @@ export function AccordionDemo() {
         </Accordion>
     )
 }
-        `,
+`,
+
+    examples: [
+      {
+        title: "Basic",
+        description: "A basic accordion that shows one item at a time. The first item is open by default.",
+        demo: "accordion",
+        code: `import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
+
+export function AccordionDemo() {
+    return (
+        <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                <AccordionContent>
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+                <AccordionTrigger>Is it styled?</AccordionTrigger>
+                <AccordionContent>
+                    Yes. It comes with default styles you can customize.
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+                <AccordionTrigger>Is it animated?</AccordionTrigger>
+                <AccordionContent>
+                    Yes. It's animated by default, but you can disable it if you prefer.
+                </AccordionContent>
+            </AccordionItem>
+        </Accordion>
+    )
+}
+`
+      },
+      {
+        title: "Multiple",
+        description: "Use type=\"multiple\" to allow multiple items to be open at the same time.",
+        demo: "accordionMultiple",
+        code: `import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
+
+export function AccordionDemo() {
+    return (
+        <Accordion type="multiple" className="w-full">
+            <AccordionItem value="item-1">
+                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                <AccordionContent>
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+                <AccordionTrigger>Is it styled?</AccordionTrigger>
+                <AccordionContent>
+                    Yes. It comes with default styles you can customize.
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+                <AccordionTrigger>Is it animated?</AccordionTrigger>
+                <AccordionContent>
+                    Yes. It's animated by default, but you can disable it if you prefer.
+                </AccordionContent>
+            </AccordionItem>
+        </Accordion>
+    )
+}
+`
+      },
+      {
+        title: "Disabled",
+        description: "Use the disabled prop on AccordionItem to disable individual items",
+        demo: "accordionDisabled",
+        code: `import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
+
+export function AccordionDemo() {
+    return (
+        <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                <AccordionContent>
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2" disabled>
+                <AccordionTrigger>Is it styled?</AccordionTrigger>
+                <AccordionContent>
+                    Yes. It comes with default styles you can customize.
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+                <AccordionTrigger>Is it animated?</AccordionTrigger>
+                <AccordionContent>
+                    Yes. It's animated by default, but you can disable it if you prefer.
+                </AccordionContent>
+            </AccordionItem>
+        </Accordion>
+    )
+}
+`
+      },
+      {
+        title: "Borders",
+        description: "Add border to the Accordion and border-b last:border-b-0 to the AccordionItem to add borders to the items.",
+        demo: "accordionBorders",
+        code: `import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
+
+const items = [
+  {
+    value: "billing",
+    trigger: "How does billing work?",
+    content:
+      "We offer monthly and annual subscription plans. Billing is charged at the beginning of each cycle, and you can cancel anytime. All plans include automatic backups, 24/7 support, and unlimited team members.",
+  },
+  {
+    value: "security",
+    trigger: "Is my data secure?",
+    content:
+      "Yes. We use end-to-end encryption, SOC 2 Type II compliance, and regular third-party security audits. All data is encrypted at rest and in transit using industry-standard protocols.",
+  },
+  {
+    value: "integration",
+    trigger: "What integrations do you support?",
+    content:
+      "We integrate with 500+ popular tools including Slack, Zapier, Salesforce, HubSpot, and more. You can also build custom integrations using our REST API and webhooks.",
+  },
+]
+
+export function AccordionBorders() {
+  return (
+    <Accordion
+      type="single"
+      collapsible
+      className="max-w-lg rounded-lg border"
+      defaultValue="billing"
+    >
+      {items.map((item) => (
+        <AccordionItem
+          key={item.value}
+          value={item.value}
+          className="border-b px-4 last:border-b-0"
+        >
+          <AccordionTrigger>{item.trigger}</AccordionTrigger>
+          <AccordionContent>{item.content}</AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  )
+}
+`
+      }
+    ],
   },
 
   alert: {
@@ -88,16 +262,63 @@ export function AccordionDemo() {
     installation: {
       tabs: [
         { label: "CLI", active: true },
-        { label: "Manual", active: false },
+        // { label: "Manual", active: false },
       ],
       cli: "npx shadcn@latest add alert",
-      manual: "",
+      // manual: "",
     },
     demo: "alert",
-    usage: `
+    args: [
+      {
+        name: "Alert",
+        description: "The Alert component displays a callout for user attention.",
+        props: [
+          {
+            prop: "variant",
+            type: "\"default\" | \"destructive\"",
+            default: "\"default\"",
+          },
+        ],
+      },
+      {
+        name: "AlertTitle",
+        description: "The AlertTitle component displays the title of the alert.",
+        props: [
+          {
+            prop: "className",
+            type: "string",
+            default: "-",
+          },
+        ],
+      },
+      {
+        name: "AlertDescription",
+        description:
+          "The AlertDescription component displays the description or content of the alert.",
+        props: [
+          {
+            prop: "className",
+            type: "string",
+            default: "-",
+          },
+        ],
+      },
+      {
+        name: "AlertAction",
+        description:
+          "The AlertAction component displays an action element (like a button) positioned absolutely in the top-right corner of the alert.",
+        props: [
+          {
+            prop: "className",
+            type: "string",
+            default: "-",
+          },
+        ],
+      },
+    ],
+    usage: [`
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
-`,
-    content: `
+`, `
 <Alert>
     <AlertCircle className="h-4 w-4" />
     <AlertTitle>Heads up!</AlertTitle>
@@ -105,8 +326,8 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
     You can add components and dependencies to your app using the CLI.
     </AlertDescription>
 </Alert>
-        `,
-    examples: `
+        `],
+    content: `
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 
@@ -120,8 +341,8 @@ export function AlertDemo() {
       </AlertDescription>
     </Alert>
   )
-}
-        `,
+}`,
+    examples: ``,
   },
 
   "alert-dialog": {
@@ -130,13 +351,13 @@ export function AlertDemo() {
     installation: {
       tabs: [
         { label: "CLI", active: true },
-        { label: "Manual", active: false },
+        // { label: "Manual", active: false },
       ],
       cli: "npx shadcn@latest add alert-dialog",
-      manual: "@radix-ui/react-alert-dialog",
+      // manual: "@radix-ui/react-alert-dialog",
     },
     demo: 'alertDialog',
-    usage: `import {
+    usage: [`import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -146,8 +367,7 @@ export function AlertDemo() {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-`,
-    content: `
+`, `
 <AlertDialog>
     <AlertDialogTrigger>Open</AlertDialogTrigger>
       <AlertDialogContent>
@@ -161,8 +381,8 @@ export function AlertDemo() {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
     </AlertDialogContent>
 </AlertDialog>
-`,
-    examples: `
+`],
+    content: `
 import {
   AlertDialog,
   AlertDialogAction,
@@ -197,9 +417,235 @@ export function AlertDialogDemo() {
       </AlertDialogContent>
     </AlertDialog>
   )
-}
+}`,
+    examples: [
+      {
+        title: "Basic",
+        description: "A modal dialog that interrupts the user with important content and expects a response.",
+        demo: "alertDialog",
+        code: `
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
 
-`,
+export function AlertDialogDemo() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">Show Dialog</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`,
+      },
+      {
+        title: "Small",
+        description: "A modal dialog that interrupts the user with important content and expects a response.",
+        demo: "alertDialogSmall",
+        code: `import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+
+export function AlertDialogSmall() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">Show Dialog</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent size="sm">
+        <AlertDialogHeader>
+          <AlertDialogTitle>Allow accessory to connect?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Do you want to allow the USB accessory to connect to this device?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Don&apos;t allow</AlertDialogCancel>
+          <AlertDialogAction>Allow</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`,
+      },
+      {
+        title: "Media",
+        description: "A modal dialog that interrupts the user with important content and expects a response.",
+        demo: "alertDialogWithMedia",
+        code: `import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+
+export function AlertDialogWithMedia() {
+  return (
+  <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">Share Project</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogMedia>
+            <CircleFadingPlusIcon />
+          </AlertDialogMedia>
+          <AlertDialogTitle>Share this project?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Anyone with the link will be able to view and edit this project.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Share</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`,
+      },
+      {
+        title: "Small with media",
+        description: "A modal dialog that interrupts the user with important content and expects a response.",
+        demo: "alertDialogSmallWithMedia",
+        code: `import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogMedia,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import { BluetoothIcon } from "lucide-react"
+
+export function AlertDialogSmallWithMedia() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">Show Dialog</Button>
+      </AlertDialogTrigger>
+
+      <AlertDialogContent size="sm">
+        <AlertDialogHeader>
+          <AlertDialogMedia>
+            <BluetoothIcon />
+          </AlertDialogMedia>
+          <AlertDialogTitle>Allow accessory to connect?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Do you want to allow the USB accessory to connect to this device?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Don&apos;t allow</AlertDialogCancel>
+          <AlertDialogAction>Allow</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`,
+      },
+      {
+        title: "Destructive",
+        description: "A modal dialog that interrupts the user with important content and expects a response.",
+        demo: "alertDialogDestructive",
+        code: `import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogMedia,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+import { Trash2Icon } from "lucide-react"
+
+export function AlertDialogDestructive() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive">Delete Chat</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent size="sm">
+        <AlertDialogHeader>
+          <AlertDialogMedia className="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive">
+            <Trash2Icon />
+          </AlertDialogMedia>
+          <AlertDialogTitle>Delete chat?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This will permanently delete this chat conversation. View{" "}
+            <a href="#">Settings</a> delete any memories saved during this chat.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel variant="outline">Cancel</AlertDialogCancel>
+          <AlertDialogAction variant="destructive">Delete</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}`,
+      }
+    ],
+
+    args: [
+      {
+        name: "Size",
+        description: "Use the size props on the AlertDialogContent component to control the size of the alert dialog. It accepts the following values:",
+        props: [
+          {
+            prop: "size",
+            type: "\"default\" | \"sm\"",
+            default: "\"default\"",
+          },
+        ],
+      },
+    ],
   },
 
   button: {
@@ -208,16 +654,14 @@ export function AlertDialogDemo() {
     installation: {
       tabs: [
         { label: "CLI", active: true },
-        { label: "Manual", active: false },
+        // { label: "Manual", active: false },
       ],
       cli: "npx shadcn@latest add button",
-      manual: "@radix-ui/react-slot",
+      // manual: "@radix-ui/react-slot",
     },
     demo: "button",
-    usage: `import { Button } from "@/components/ui/button"`,
-    content: `<Button>Click me</Button>`,
-    examples: `
-import { ArrowUpIcon } from "lucide-react"
+    usage: [`import { Button } from "@/components/ui/button"`, `<Button>Click me</Button>`],
+    content: `import { ArrowUpIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function ButtonDemo() {
@@ -229,8 +673,51 @@ export function ButtonDemo() {
       </Button>
     </div>
   )
-}
-        `,
+}`,
+    examples: [
+      {
+        title: "Button",
+        description: "A clickable element that triggers an action or event.",
+        demo: "button",
+        code: `import { ArrowUpIcon } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+export function ButtonDemo() {
+  return (
+    <div className="flex flex-wrap justify-center items-center gap-2 md:flex-row">
+      <Button variant="outline">Button</Button>
+      <Button variant="outline" size="icon" aria-label="Submit">
+        <ArrowUpIcon />
+      </Button>
+    </div>
+  )
+}`,
+      }
+    ],
+
+    args: [
+      {
+        name: "Button",
+        description: "The Button component is a wrapper around the button element that adds a variety of styles and functionality.",
+        props: [
+          {
+            prop: "variant",
+            type: "\"default\" | \"outline\" | \"secondary\" | \"ghost\" | \"link\" | \"destructive\"",
+            default: "\"default\"",
+          },
+          {
+            prop: "size",
+            type: "\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"",
+            default: "\"default\"",
+          },
+          {
+            prop: "asChild",
+            type: "boolean",
+            default: "false",
+          },
+        ],
+      },
+    ],
   },
 
   badge: {
@@ -245,10 +732,8 @@ export function ButtonDemo() {
       manual: "Copy the badge component from the components library.",
     },
     demo: "badge",
-    usage: `import { Badge } from "@/components/ui/badge"`,
-    content: `<Badge>Badge</Badge>`,
-    examples: `
-import { BadgeCheckIcon } from "lucide-react"
+    usage: [`import { Badge } from "@/components/ui/badge"`, `<Badge>Badge</Badge>`],
+    content: `import { BadgeCheckIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 export function BadgeDemo() {
@@ -292,8 +777,8 @@ export function BadgeDemo() {
       </div>
     </div>
   )
-}
-`,
+}`,
+    examples: ``,
   },
 
   card: {
@@ -308,7 +793,7 @@ export function BadgeDemo() {
       manual: "Copy the card component from the components library.",
     },
     demo: "card",
-    usage: `
+    usage: [`
 import {
   Card,
   CardContent,
@@ -316,8 +801,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-`,
-    content: `
+`, `
 <Card>
   <CardHeader>
     <CardTitle>Card Title</CardTitle>
@@ -326,8 +810,8 @@ import {
   <CardContent>
     Content goes here
   </CardContent>
-</Card>`,
-    examples: `
+</Card>`],
+    content: `
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -395,16 +879,17 @@ export function CardDemo() {
       </Card>
     </div>
   )
-}`
+}`,
+    examples: ``
   },
 
   calendar: {
     title: "Calendar",
     description: "A date field component that allows users to enter and edit date.",
-    docs: true,
-    urlDocs: "https://daypicker.dev/",
-    apiReference: false,
-    urlReference: "",
+    demo: "calendar",
+    links: [
+      { label: "Docs", href: "https://daypicker.dev/" },
+    ],
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -413,9 +898,8 @@ export function CardDemo() {
       cli: "npx shadcn@latest add input",
       manual: "Copy the input component from the components library.",
     },
-    demo: "calendar",
-    usage: `import { Calendar } from "@/components/ui/calendar"`,
-    content: `const [date, setDate] = React.useState<Date | undefined>(new Date())
+
+    usage: [`import { Calendar } from "@/components/ui/calendar"`, `const [date, setDate] = React.useState<Date | undefined>(new Date())
 
 return (
   <Calendar
@@ -424,8 +908,8 @@ return (
     onSelect={setDate}
     className="rounded-lg border"
   />
-)`,
-    examples: `"use client"
+)`],
+    content: `"use client"
 
 import * as React from "react"
 
@@ -443,7 +927,8 @@ export function CalendarDemo() {
       captionLayout="dropdown"
     />
   )
-}`
+}`,
+    examples: ``
   },
 
   dialog: {
@@ -458,7 +943,7 @@ export function CalendarDemo() {
       manual: "Copy the dialog component from the components library.",
     },
     demo: "dialog",
-    usage: `import {
+    usage: [`import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -466,8 +951,7 @@ export function CalendarDemo() {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-`,
-    content: `<Dialog>
+`, `<Dialog>
   <DialogTrigger>Open Dialog</DialogTrigger>
   <DialogContent>
     <DialogHeader>
@@ -477,8 +961,8 @@ export function CalendarDemo() {
       </DialogDescription>
     </DialogHeader>
   </DialogContent>
-</Dialog>`,
-    examples: `import { Button } from "@/components/ui/button"
+</Dialog>`],
+    content: `import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogClose,
@@ -527,34 +1011,34 @@ export function DialogDemo() {
       </form>
     </Dialog>
   )
-}`
+}`,
+    examples: ``
   },
 
   "dropdown-menu": {
     title: "Dropdown Menu",
     description: "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
-    docs: true,
-    urlDocs: "https://www.radix-ui.com/primitives/docs/components/dropdown-menu",
-    apiReference: true,
-    urlReference: "https://www.radix-ui.com/primitives/docs/components/dropdown-menu#api-reference",
+    demo: "dropdownMenu",
+    links: [
+      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/dropdown-menu" },
+      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/dropdown-menu#api-reference" },
+    ],
     installation: {
       tabs: [
         { label: "CLI", active: true },
         { label: "Manual", active: false },
       ],
-      cli: "npx shadcn@latest add input",
-      manual: "Copy the input component from the components library.",
+      cli: "npx shadcn@latest add dropdown-menu",
+      manual: "@radix-ui/react-dropdown-menu",
     },
-    demo: "dropdownMenu",
-    usage: `import {
+    usage: [`import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"`,
-    content: `<DropdownMenu>
+} from "@/components/ui/dropdown-menu"`, `<DropdownMenu>
   <DropdownMenuTrigger>Open</DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -564,8 +1048,8 @@ export function DialogDemo() {
     <DropdownMenuItem>Team</DropdownMenuItem>
     <DropdownMenuItem>Subscription</DropdownMenuItem>
   </DropdownMenuContent>
-</DropdownMenu>`,
-    examples: `import { Button } from "@/components/ui/button"
+</DropdownMenu>`],
+    content: `import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -638,14 +1122,13 @@ export function DropdownMenuDemo() {
       </DropdownMenuContent>
     </DropdownMenu>
   )
-}`
+}`,
+    examples: ``
   },
 
   input: {
     title: "Input",
     description: "Displays a form input field.",
-    docs: false,
-    apiReference: false,
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -655,22 +1138,22 @@ export function DropdownMenuDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "input",
-    usage: `import { Input } from "@/components/ui/input"`,
-    content: `<Input type="email" placeholder="Email" />`,
-    examples: `import { Input } from "@/components/ui/input"
+    usage: [`import { Input } from "@/components/ui/input"`, `<Input type="email" placeholder="Email" />`],
+    content: `import { Input } from "@/components/ui/input"
 
 export function InputDemo() {
   return <Input type="email" placeholder="Email" />
-}`
+}`,
+    examples: ``
   },
 
   label: {
     title: "Label",
     description: "Renders an accessible label associated with controls.",
-    docs: true,
-    urlDocs: "https://www.radix-ui.com/primitives/docs/components/label",
-    apiReference: true,
-    urlReference: "https://www.radix-ui.com/primitives/docs/components/label#api-reference",
+    links: [
+      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/label" },
+      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/label#api-reference" },
+    ],
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -680,9 +1163,8 @@ export function InputDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "label",
-    usage: `import { Label } from "@/components/ui/label"`,
-    content: `<Label htmlFor="email">Your email address</Label>`,
-    examples: `import { Checkbox } from "@/components/ui/checkbox"
+    usage: [`import { Label } from "@/components/ui/label"`, `<Label htmlFor="email">Your email address</Label>`],
+    content: `import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 
 export function LabelDemo() {
@@ -694,17 +1176,17 @@ export function LabelDemo() {
       </div>
     </div>
   )
-}
-`
+}`,
+    examples: ``
   },
 
   popover: {
     title: "Popover",
     description: "Displays rich content in a portal, triggered by a button.",
-    docs: true,
-    urlDocs: "https://www.radix-ui.com/primitives/docs/components/popover",
-    apiReference: true,
-    urlReference: "https://www.radix-ui.com/primitives/docs/components/popover#api-reference",
+    links: [
+      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/popover" },
+      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/popover#api-reference" },
+    ],
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -714,16 +1196,15 @@ export function LabelDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "popover",
-    usage: `import {
+    usage: [`import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"`,
-    content: `<Popover>
+} from "@/components/ui/popover"`, `<Popover>
   <PopoverTrigger>Open</PopoverTrigger>
   <PopoverContent>Place content for the popover here.</PopoverContent>
-</Popover>`,
-    examples: `import { Button } from "@/components/ui/button"
+</Popover>`],
+    content: `import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
@@ -784,16 +1265,17 @@ export function PopoverDemo() {
       </PopoverContent>
     </Popover>
   )
-}`
+}`,
+    examples: ``
   },
 
   progress: {
     title: "Progress",
     description: "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-    docs: true,
-    urlDocs: "https://www.radix-ui.com/primitives/docs/components/progress",
-    apiReference: true,
-    urlReference: "https://www.radix-ui.com/primitives/docs/components/progress#api-reference",
+    links: [
+      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/progress" },
+      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/progress#api-reference" },
+    ],
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -803,9 +1285,8 @@ export function PopoverDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "progress",
-    usage: `import { Progress } from "@/components/ui/progress"`,
-    content: `<Progress value={33} />`,
-    examples: `"use client"
+    usage: [`import { Progress } from "@/components/ui/progress"`, `<Progress value={33} />`],
+    content: `"use client"
 
 import * as React from "react"
 
@@ -820,16 +1301,17 @@ export function ProgressDemo() {
   }, [])
 
   return <Progress value={progress} className="w-[60%]" />
-}`
+}`,
+    examples: ``
   },
 
   select: {
     title: "Select",
     description: "Displays a list of options for the user to pick from—triggered by a button.",
-    docs: true,
-    urlDocs: "https://www.radix-ui.com/primitives/docs/components/select",
-    apiReference: true,
-    urlReference: "https://www.radix-ui.com/primitives/docs/components/select#api-reference",
+    links: [
+      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/select" },
+      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/select#api-reference" },
+    ],
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -839,14 +1321,13 @@ export function ProgressDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "select",
-    usage: `import {
+    usage: [`import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"`,
-    content: `<Select>
+} from "@/components/ui/select"`, `<Select>
   <SelectTrigger className="w-45">
     <SelectValue placeholder="Theme" />
   </SelectTrigger>
@@ -855,8 +1336,8 @@ export function ProgressDemo() {
     <SelectItem value="dark">Dark</SelectItem>
     <SelectItem value="system">System</SelectItem>
   </SelectContent>
-</Select>`,
-    examples: `import * as React from "react"
+</Select>`],
+    content: `import * as React from "react"
 
 import {
   Select,
@@ -886,16 +1367,17 @@ export function SelectDemo() {
       </SelectContent>
     </Select>
   )
-}`
+}`,
+    examples: ``
   },
 
   slider: {
     title: "Slider",
     description: "An input where the user selects a value from within a given range.",
-    docs: true,
-    urlDocs: "https://www.radix-ui.com/primitives/docs/components/slider",
-    apiReference: true,
-    urlReference: "https://www.radix-ui.com/primitives/docs/components/slider#api-reference",
+    links: [
+      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/slider" },
+      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/slider#api-reference" },
+    ],
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -905,9 +1387,8 @@ export function SelectDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "slider",
-    usage: `import { Slider } from "@/components/ui/slider"`,
-    content: `<Slider defaultValue={[33]} max={100} step={1} />`,
-    examples: `import { cn } from "@/lib/utils"
+    usage: [`import { Slider } from "@/components/ui/slider"`, `<Slider defaultValue={[33]} max={100} step={1} />`],
+    content: `import { cn } from "@/lib/utils"
 import { Slider } from "@/components/ui/slider"
 
 type SliderProps = React.ComponentProps<typeof Slider>
@@ -922,16 +1403,13 @@ export function SliderDemo({ className, ...props }: SliderProps) {
       {...props}
     />
   )
-}`
+}`,
+    examples: ``
   },
 
   sheet: {
     title: "Sheet",
     description: "Extends the Dialog component to display content that complements the main content of the screen.",
-    docs: false,
-    urlDocs: "",
-    apiReference: false,
-    urlReference: "",
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -941,15 +1419,14 @@ export function SliderDemo({ className, ...props }: SliderProps) {
       manual: "Copy the input component from the components library.",
     },
     demo: "sheet",
-    usage: `import {
+    usage: [`import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"`,
-    content: `<Sheet>
+} from "@/components/ui/sheet"`, `<Sheet>
   <SheetTrigger>Open</SheetTrigger>
   <SheetContent>
     <SheetHeader>
@@ -960,8 +1437,8 @@ export function SliderDemo({ className, ...props }: SliderProps) {
       </SheetDescription>
     </SheetHeader>
   </SheetContent>
-</Sheet>`,
-    examples: `import { Button } from "@/components/ui/button"
+</Sheet>`],
+    content: `import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
@@ -1007,7 +1484,8 @@ export function SheetDemo() {
       </SheetContent>
     </Sheet>
   )
-}`
+}`,
+    examples: ``,
   },
 
   tabs: {
@@ -1022,17 +1500,15 @@ export function SheetDemo() {
       manual: "Copy the tabs component from the components library.",
     },
     demo: "tabs",
-    usage: `import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"`,
-    content: `<Tabs defaultValue="tab1">
+    usage: [`import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"`, `<Tabs defaultValue="tab1">
   <TabsList>
     <TabsTrigger value="tab1">Tab 1</TabsTrigger>
     <TabsTrigger value="tab2">Tab 2</TabsTrigger>
   </TabsList>
   <TabsContent value="tab1">Content 1</TabsContent>
   <TabsContent value="tab2">Content 2</TabsContent>
-</Tabs>
-`,
-    examples: `import { AppWindowIcon, CodeIcon } from "lucide-react"
+</Tabs>`],
+    content: `import { AppWindowIcon, CodeIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -1112,6 +1588,7 @@ export function TabsDemo() {
     </div>
   )
 }`,
+    examples: ``,
   },
 }
 

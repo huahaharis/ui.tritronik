@@ -1,8 +1,8 @@
 "use client"
 
-import { AccordionDemo } from "./accordion-demo"
+import { AccordionDemo, AccordionMultiple, AccordionDisabled, AccordionBorders } from "./accordion-demo"
 import { AlertDemo } from "./alert-demo"
-import { AlertDialogDemo } from "./alert-dialog-demo"
+import { AlertDialogDemo, AlertDialogSmall, AlertDialogSmallWithMedia, AlertDialogWithMedia, AlertDialogDestructive } from "./alert-dialog-demo"
 import { BadgeDemo } from "./badge-demo"
 import { CardDemo } from "./card-demo"
 import { ButtonDemo } from "./button-demo"
@@ -20,8 +20,15 @@ import { LabelDemo } from "./label-demo"
 
 export const demoRegistry: Record<string, React.ComponentType> = {
   accordion: AccordionDemo,
+  accordionMultiple: AccordionMultiple,
+  accordionDisabled: AccordionDisabled,
+  accordionBorders: AccordionBorders,
   alert: AlertDemo,
   alertDialog: AlertDialogDemo,
+  alertDialogSmall: AlertDialogSmall,
+  alertDialogSmallWithMedia: AlertDialogSmallWithMedia,
+  alertDialogWithMedia: AlertDialogWithMedia,
+  alertDialogDestructive: AlertDialogDestructive,
   button: ButtonDemo,
   badge: BadgeDemo,
   card: CardDemo,

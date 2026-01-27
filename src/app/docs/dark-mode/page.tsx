@@ -15,7 +15,7 @@ const frameworks = [
 
 export default function DarkModePage() {
     return (
-        <div className="mx-auto max-w-3xl px-6 py-12 md:px-8">
+        <div className="mx-auto max-w-2xl px-6 py-12 md:px-8">
             <div className="mb-8">
                 <h1 className="text-4xl font-bold text-foreground">Dark Mode</h1>
                 <p className="text-sm text-muted-foreground mt-4">

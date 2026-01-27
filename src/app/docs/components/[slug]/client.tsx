@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Fragment, type ElementType } from "react"
 import { DemoBlock } from "@/components/docs/demo-block"
 import { demoRegistry } from "@/components/demos"
-import { Copy, ArrowUpRight } from "lucide-react"
+import { Copy } from "lucide-react"
 import type { ComponentData } from "@/lib/component-data"
 import Link from "next/link"
 import { getComponentsList } from "@/lib/component-data"
@@ -16,11 +16,13 @@ export default function ComponentDocClient({
     slug?: string
     component: ComponentData
 }) {
-    const [pkg, setPkg] = useState<Pkg>("yarn")
+    const [pkg, setPkg] = useState<Pkg>("pnpm")
     const [copiedId, setCopiedId] = useState<string | null>(null)
     const [installationTab, setInstallationTab] = useState("CLI")
+    const [demoTab, setDemoTab] = useState("Radix UI")
+    const [isExpanded, setIsExpanded] = useState(false)
     const components = getComponentsList()
-    const Demo = component.demo ? demoRegistry[component.demo] : null
+    const Demo = component.demo ? (demoRegistry[component.demo] as ElementType) : undefined
 
     const copyToClipboard = (text: string, id: string) => {
         navigator.clipboard.writeText(text)
@@ -54,26 +56,14 @@ export default function ComponentDocClient({
     const { prev, next } = getPrevNext(slug, components)
 
     return (
-        <div className="mx-auto max-w-3xl px-6 py-12 md:px-8 space-y-12">
+        <div className="mx-auto max-w-2xl px-6 py-12 md:px-8 space-y-12">
 
             <div className="mb-8 flex items-start justify-between gap-6">
                 <div>
                     <h1 className="text-4xl font-bold">{component.title}</h1>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="mt-2 text-base text-muted-foreground">
                         {component.description}
                     </p>
-                    <div className="flex flex-row mt-2">
-                        {component.docs && (
-                            <Link href={`${component.urlDocs}`} className="flex flex-row justify-center place-items-center items-center rounded-xl text-xs bg-muted h-6 w-14">
-                                Docs <ArrowUpRight size={12} />
-                            </Link>
-                        )}
-                        {component.apiReference && (
-                            <Link href={`${component.urlReference}`} className="flex flex-row justify-center place-items-center items-center rounded-xl text-xs bg-muted h-6 w-28 ml-2">
-                                API Reference <ArrowUpRight size={12} />
-                            </Link>
-                        )}
-                    </div>
                 </div>
                 <div className="flex justify-center place-items-center mt-3">
                     <div
@@ -124,11 +114,28 @@ export default function ComponentDocClient({
 
             <div className="space-y-12">
 
-                {Demo && component.examples && (
+                {Demo && component.content && (
                     <section id="demo">
-                        <h2 className="mb-6 text-2xl font-bold">Demo</h2>
+                        <div className="flex mb-4">
+                            <div
+                                onClick={() => [setDemoTab("Radix UI"), setIsExpanded(false)]}
+                                className={`px-4 py-2 transition-all duration-300 cursor-pointer ${demoTab === "Radix UI" ? "border-b-2 border-primary" : ""}`}
+                            >
+                                Radix UI
+                            </div>
+                            <div
+                                onClick={() => [setDemoTab("Base UI"), setIsExpanded(false)]}
+                                className={`px-4 py-2 transition-all duration-300 cursor-pointer ${demoTab === "Base UI" ? "border-b-2 border-primary" : ""}`}
+                            >
+                                Base UI
+                            </div>
+                        </div>
 
-                        <DemoBlock code={component.examples}>
+                        <DemoBlock
+                            code={demoTab === "Radix UI" ? component.content : (typeof component.examples === "string" ? component.examples : component.content)}
+                            isExpanded={isExpanded}
+                            onExpand={setIsExpanded}
+                        >
                             <Demo />
                         </DemoBlock>
                     </section>
@@ -154,7 +161,6 @@ export default function ComponentDocClient({
                         </div>
 
                         {installationTab === "CLI" && (
-
                             <Command
                                 pkg={pkg}
                                 setPkg={setPkg}
@@ -196,36 +202,106 @@ export default function ComponentDocClient({
                     </section>
                 )}
 
-                {component.usage && component.content && (
+                {component.usage && (
                     <section id="usage">
                         <h2 className="mb-6 text-2xl font-bold">Usage</h2>
-                        <CodeBlock
-                            code={component.usage}
-                            id="usage-code"
-                            copied={copiedId}
-                            onCopy={copyToClipboard}
-                            filename="TypeScript"
-                        />
-                        <div className="h-5" />
-                        <CodeBlock
-                            code={component.content}
-                            id="usage-code"
-                            copied={copiedId}
-                            onCopy={copyToClipboard}
-                            filename="TypeScript"
-                        />
+                        {component.usage.map((arr: string, index: number) => (
+                            <Fragment key={index}>
+                                <CodeBlock
+                                    code={arr}
+                                    id="usage-code"
+                                    copied={copiedId}
+                                    onCopy={copyToClipboard}
+                                    filename="TypeScript"
+                                />
+                                <div className="h-5" />
+                            </Fragment>
+                        ))}
                     </section>
                 )}
 
+                {component.examples && (
+                    <section id="examples">
+                        <h2 className="mb-6 text-2xl font-bold">Examples</h2>
+                        {Array.isArray(component.examples) && component.examples.map((example, index) => {
+                            const Example = example.demo ? (demoRegistry[example.demo] as ElementType) : undefined
+                            return (
+                                <Fragment key={index}>
+                                    <p className="mb-4 text-xl font-semibold">{example.title}</p>
+                                    <div className="mb-6 text-muted-foreground">{example.description}</div>
+                                    <DemoBlock
+                                        code={example.code}
+                                    >
+                                        {Example && <Example />}
+                                    </DemoBlock>
+                                    <div className="h-5" />
+                                </Fragment>
+                            )
+                        })}
+                    </section>
+                )}
+
+                <section id="api-reference">
+                    <h2 className="mb-6 text-2xl font-bold">API Reference</h2>
+                    {component.links?.find(l => l.label === "API Reference") ? (
+                        <p className="text-muted-foreground">
+                            See the full API reference for {component.title} on the <Link href={`${component.links?.find(l => l.label === "API Reference")?.href ?? component.links?.[0]?.href}`} target="_blank" className="text-primary">Radix UI</Link>.
+                        </p>
+                    ) : Array.isArray(component.args) ? (
+                        <div className="space-y-8">
+                            {component.args.map((section, title_index) => (
+                                <div key={title_index} className="space-y-4">
+                                    <h3 className="text-xl font-bold">{section.name}</h3>
+                                    <p className="text-muted-foreground">{section.description}</p>
+                                    <div className="rounded-xl border w-full overflow-hidden">
+                                        <div className="flex flex-row border-b p-4 font-medium">
+                                            <div className="w-1/4">Prop</div>
+                                            <div className="w-1/2">Type</div>
+                                            <div className="w-1/4">Default</div>
+                                        </div>
+                                        <div className="divide-y">
+                                            {section.props.map((prop, index) => (
+                                                <div key={index} className="flex flex-row gap-4 p-4 text-sm items-center">
+                                                    <div className="w-1/4">
+                                                        <code className="rounded-md bg-muted px-2 py-1 font-mono text-sm">
+                                                            {prop.prop}
+                                                        </code>
+                                                    </div>
+                                                    <div className="w-1/2">
+                                                        <code className="rounded-md bg-muted px-2 py-1 font-mono text-muted-foreground">
+                                                            {prop.type.replace(/^"|"$/g, '')}
+                                                        </code>
+                                                    </div>
+                                                    <div className="w-1/4">
+                                                        {prop.default && (
+                                                            <code className="font-mono text-muted-foreground">
+                                                                {prop.default.replace(/^"|"$/g, '')}
+                                                            </code>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-muted-foreground">
+                            No API reference available for this component.
+                        </p>
+                    )}
+                </section>
+
                 <div className="border-t pt-8">
-                    <a
+                    <Link
                         href="/docs/components"
                         className="text-sm font-semibold text-muted-foreground hover:text-foreground"
                     >
                         ← Components
-                    </a>
+                    </Link>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

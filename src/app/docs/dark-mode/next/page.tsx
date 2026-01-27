@@ -17,7 +17,7 @@ export default function NextJsInstallationPage() {
         setTimeout(() => setCopied(null), 1500)
     }
     return (
-        <div className="mx-auto max-w-3xl px-6 py-12 md:px-8">
+        <div className="mx-auto max-w-2xl px-6 py-12 md:px-8">
 
             <div className="mb-10 flex items-start justify-between">
                 <div>
