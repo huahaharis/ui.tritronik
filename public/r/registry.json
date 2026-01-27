@@ -40,7 +40,7 @@
             "files": [
                 {
                     "path": "src/components/ui/button.tsx",
-                    "type": "registry:component"
+                    "type": "registry:ui"
                 }
             ]
         },
@@ -50,7 +50,7 @@
             "files": [
                 {
                     "path": "src/components/ui/accordion.tsx",
-                    "type": "registry:component"
+                    "type": "registry:ui"
                 }
             ],
             "dependencies": [
@@ -73,7 +73,7 @@
             "files": [
                 {
                     "path": "src/components/ui/alert-dialog.tsx",
-                    "type": "registry:component"
+                    "type": "registry:ui"
                 }
             ]
         },
@@ -89,7 +89,7 @@
             "files": [
                 {
                     "path": "src/components/ui/avatar.tsx",
-                    "type": "registry:component"
+                    "type": "registry:ui"
                 }
             ]
         },
@@ -106,7 +106,7 @@
             "files": [
                 {
                     "path": "src/components/ui/calendar.tsx",
-                    "type": "registry:component"
+                    "type": "registry:ui"
                 }
             ]
         }
