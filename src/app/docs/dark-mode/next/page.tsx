@@ -8,7 +8,7 @@ import { DemoBlock } from "@/components/docs/demo-block"
 import { ModeToggle } from "@/components/demos/dark-mode-demo"
 
 export default function NextJsInstallationPage() {
-    const [pkg, setPkg] = useState<Pkg>("yarn")
+    const [pkg, setPkg] = useState<Pkg>("pnpm")
     const [copied, setCopied] = useState<string | null>(null)
 
     function copy(text: string, id: string) {

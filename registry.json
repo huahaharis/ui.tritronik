@@ -46,7 +46,7 @@
         },
         {
             "name": "accordion",
-            "type": "registry:component",
+            "type": "registry:ui",
             "files": [
                 {
                     "path": "src/components/ui/accordion.tsx",
