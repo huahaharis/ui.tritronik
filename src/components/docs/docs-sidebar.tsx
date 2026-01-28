@@ -48,6 +48,7 @@ export function DocsSidebar() {
         // { label: "Button Group", href: "/docs/components/button-group" },
         { label: "Calendar", href: "/docs/components/calendar" },
         { label: "Card", href: "/docs/components/card" },
+        { label: "Chart", href: "/docs/components/chart" },
         // { label: "Carousel", href: "/docs/components/carousel" },
         // { label: "Checkbox", href: "/docs/components/checkbox" },
         // { label: "Collapsible", href: "/docs/components/collapsible" },
@@ -56,6 +57,7 @@ export function DocsSidebar() {
         // { label: "Context Menu", href: "/docs/components/context-menu" },
         // { label: "Data Table", href: "/docs/components/data-table" },
         // { label: "Date Picker", href: "/docs/components/date-picker" },
+        { label: "Data Table", href: "/docs/components/data-table" },
         { label: "Dialog", href: "/docs/components/dialog" },
         // { label: "Drawer", href: "/docs/components/drawer" },
         { label: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
@@ -67,7 +69,8 @@ export function DocsSidebar() {
         // { label: "Input Group", href: "/docs/components/input-group" },
         // { label: "Input OTP", href: "/docs/components/input-otp" },
         // { label: "Item", href: "/docs/components/item" },
-        // { label: "Kbd", href: "/docs/components/kbd" },
+        // { label: "Kbd", href: "/docs/components/kbd" },  
+        { label: "Kanban", href: "/docs/components/kanban" },
         { label: "Label", href: "/docs/components/label" },
         // { label: "Menubar", href: "/docs/components/menubar" },
         // { label: "Navigation Menu", href: "/docs/components/navigation-menu" },
@@ -79,12 +82,12 @@ export function DocsSidebar() {
         { label: "Select", href: "/docs/components/select" },
         // { label: "Separator", href: "/docs/components/separator" },
         { label: "Sheet", href: "/docs/components/sheet" },
+        { label: "Stepper", href: "/docs/components/stepper" },
         // { label: "Sidebar", href: "/docs/components/sidebar" },
         // { label: "Skeleton", href: "/docs/components/skeleton" },
         { label: "Slider", href: "/docs/components/slider" },
         // { label: "Spinner", href: "/docs/components/spinner" },
         // { label: "Switch", href: "/docs/components/switch" },
-        // { label: "Table", href: "/docs/components/table" },
         { label: "Tabs", href: "/docs/components/tabs" },
         // { label: "Textarea", href: "/docs/components/textarea" },
         // { label: "Toast", href: "/docs/components/toast" },
@@ -116,6 +119,7 @@ export function DocsSidebar() {
               </li>
             ))}
           </ul>
+
         </div>
       ))}
     </aside>

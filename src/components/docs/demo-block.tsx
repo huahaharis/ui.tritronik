@@ -44,7 +44,7 @@ export function DemoBlock({
         <div className={cn(
           "relative overflow-hidden font-mono text-sm transition-all duration-300",
           "relative overflow-hidden font-mono text-sm transition-all duration-300",
-          !expanded ? "max-h-[120px]" : "max-h-[2000px]"
+          !expanded ? "max-h-[120px]" : "max-h-full"
         )}>
           <div className="flex">
             <div className="select-none border-r border-border bg-muted/50 px-3 py-4 text-right text-muted-foreground">

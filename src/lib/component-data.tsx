@@ -1,39 +1,48 @@
 export interface ComponentData {
-  title: string
-  description: string
-  links?: Array<{ label: string; href: string }>
-  demo?: string
+  title: string;
+  description: string;
+  links?: Array<{ label: string; href: string }>;
+  demo?: string;
   installation?: {
-    tabs: Array<{ label: string; active: boolean }>
-    cli: string
-    manual?: string
-  }
-  usage?: string[]
-  content?: string
-  examples?: string | {
-    title: string
-    description: string
-    code: string
-    demo: string
-  }[]
+    tabs: Array<{ label: string; active: boolean }>;
+    cli: string;
+    manual?: string;
+  };
+  usage?: string[];
+  content?: string;
+  examples?:
+    | string
+    | {
+        title: string;
+        description: string;
+        code: string;
+        demo: string;
+      }[];
   args?: {
-    name: string
-    description: string
+    name: string;
+    description: string;
     props: {
-      prop: string
-      type: string
-      default: string
-    }[]
-  }[]
+      prop: string;
+      type: string;
+      default: string;
+    }[];
+  }[];
 }
 
 const components: Record<string, ComponentData> = {
   accordion: {
     title: "Accordion",
-    description: "A vertically stacked set of interactive headings that each reveal a section of content.",
+    description:
+      "A vertically stacked set of interactive headings that each reveal a section of content.",
     links: [
-      { label: "Docs", href: "https://www.radix-ui.com/docs/primitives/components/accordion" },
-      { label: "API Reference", href: "https://www.radix-ui.com/docs/primitives/components/accordion#api-reference" },
+      {
+        label: "Docs",
+        href: "https://www.radix-ui.com/docs/primitives/components/accordion",
+      },
+      {
+        label: "API Reference",
+        href: "https://www.radix-ui.com/docs/primitives/components/accordion#api-reference",
+      },
     ],
     demo: "accordion",
     installation: {
@@ -44,13 +53,15 @@ const components: Record<string, ComponentData> = {
       cli: "npx shadcn@latest add accordion",
       // manual: "@radix-ui/react-accordion",
     },
-    usage: [`import {
+    usage: [
+      `import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-`, `<Accordion type="single" collapsible>
+`,
+      `<Accordion type="single" collapsible>
     <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
@@ -58,7 +69,8 @@ const components: Record<string, ComponentData> = {
         </AccordionContent>
     </AccordionItem>
 </Accordion>
-`],
+`,
+    ],
     content: `import {
     Accordion,
     AccordionItem,
@@ -89,7 +101,8 @@ export function AccordionDemo() {
     examples: [
       {
         title: "Basic",
-        description: "A basic accordion that shows one item at a time. The first item is open by default.",
+        description:
+          "A basic accordion that shows one item at a time. The first item is open by default.",
         demo: "accordion",
         code: `import {
     Accordion,
@@ -122,11 +135,12 @@ export function AccordionDemo() {
         </Accordion>
     )
 }
-`
+`,
       },
       {
         title: "Multiple",
-        description: "Use type=\"multiple\" to allow multiple items to be open at the same time.",
+        description:
+          'Use type="multiple" to allow multiple items to be open at the same time.',
         demo: "accordionMultiple",
         code: `import {
     Accordion,
@@ -159,11 +173,12 @@ export function AccordionDemo() {
         </Accordion>
     )
 }
-`
+`,
       },
       {
         title: "Disabled",
-        description: "Use the disabled prop on AccordionItem to disable individual items",
+        description:
+          "Use the disabled prop on AccordionItem to disable individual items",
         demo: "accordionDisabled",
         code: `import {
     Accordion,
@@ -196,11 +211,12 @@ export function AccordionDemo() {
         </Accordion>
     )
 }
-`
+`,
       },
       {
         title: "Borders",
-        description: "Add border to the Accordion and border-b last:border-b-0 to the AccordionItem to add borders to the items.",
+        description:
+          "Add border to the Accordion and border-b last:border-b-0 to the AccordionItem to add borders to the items.",
         demo: "accordionBorders",
         code: `import {
     Accordion,
@@ -251,8 +267,8 @@ export function AccordionBorders() {
     </Accordion>
   )
 }
-`
-      }
+`,
+      },
     ],
   },
 
@@ -271,18 +287,20 @@ export function AccordionBorders() {
     args: [
       {
         name: "Alert",
-        description: "The Alert component displays a callout for user attention.",
+        description:
+          "The Alert component displays a callout for user attention.",
         props: [
           {
             prop: "variant",
-            type: "\"default\" | \"destructive\"",
-            default: "\"default\"",
+            type: '"default" | "destructive"',
+            default: '"default"',
           },
         ],
       },
       {
         name: "AlertTitle",
-        description: "The AlertTitle component displays the title of the alert.",
+        description:
+          "The AlertTitle component displays the title of the alert.",
         props: [
           {
             prop: "className",
@@ -316,9 +334,11 @@ export function AccordionBorders() {
         ],
       },
     ],
-    usage: [`
+    usage: [
+      `
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
-`, `
+`,
+      `
 <Alert>
     <AlertCircle className="h-4 w-4" />
     <AlertTitle>Heads up!</AlertTitle>
@@ -326,7 +346,8 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
     You can add components and dependencies to your app using the CLI.
     </AlertDescription>
 </Alert>
-        `],
+        `,
+    ],
     content: `
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
@@ -347,7 +368,8 @@ export function AlertDemo() {
 
   "alert-dialog": {
     title: "Alert Dialog",
-    description: "A modal dialog that interrupts the user with important content and expects a response.",
+    description:
+      "A modal dialog that interrupts the user with important content and expects a response.",
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -356,8 +378,9 @@ export function AlertDemo() {
       cli: "npx shadcn@latest add alert-dialog",
       // manual: "@radix-ui/react-alert-dialog",
     },
-    demo: 'alertDialog',
-    usage: [`import {
+    demo: "alertDialog",
+    usage: [
+      `import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -367,7 +390,8 @@ export function AlertDemo() {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-`, `
+`,
+      `
 <AlertDialog>
     <AlertDialogTrigger>Open</AlertDialogTrigger>
       <AlertDialogContent>
@@ -381,7 +405,8 @@ export function AlertDemo() {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
     </AlertDialogContent>
 </AlertDialog>
-`],
+`,
+    ],
     content: `
 import {
   AlertDialog,
@@ -421,7 +446,8 @@ export function AlertDialogDemo() {
     examples: [
       {
         title: "Basic",
-        description: "A modal dialog that interrupts the user with important content and expects a response.",
+        description:
+          "A modal dialog that interrupts the user with important content and expects a response.",
         demo: "alertDialog",
         code: `
 import {
@@ -462,7 +488,8 @@ export function AlertDialogDemo() {
       },
       {
         title: "Small",
-        description: "A modal dialog that interrupts the user with important content and expects a response.",
+        description:
+          "A modal dialog that interrupts the user with important content and expects a response.",
         demo: "alertDialogSmall",
         code: `import {
   AlertDialog,
@@ -501,7 +528,8 @@ export function AlertDialogSmall() {
       },
       {
         title: "Media",
-        description: "A modal dialog that interrupts the user with important content and expects a response.",
+        description:
+          "A modal dialog that interrupts the user with important content and expects a response.",
         demo: "alertDialogWithMedia",
         code: `import {
   AlertDialog,
@@ -543,7 +571,8 @@ export function AlertDialogWithMedia() {
       },
       {
         title: "Small with media",
-        description: "A modal dialog that interrupts the user with important content and expects a response.",
+        description:
+          "A modal dialog that interrupts the user with important content and expects a response.",
         demo: "alertDialogSmallWithMedia",
         code: `import {
   AlertDialog,
@@ -588,7 +617,8 @@ export function AlertDialogSmallWithMedia() {
       },
       {
         title: "Destructive",
-        description: "A modal dialog that interrupts the user with important content and expects a response.",
+        description:
+          "A modal dialog that interrupts the user with important content and expects a response.",
         demo: "alertDialogDestructive",
         code: `import {
   AlertDialog,
@@ -630,18 +660,19 @@ export function AlertDialogDestructive() {
     </AlertDialog>
   )
 }`,
-      }
+      },
     ],
 
     args: [
       {
         name: "Size",
-        description: "Use the size props on the AlertDialogContent component to control the size of the alert dialog. It accepts the following values:",
+        description:
+          "Use the size props on the AlertDialogContent component to control the size of the alert dialog. It accepts the following values:",
         props: [
           {
             prop: "size",
-            type: "\"default\" | \"sm\"",
-            default: "\"default\"",
+            type: '"default" | "sm"',
+            default: '"default"',
           },
         ],
       },
@@ -660,7 +691,10 @@ export function AlertDialogDestructive() {
       // manual: "@radix-ui/react-slot",
     },
     demo: "button",
-    usage: [`import { Button } from "@/components/ui/button"`, `<Button>Click me</Button>`],
+    usage: [
+      `import { Button } from "@/components/ui/button"`,
+      `<Button>Click me</Button>`,
+    ],
     content: `import { ArrowUpIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -692,23 +726,24 @@ export function ButtonDemo() {
     </div>
   )
 }`,
-      }
+      },
     ],
 
     args: [
       {
         name: "Button",
-        description: "The Button component is a wrapper around the button element that adds a variety of styles and functionality.",
+        description:
+          "The Button component is a wrapper around the button element that adds a variety of styles and functionality.",
         props: [
           {
             prop: "variant",
-            type: "\"default\" | \"outline\" | \"secondary\" | \"ghost\" | \"link\" | \"destructive\"",
-            default: "\"default\"",
+            type: '"default" | "outline" | "secondary" | "ghost" | "link" | "destructive"',
+            default: '"default"',
           },
           {
             prop: "size",
-            type: "\"default\" | \"xs\" | \"sm\" | \"lg\" | \"icon\" | \"icon-xs\" | \"icon-sm\" | \"icon-lg\"",
-            default: "\"default\"",
+            type: '"default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg"',
+            default: '"default"',
           },
           {
             prop: "asChild",
@@ -732,7 +767,10 @@ export function ButtonDemo() {
       manual: "Copy the badge component from the components library.",
     },
     demo: "badge",
-    usage: [`import { Badge } from "@/components/ui/badge"`, `<Badge>Badge</Badge>`],
+    usage: [
+      `import { Badge } from "@/components/ui/badge"`,
+      `<Badge>Badge</Badge>`,
+    ],
     content: `import { BadgeCheckIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
@@ -793,7 +831,8 @@ export function BadgeDemo() {
       manual: "Copy the card component from the components library.",
     },
     demo: "card",
-    usage: [`
+    usage: [
+      `
 import {
   Card,
   CardContent,
@@ -801,7 +840,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-`, `
+`,
+      `
 <Card>
   <CardHeader>
     <CardTitle>Card Title</CardTitle>
@@ -810,7 +850,8 @@ import {
   <CardContent>
     Content goes here
   </CardContent>
-</Card>`],
+</Card>`,
+    ],
     content: `
 import { Button } from "@/components/ui/button"
 import {
@@ -880,16 +921,15 @@ export function CardDemo() {
     </div>
   )
 }`,
-    examples: ``
+    examples: ``,
   },
 
   calendar: {
     title: "Calendar",
-    description: "A date field component that allows users to enter and edit date.",
+    description:
+      "A date field component that allows users to enter and edit date.",
     demo: "calendar",
-    links: [
-      { label: "Docs", href: "https://daypicker.dev/" },
-    ],
+    links: [{ label: "Docs", href: "https://daypicker.dev/" }],
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -899,7 +939,9 @@ export function CardDemo() {
       manual: "Copy the input component from the components library.",
     },
 
-    usage: [`import { Calendar } from "@/components/ui/calendar"`, `const [date, setDate] = React.useState<Date | undefined>(new Date())
+    usage: [
+      `import { Calendar } from "@/components/ui/calendar"`,
+      `const [date, setDate] = React.useState<Date | undefined>(new Date())
 
 return (
   <Calendar
@@ -908,7 +950,8 @@ return (
     onSelect={setDate}
     className="rounded-lg border"
   />
-)`],
+)`,
+    ],
     content: `"use client"
 
 import * as React from "react"
@@ -928,12 +971,13 @@ export function CalendarDemo() {
     />
   )
 }`,
-    examples: ``
+    examples: ``,
   },
 
   dialog: {
     title: "Dialog",
-    description: "A window overlaid on either the primary window or another dialog window.",
+    description:
+      "A window overlaid on either the primary window or another dialog window.",
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -943,7 +987,8 @@ export function CalendarDemo() {
       manual: "Copy the dialog component from the components library.",
     },
     demo: "dialog",
-    usage: [`import {
+    usage: [
+      `import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -951,7 +996,8 @@ export function CalendarDemo() {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-`, `<Dialog>
+`,
+      `<Dialog>
   <DialogTrigger>Open Dialog</DialogTrigger>
   <DialogContent>
     <DialogHeader>
@@ -961,7 +1007,8 @@ export function CalendarDemo() {
       </DialogDescription>
     </DialogHeader>
   </DialogContent>
-</Dialog>`],
+</Dialog>`,
+    ],
     content: `import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -1012,16 +1059,23 @@ export function DialogDemo() {
     </Dialog>
   )
 }`,
-    examples: ``
+    examples: ``,
   },
 
   "dropdown-menu": {
     title: "Dropdown Menu",
-    description: "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
+    description:
+      "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
     demo: "dropdownMenu",
     links: [
-      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/dropdown-menu" },
-      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/dropdown-menu#api-reference" },
+      {
+        label: "Docs",
+        href: "https://www.radix-ui.com/primitives/docs/components/dropdown-menu",
+      },
+      {
+        label: "API Reference",
+        href: "https://www.radix-ui.com/primitives/docs/components/dropdown-menu#api-reference",
+      },
     ],
     installation: {
       tabs: [
@@ -1031,14 +1085,16 @@ export function DialogDemo() {
       cli: "npx shadcn@latest add dropdown-menu",
       manual: "@radix-ui/react-dropdown-menu",
     },
-    usage: [`import {
+    usage: [
+      `import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"`, `<DropdownMenu>
+} from "@/components/ui/dropdown-menu"`,
+      `<DropdownMenu>
   <DropdownMenuTrigger>Open</DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -1048,7 +1104,8 @@ export function DialogDemo() {
     <DropdownMenuItem>Team</DropdownMenuItem>
     <DropdownMenuItem>Subscription</DropdownMenuItem>
   </DropdownMenuContent>
-</DropdownMenu>`],
+</DropdownMenu>`,
+    ],
     content: `import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -1123,7 +1180,7 @@ export function DropdownMenuDemo() {
     </DropdownMenu>
   )
 }`,
-    examples: ``
+    examples: ``,
   },
 
   input: {
@@ -1138,21 +1195,30 @@ export function DropdownMenuDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "input",
-    usage: [`import { Input } from "@/components/ui/input"`, `<Input type="email" placeholder="Email" />`],
+    usage: [
+      `import { Input } from "@/components/ui/input"`,
+      `<Input type="email" placeholder="Email" />`,
+    ],
     content: `import { Input } from "@/components/ui/input"
 
 export function InputDemo() {
   return <Input type="email" placeholder="Email" />
 }`,
-    examples: ``
+    examples: ``,
   },
 
   label: {
     title: "Label",
     description: "Renders an accessible label associated with controls.",
     links: [
-      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/label" },
-      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/label#api-reference" },
+      {
+        label: "Docs",
+        href: "https://www.radix-ui.com/primitives/docs/components/label",
+      },
+      {
+        label: "API Reference",
+        href: "https://www.radix-ui.com/primitives/docs/components/label#api-reference",
+      },
     ],
     installation: {
       tabs: [
@@ -1163,7 +1229,10 @@ export function InputDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "label",
-    usage: [`import { Label } from "@/components/ui/label"`, `<Label htmlFor="email">Your email address</Label>`],
+    usage: [
+      `import { Label } from "@/components/ui/label"`,
+      `<Label htmlFor="email">Your email address</Label>`,
+    ],
     content: `import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 
@@ -1177,15 +1246,21 @@ export function LabelDemo() {
     </div>
   )
 }`,
-    examples: ``
+    examples: ``,
   },
 
   popover: {
     title: "Popover",
     description: "Displays rich content in a portal, triggered by a button.",
     links: [
-      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/popover" },
-      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/popover#api-reference" },
+      {
+        label: "Docs",
+        href: "https://www.radix-ui.com/primitives/docs/components/popover",
+      },
+      {
+        label: "API Reference",
+        href: "https://www.radix-ui.com/primitives/docs/components/popover#api-reference",
+      },
     ],
     installation: {
       tabs: [
@@ -1196,14 +1271,17 @@ export function LabelDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "popover",
-    usage: [`import {
+    usage: [
+      `import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"`, `<Popover>
+} from "@/components/ui/popover"`,
+      `<Popover>
   <PopoverTrigger>Open</PopoverTrigger>
   <PopoverContent>Place content for the popover here.</PopoverContent>
-</Popover>`],
+</Popover>`,
+    ],
     content: `import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -1266,15 +1344,22 @@ export function PopoverDemo() {
     </Popover>
   )
 }`,
-    examples: ``
+    examples: ``,
   },
 
   progress: {
     title: "Progress",
-    description: "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    description:
+      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
     links: [
-      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/progress" },
-      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/progress#api-reference" },
+      {
+        label: "Docs",
+        href: "https://www.radix-ui.com/primitives/docs/components/progress",
+      },
+      {
+        label: "API Reference",
+        href: "https://www.radix-ui.com/primitives/docs/components/progress#api-reference",
+      },
     ],
     installation: {
       tabs: [
@@ -1285,7 +1370,10 @@ export function PopoverDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "progress",
-    usage: [`import { Progress } from "@/components/ui/progress"`, `<Progress value={33} />`],
+    usage: [
+      `import { Progress } from "@/components/ui/progress"`,
+      `<Progress value={33} />`,
+    ],
     content: `"use client"
 
 import * as React from "react"
@@ -1302,15 +1390,22 @@ export function ProgressDemo() {
 
   return <Progress value={progress} className="w-[60%]" />
 }`,
-    examples: ``
+    examples: ``,
   },
 
   select: {
     title: "Select",
-    description: "Displays a list of options for the user to pick from—triggered by a button.",
+    description:
+      "Displays a list of options for the user to pick from—triggered by a button.",
     links: [
-      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/select" },
-      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/select#api-reference" },
+      {
+        label: "Docs",
+        href: "https://www.radix-ui.com/primitives/docs/components/select",
+      },
+      {
+        label: "API Reference",
+        href: "https://www.radix-ui.com/primitives/docs/components/select#api-reference",
+      },
     ],
     installation: {
       tabs: [
@@ -1321,13 +1416,15 @@ export function ProgressDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "select",
-    usage: [`import {
+    usage: [
+      `import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"`, `<Select>
+} from "@/components/ui/select"`,
+      `<Select>
   <SelectTrigger className="w-45">
     <SelectValue placeholder="Theme" />
   </SelectTrigger>
@@ -1336,7 +1433,8 @@ export function ProgressDemo() {
     <SelectItem value="dark">Dark</SelectItem>
     <SelectItem value="system">System</SelectItem>
   </SelectContent>
-</Select>`],
+</Select>`,
+    ],
     content: `import * as React from "react"
 
 import {
@@ -1368,15 +1466,22 @@ export function SelectDemo() {
     </Select>
   )
 }`,
-    examples: ``
+    examples: ``,
   },
 
   slider: {
     title: "Slider",
-    description: "An input where the user selects a value from within a given range.",
+    description:
+      "An input where the user selects a value from within a given range.",
     links: [
-      { label: "Docs", href: "https://www.radix-ui.com/primitives/docs/components/slider" },
-      { label: "API Reference", href: "https://www.radix-ui.com/primitives/docs/components/slider#api-reference" },
+      {
+        label: "Docs",
+        href: "https://www.radix-ui.com/primitives/docs/components/slider",
+      },
+      {
+        label: "API Reference",
+        href: "https://www.radix-ui.com/primitives/docs/components/slider#api-reference",
+      },
     ],
     installation: {
       tabs: [
@@ -1387,7 +1492,10 @@ export function SelectDemo() {
       manual: "Copy the input component from the components library.",
     },
     demo: "slider",
-    usage: [`import { Slider } from "@/components/ui/slider"`, `<Slider defaultValue={[33]} max={100} step={1} />`],
+    usage: [
+      `import { Slider } from "@/components/ui/slider"`,
+      `<Slider defaultValue={[33]} max={100} step={1} />`,
+    ],
     content: `import { cn } from "@/lib/utils"
 import { Slider } from "@/components/ui/slider"
 
@@ -1404,12 +1512,13 @@ export function SliderDemo({ className, ...props }: SliderProps) {
     />
   )
 }`,
-    examples: ``
+    examples: ``,
   },
 
   sheet: {
     title: "Sheet",
-    description: "Extends the Dialog component to display content that complements the main content of the screen.",
+    description:
+      "Extends the Dialog component to display content that complements the main content of the screen.",
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -1419,14 +1528,16 @@ export function SliderDemo({ className, ...props }: SliderProps) {
       manual: "Copy the input component from the components library.",
     },
     demo: "sheet",
-    usage: [`import {
+    usage: [
+      `import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"`, `<Sheet>
+} from "@/components/ui/sheet"`,
+      `<Sheet>
   <SheetTrigger>Open</SheetTrigger>
   <SheetContent>
     <SheetHeader>
@@ -1437,7 +1548,8 @@ export function SliderDemo({ className, ...props }: SliderProps) {
       </SheetDescription>
     </SheetHeader>
   </SheetContent>
-</Sheet>`],
+</Sheet>`,
+    ],
     content: `import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -1490,7 +1602,8 @@ export function SheetDemo() {
 
   tabs: {
     title: "Tabs",
-    description: "A set of layered sections of content that display one at a time.",
+    description:
+      "A set of layered sections of content that display one at a time.",
     installation: {
       tabs: [
         { label: "CLI", active: true },
@@ -1500,14 +1613,17 @@ export function SheetDemo() {
       manual: "Copy the tabs component from the components library.",
     },
     demo: "tabs",
-    usage: [`import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"`, `<Tabs defaultValue="tab1">
+    usage: [
+      `import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"`,
+      `<Tabs defaultValue="tab1">
   <TabsList>
     <TabsTrigger value="tab1">Tab 1</TabsTrigger>
     <TabsTrigger value="tab2">Tab 2</TabsTrigger>
   </TabsList>
   <TabsContent value="tab1">Content 1</TabsContent>
   <TabsContent value="tab2">Content 2</TabsContent>
-</Tabs>`],
+</Tabs>`,
+    ],
     content: `import { AppWindowIcon, CodeIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -1590,20 +1706,741 @@ export function TabsDemo() {
 }`,
     examples: ``,
   },
+
+  kanban: {
+    title: "Kanban",
+    description: "A drag and drop kanban board component.",
+    installation: {
+      tabs: [
+        { label: "CLI", active: true },
+        // { label: "Manual", active: false },
+      ],
+      cli: "npx shadcn@latest add kanban",
+      // manual: "",
+    },
+    demo: "kanban",
+    usage: [
+      `
+import { 
+  KanbanBoard, 
+  KanbanList, 
+  KanbanColumn, 
+  KanbanCard 
+} from "@/components/ui/kanban"
+`,
+      `
+<KanbanBoard onDragEnd={handleDragEnd}>
+  <KanbanList>
+    <KanbanColumn id="todo">
+       <KanbanCard id="task-1">Task 1</KanbanCard>
+    </KanbanColumn>
+  </KanbanList>
+</KanbanBoard>
+`,
+    ],
+    content: `"use client"
+
+import { useMemo } from "react"
+import {
+  KanbanBoard,
+  KanbanCard,
+  KanbanColumn,
+  KanbanList,
+  useKanban,
+  KanbanDragOverlay
+} from "@/components/ui/kanban"
+import { Badge } from "@/components/ui/badge"
+
+type Task = {
+  id: string
+  title: string
+  tag: string
 }
 
+type Column = {
+  id: string
+  title: string
+  tasks: Task[]
+}
+
+const initialData: Column[] = [
+  {
+    id: "todo",
+    title: "To Do",
+    tasks: [
+      { id: "t1", title: "Research dnd-kit", tag: "Research" },
+      { id: "t2", title: "Install dependencies", tag: "Tech" },
+    ],
+  },
+  {
+    id: "in-progress",
+    title: "In Progress",
+    tasks: [
+      { id: "t3", title: "Implement KanbanBoard", tag: "Dev" },
+    ],
+  },
+  {
+    id: "done",
+    title: "Done",
+    tasks: [
+      { id: "t4", title: "Create Plan", tag: "Planning" },
+    ],
+  },
+]
+
+export function KanbanDemo() {
+  const {
+      columns,
+      activeTask,
+      activeColumn,
+      handleDragStart,
+      handleDragOver,
+      handleDragEnd,
+      sensors
+  } = useKanban<Task, Column>(initialData)
+
+  return (
+    <KanbanBoard 
+    onDragStart={handleDragStart} 
+    onDragOver={handleDragOver} 
+    onDragEnd={handleDragEnd} 
+    sensors={sensors}
+    className="h-[500px]"
+    >
+        <KanbanList items={columns.map(c => c.id)} className="w-full">
+            {columns.map((col) => (
+                <KanbanColumn key={col.id} id={col.id} className="w-[300px]">
+                    <div className="flex items-center justify-between font-semibold mb-4 text-sm uppercase text-muted-foreground">
+                        {col.title}
+                        <Badge variant="outline">{col.tasks.length}</Badge>
+                    </div>
+                    
+                    <KanbanList items={useMemo(() => col.tasks.map(t => t.id), [col.tasks])} className="flex-col gap-2 min-h-[100px]">
+                        {col.tasks.map((task) => (
+                            <KanbanCard key={task.id} id={task.id} className="p-3 bg-card border rounded-md shadow-sm hover:shadow-md transition-all">
+                                <div className="flex flex-col gap-2">
+                                    <span className="font-medium text-sm">{task.title}</span>
+                                    <div className="flex pb-1">
+                                        <Badge variant="secondary" className="text-[10px] px-1 py-0 h-5">{task.tag}</Badge>
+                                    </div>
+                                </div>
+                            </KanbanCard>
+                        ))}
+                    </KanbanList>
+                </KanbanColumn>
+            ))}
+        </KanbanList>
+
+        <KanbanDragOverlay>
+            {activeColumn ? (
+                <div className="w-[300px] bg-muted/50 p-4 rounded-md opacity-80 border-2 border-primary">
+                    {activeColumn.title}
+                </div>
+            ) : activeTask ? (
+                <div className="p-3 bg-card border rounded-md shadow-md w-[280px] cursor-grabbing">
+                    <div className="flex flex-col gap-2">
+                            <span className="font-medium text-sm">{activeTask.title}</span>
+                            <div className="flex pb-1">
+                            <Badge variant="secondary" className="text-[10px] px-1 py-0 h-5">{activeTask.tag}</Badge>
+                            </div>
+                    </div>
+                </div>
+            ) : null}
+        </KanbanDragOverlay>
+    </KanbanBoard>
+  )
+}`,
+    examples: [
+      {
+        title: "Basic",
+        description: "A basic drag and drop list.",
+        demo: "dragAndDropList",
+        code: `"use client"
+
+import { useMemo } from "react"
+import {
+    KanbanBoard,
+    KanbanColumn,
+    KanbanList,
+    KanbanCard,
+    useKanban,
+    KanbanDragOverlay
+} from "@/components/ui/kanban"
+import { Badge } from "@/components/ui/badge"
+
+type Task = {
+  id: string
+  title: string
+  tag: string
+}
+
+type Column = {
+  id: string
+  title: string
+  tasks: Task[]
+}
+
+export function DragAndDropList() {
+  const initialSimpleData: Column[] = [
+    {
+      id: "list",
+      title: "Vertical List",
+      tasks: [
+        { id: "item-1", title: "Item 1", tag: "A" },
+        { id: "item-2", title: "Item 2", tag: "B" },
+        { id: "item-3", title: "Item 3", tag: "C" },
+        { id: "item-4", title: "Item 4", tag: "D" },
+        { id: "item-5", title: "Item 5", tag: "E" },
+      ],
+    },
+  ]
+
+  const {
+      columns,
+      activeTask,
+      handleDragStart,
+      handleDragOver,
+      handleDragEnd,
+      sensors
+  } = useKanban<Task, Column>(initialSimpleData)
+
+  const col = columns[0];
+
+  return (
+    <KanbanBoard 
+      onDragStart={handleDragStart} 
+      onDragOver={handleDragOver} 
+      onDragEnd={handleDragEnd} 
+      sensors={sensors}
+      className="flex-col h-auto"
+    >
+        <div className="w-full max-w-md mx-auto p-4 border rounded-lg bg-background">
+            <h3 className="font-semibold mb-4 text-sm uppercase text-muted-foreground">Reorder Items</h3>
+            <KanbanList 
+                items={useMemo(() => col.tasks.map(t => t.id), [col.tasks])} 
+                className="flex-col gap-2"
+                strategy={verticalListSortingStrategy}
+            >
+                {col.tasks.map((task) => (
+                    <KanbanCard key={task.id} id={task.id} className="group flex items-center justify-between p-3 bg-card border rounded-md shadow-sm hover:border-primary/50 transition-colors">
+                        <div className="flex items-center gap-3">
+                             <div className="text-muted-foreground/50 group-hover:text-foreground cursor-grab">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+                             </div>
+                             <span>{task.title}</span>
+                        </div>
+                        <Badge variant="outline">{task.tag}</Badge>
+                    </KanbanCard>
+                ))}
+            </KanbanList>
+        </div>
+
+        <KanbanDragOverlay>
+             {activeTask ? (
+                <div className="flex items-center justify-between p-3 bg-card border rounded-md shadow-xl w-[400px] cursor-grabbing active:scale-105 transition-transform">
+                     <div className="flex items-center gap-3">
+                         <div className="text-foreground">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+                         </div>
+                         <span>{activeTask.title}</span>
+                    </div>
+                    <Badge variant="outline">{activeTask.tag}</Badge>
+                </div>
+            ) : null}
+        </KanbanDragOverlay>
+    </KanbanBoard>
+  )
+}`,
+      },
+      {
+        title: "Drag and drop grid",
+        description: "A drag and drop grid.",
+        demo: "dragAndDropGrid",
+        code: `"use client"
+
+import { useMemo } from "react"
+import {
+  KanbanBoard,
+  KanbanCard,
+  KanbanColumn,
+  KanbanList,
+  useKanban,
+  KanbanDragOverlay,
+  verticalListSortingStrategy,
+  rectSortingStrategy,
+} from "@/components/ui/kanban"
+import { Badge } from "@/components/ui/badge"
+
+type Task = {
+  id: string
+  title: string
+  tag: string
+}
+
+type Column = {
+  id: string
+  title: string
+  tasks: Task[]
+}
+
+export function DragAndDropGrid() {
+  const initialGridData: Column[] = [
+    {
+      id: "grid",
+      title: "Grid Layout",
+      tasks: [
+        { id: "img-1", title: "Image 1", tag: "JPG" },
+        { id: "img-2", title: "Image 2", tag: "PNG" },
+        { id: "img-3", title: "Image 3", tag: "SVG" },
+        { id: "img-4", title: "Image 4", tag: "GIF" },
+        { id: "img-5", title: "Image 5", tag: "WEBP" },
+        { id: "img-6", title: "Image 6", tag: "BMP" },
+      ],
+    },
+  ]
+
+  const {
+      columns,
+      activeTask,
+      handleDragStart,
+      handleDragOver,
+      handleDragEnd,
+      sensors
+  } = useKanban<Task, Column>(initialGridData)
+
+  const col = columns[0];
+
+  return (
+    <KanbanBoard 
+      onDragStart={handleDragStart} 
+      onDragOver={handleDragOver} 
+      onDragEnd={handleDragEnd} 
+      sensors={sensors}
+      className="flex-col h-auto"
+    >
+        <div className="w-full max-w-2xl mx-auto p-4 border rounded-lg bg-background">
+            <h3 className="font-semibold mb-4 text-sm uppercase text-muted-foreground">Grid Layout</h3>
+            <KanbanList 
+                items={useMemo(() => col.tasks.map(t => t.id), [col.tasks])} 
+                className="grid grid-cols-2 md:grid-cols-3 gap-4"
+                strategy={rectSortingStrategy}
+            >
+                {col.tasks.map((task) => (
+                    <KanbanCard key={task.id} id={task.id} className="aspect-square flex flex-col items-center justify-center p-4 bg-muted/30 border-2 border-dashed rounded-xl hover:border-primary/50 hover:bg-muted/50 transition-all cursor-grab group">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                             <span className="font-bold text-primary">{task.tag}</span>
+                        </div>
+                        <span className="font-medium">{task.title}</span>
+                    </KanbanCard>
+                ))}
+            </KanbanList>
+        </div>
+
+        <KanbanDragOverlay>
+             {activeTask ? (
+                <div className="aspect-square flex flex-col items-center justify-center p-4 bg-background border-2 border-primary rounded-xl shadow-2xl cursor-grabbing w-[150px] opacity-90 scale-105">
+                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                             <span className="font-bold text-primary">{activeTask.tag}</span>
+                        </div>
+                        <span className="font-medium">{activeTask.title}</span>
+                </div>
+            ) : null}
+        </KanbanDragOverlay>
+    </KanbanBoard>
+  )
+}`,
+      },
+    ],
+  },
+  stepper: {
+    title: "Stepper",
+    description:
+      "A component to indicate progress through a multi-step process.",
+    installation: {
+      tabs: [
+        { label: "CLI", active: true },
+        // { label: "Manual", active: false },
+      ],
+      cli: "npx shadcn@latest add stepper",
+      // manual: "",
+    },
+    demo: "stepper",
+    usage: [
+      `
+import { 
+  Stepper, 
+  StepperItem, 
+  StepperTrigger, 
+  StepperContent 
+} from "@/components/ui/stepper"
+`,
+      `
+<Stepper defaultValue={1}>
+  <StepperItem step={1}>
+    <StepperTrigger>Step 1</StepperTrigger>
+    <StepperContent>Content 1</StepperContent>
+  </StepperItem>
+  <StepperItem step={2}>
+    <StepperTrigger>Step 2</StepperTrigger>
+    <StepperContent>Content 2</StepperContent>
+  </StepperItem>
+</Stepper>
+`,
+    ],
+    content: `"use client"
+
+import * as React from "react"
+import { CheckIcon, ChevronRightIcon } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import {
+  Stepper,
+  StepperItem,
+  StepperTrigger,
+  StepperIndicator,
+  StepperTitle,
+  StepperDescription,
+  StepperSeparator,
+} from "@/components/ui/stepper"
+
+export function StepperDemo() {
+  const [activeStep, setActiveStep] = React.useState(1)
+
+  return (
+    <div className="flex w-full flex-col gap-8 p-4">
+      <Stepper value={activeStep} onValueChange={setActiveStep}>
+        
+        <StepperItem step={1} className="flex-1">
+            <StepperTrigger onClick={() => setActiveStep(1)} className="w-full flex-col items-start gap-2">
+                <div className="flex items-center gap-2">
+                    <StepperIndicator className={activeStep >= 1 ? "bg-primary text-primary-foreground" : "bg-muted"}>
+                        {activeStep > 1 ? <CheckIcon className="h-4 w-4" /> : 1}
+                    </StepperIndicator>
+                    <div className="flex flex-col items-start">
+                        <StepperTitle>Account</StepperTitle>
+                        <StepperDescription>Enter details</StepperDescription>
+                    </div>
+                </div>
+            </StepperTrigger>
+            <StepperSeparator className="mt-4" />
+        </StepperItem>
+
+        <StepperItem step={2} className="flex-1">
+             <StepperTrigger onClick={() => setActiveStep(2)} className="w-full flex-col items-start gap-2">
+                <div className="flex items-center gap-2">
+                    <StepperIndicator className={activeStep >= 2 ? "bg-primary text-primary-foreground" : "bg-muted"}>
+                         {activeStep > 2 ? <CheckIcon className="h-4 w-4" /> : 2}
+                    </StepperIndicator>
+                    <div className="flex flex-col items-start">
+                        <StepperTitle>Address</StepperTitle>
+                        <StepperDescription>Shipping info</StepperDescription>
+                    </div>
+                </div>
+            </StepperTrigger>
+             <StepperSeparator className="mt-4" />
+        </StepperItem>
+
+        <StepperItem step={3} className="flex-1">
+            <StepperTrigger onClick={() => setActiveStep(3)} className="w-full flex-col items-start gap-2">
+                <div className="flex items-center gap-2">
+                     <StepperIndicator className={activeStep >= 3 ? "bg-primary text-primary-foreground" : "bg-muted"}>
+                         {activeStep > 3 ? <CheckIcon className="h-4 w-4" /> : 3}
+                    </StepperIndicator>
+                    <div className="flex flex-col items-start">
+                        <StepperTitle>Confirm</StepperTitle>
+                        <StepperDescription>Review order</StepperDescription>
+                    </div>
+                </div>
+            </StepperTrigger>
+        </StepperItem>
+
+      </Stepper>
+
+      <div className="flex w-full flex-col gap-4 rounded-lg border p-6">
+        <div className="text-xl font-semibold">
+           {activeStep === 1 && "Step 1: Account Details"}
+           {activeStep === 2 && "Step 2: Shipping Address"}
+           {activeStep === 3 && "Step 3: Confirmation"}
+        </div>
+        <div className="text-muted-foreground">
+           {activeStep === 1 && "Please enter your account information below."}
+           {activeStep === 2 && "Where should we send your package?"}
+           {activeStep === 3 && "Please review your order before paying."}
+        </div>
+        
+        <div className="flex justify-end gap-2 mt-4">
+            <Button 
+                variant="outline" 
+                onClick={() => setActiveStep(prev => Math.max(1, prev - 1))}
+                disabled={activeStep === 1}
+            >
+                Back
+            </Button>
+            <Button 
+                onClick={() => setActiveStep(prev => Math.min(3, prev + 1))}
+                disabled={activeStep === 3}
+            >
+                Next
+            </Button>
+        </div>
+      </div>
+    </div>
+  )
+}
+`,
+    examples: [],
+  },
+  chart: {
+    title: "Chart",
+    description:
+      "A unified chart component that supports Bar, Line, Area, and Pie charts.",
+    installation: {
+      tabs: [{ label: "CLI", active: true }],
+      cli: "npx shadcn@latest add chart",
+    },
+    demo: "chart",
+    usage: [
+      `
+import { UnifiedChart } from "@/components/ui/unified-chart"
+
+const data = [
+  { month: "Jan", sales: 100 },
+  { month: "Feb", sales: 150 },
+]
+`,
+      `
+<UnifiedChart 
+  type="bar" 
+  data={data} 
+  dataKey="sales" 
+  xAxisKey="month" 
+  config={chartConfig}
+/>
+`,
+    ],
+    content: `// Source for unified-chart.tsx (see file)`,
+    examples: [],
+  },
+  "data-table": {
+    title: "Data-table",
+    description: "Powerful table built using TanStack Table v8.",
+    installation: {
+      tabs: [{ label: "CLI", active: true }],
+      cli: "npx shadcn@latest add table",
+    },
+    demo: "table",
+    usage: [
+      `
+import { DataTable } from "@/components/ui/data-table"
+import { ColumnDef } from "@tanstack/react-table"
+
+export type Payment = {
+  id: string
+  amount: number
+  status: "pending" | "processing" | "success" | "failed"
+  email: string
+}
+
+export const columns = [
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+  },
+  {
+    title: 'Email',
+    dataIndex: 'email',
+    key: 'email',
+  },
+  {
+    title: 'Amount',
+    dataIndex: 'amount',
+    key: 'amount',
+  },
+]
+`,
+      `
+<DataTable 
+  columns={columns} 
+  data={data} 
+  paginationStyle="numbered" 
+/>
+`,
+    ],
+    content: `"use client"
+
+import { MoreHorizontal } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { DataTable } from "@/components/ui/data-table"
+
+const data: Payment[] = [
+  {
+    id: "m5gr84i9",
+    amount: 316,
+    status: "success",
+    email: "ken99@yahoo.com",
+    customer_name: "Ken",
+    date: "2024-01-01",
+  },
+  {
+    id: "3u1reoj4",
+    amount: 242,
+    status: "success",
+    email: "Abe45@gmail.com",
+    customer_name: "Abe",
+    date: "2024-01-02",
+  },
+  {
+    id: "derv1ws0",
+    amount: 837,
+    status: "processing",
+    email: "Monserrat44@gmail.com",
+    customer_name: "Monserrat",
+    date: "2024-01-03",
+  }
+]
+
+export type Payment = {
+  id: string
+  amount: number
+  status: "pending" | "processing" | "success" | "failed"
+  email: string
+  customer_name: string
+  date: string
+}
+
+const columns = [
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    render: (value: any) => <div className="capitalize">{value}</div>
+  },
+  {
+    title: 'Email',
+    dataIndex: 'email',
+    key: 'email',
+    render: (value: any) => <div className="lowercase">{value}</div>
+  },
+  {
+    title: 'Customer',
+    dataIndex: 'customer_name',
+    key: 'customer_name',
+    render: (value: any) => <div className="capitalize">{value}</div>
+  },
+  {
+    title: 'Amount',
+    dataIndex: 'amount',
+    key: 'amount',
+    render: (value: any) => {
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(value)
+      return <div className="text-right font-medium">{formatted}</div>
+    }
+  },
+  {
+    title: '',
+    dataIndex: 'actions',
+    key: 'actions',
+    render: (_: any, payment: Payment) => {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(payment.id)}
+            >
+              Copy payment ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>View customer</DropdownMenuItem>
+            <DropdownMenuItem>View payment details</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
+    }
+  },
+];
+
+export function TableDemo() {
+  return (
+    <div className="container mx-auto py-10">
+      <DataTable columns={columns} data={data} paginationStyle="numbered" enableSelection={false} />
+    </div>
+  )
+}`,
+    examples: [],
+    args: [
+      {
+        name: "enableSelection",
+        description: "Enable row selection.",
+        props: [
+          {
+            prop: "enableSelection",
+            type: "boolean",
+            default: "false",
+          },
+        ],
+      },
+      {
+        name: "data",
+        description: "The data to display in the table.",
+        props: [
+          {
+            prop: "data",
+            type: "any[]",
+            default: "[]",
+          },
+        ],
+      },
+      {
+        name: "paginationStyle",
+        description: "The pagination style to use.",
+        props: [
+          {
+            prop: "paginationStyle",
+            type: `numbered | simple`,
+            default: `simple`,
+          },
+        ],
+      },
+    ],
+  },
+};
+
 export function getComponentData(slug: string): ComponentData | null {
-  return components[slug] || null
+  return components[slug] || null;
 }
 
 export function getAllComponents(): string[] {
-  return Object.keys(components)
+  return Object.keys(components);
 }
 
-export function getComponentsList(): Array<{ slug: string; title: string; description: string }> {
+export function getComponentsList(): Array<{
+  slug: string;
+  title: string;
+  description: string;
+}> {
   return Object.entries(components).map(([slug, data]) => ({
     slug,
     title: data.title,
     description: data.description,
-  }))
+  }));
 }

@@ -17,6 +17,10 @@ import { SheetDemo } from "./sheet-demo"
 import { SliderDemo } from "./slider-demo"
 import { PopoverDemo } from "./popover-demo"
 import { LabelDemo } from "./label-demo"
+import { KanbanDemo, DragAndDropList, DragAndDropGrid, KanbanSortable } from "./kanban-demo"
+import { StepperDemo } from "./stepper-demo"
+import { ChartDemo } from "./chart-demo"
+import { TableDemo } from "./table-demo"
 
 export const demoRegistry: Record<string, React.ComponentType> = {
   accordion: AccordionDemo,
@@ -43,4 +47,11 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   slider: SliderDemo,
   popover: PopoverDemo,
   label: LabelDemo,
+  kanban: KanbanDemo, 
+  kanbanSortable: KanbanSortable,
+  dragAndDropList: DragAndDropList,
+  dragAndDropGrid: DragAndDropGrid,
+  stepper: StepperDemo,
+  chart: ChartDemo,
+  table: TableDemo,
 }
