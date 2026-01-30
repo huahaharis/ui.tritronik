@@ -1207,6 +1207,59 @@ export function InputDemo() {
     examples: ``,
   },
 
+  "input-group": {
+    title: "Input Group",
+    description:
+      "Extends Input to allow for prepended and appended text, icons, or buttons.",
+    installation: {
+      tabs: [
+        { label: "CLI", active: true },
+        { label: "Manual", active: false },
+      ],
+      cli: "npx shadcn@latest add input-group",
+      manual: "Copy the input-group component from the components library.",
+    },
+    demo: "input-group",
+    usage: [
+      `import { InputGroup, InputGroupAddon, InputGroupText, InputGroupInput } from "@/components/ui/input-group"`,
+      `<InputGroup>
+  <InputGroupAddon>
+    <InputGroupText>@</InputGroupText>
+  </InputGroupAddon>
+  <InputGroupInput placeholder="Username" />
+</InputGroup>`,
+    ],
+    content: `import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+} from '@/components/ui/input-group'
+import { Search, Copy } from 'lucide-react'
+
+export function InputGroupDemo() {
+  return (
+    <div className="flex flex-col gap-4 w-full max-w-sm">
+      <InputGroup>
+        <InputGroupAddon>
+          <InputGroupText>https://</InputGroupText>
+        </InputGroupAddon>
+        <InputGroupInput placeholder="google.com" />
+      </InputGroup>
+
+      <InputGroup>
+        <InputGroupAddon>
+          <Search className="size-4" />
+        </InputGroupAddon>
+        <InputGroupInput placeholder="Search..." />
+      </InputGroup>
+    </div>
+  )
+}`,
+    examples: [],
+  },
+
   label: {
     title: "Label",
     description: "Renders an accessible label associated with controls.",
@@ -1465,6 +1518,36 @@ export function SelectDemo() {
       </SelectContent>
     </Select>
   )
+}`,
+    examples: ``,
+  },
+
+  "color-picker": {
+    title: "Color Picker",
+    description:
+      "A color picker component that allows users to select a color.",
+    installation: {
+      tabs: [
+        { label: "CLI", active: true },
+        { label: "Manual", active: false },
+      ],
+      cli: "npx shadcn@latest add color-picker",
+      manual: "Copy the color-picker component from the components library.",
+    },
+    demo: "color-picker",
+    usage: [
+      `import { ColorPicker } from "@/components/ui/color-picker"`,
+      `<ColorPicker value="#000000" onChange={setColor} />`,
+    ],
+    content: `import * as React from 'react';
+import { ColorPicker } from '@/components/ui/color-picker';
+
+export function ColorPickerDemo() {
+  const [color, setColor] = React.useState('#000000');
+
+  return (
+    <ColorPicker value={color} onChange={setColor} />
+  );
 }`,
     examples: ``,
   },
@@ -2052,6 +2135,7 @@ export function DragAndDropGrid() {
       },
     ],
   },
+
   stepper: {
     title: "Stepper",
     description:
@@ -2190,6 +2274,76 @@ export function StepperDemo() {
 `,
     examples: [],
   },
+  carousel: {
+    title: "Carousel",
+    description: "A motion-carousel component built with Embla Carousel.",
+    links: [
+      {
+        label: "Docs",
+        href: "https://ui.shadcn.com/docs/components/carousel",
+      },
+      {
+        label: "API Reference",
+        href: "https://www.embla-carousel.com/api/",
+      },
+    ],
+    installation: {
+      tabs: [{ label: "CLI", active: true }],
+      cli: "npx shadcn@latest add carousel",
+    },
+    demo: "carousel",
+    usage: [
+      `import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"`,
+      `<Carousel>
+  <CarouselContent>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>`,
+    ],
+    content: `import * as React from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+
+export function CarouselDemo() {
+  return (
+    <Carousel className="w-full max-w-xs">
+      <CarouselContent>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index}>
+            <div className="p-1">
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-4xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  )
+}
+`,
+  },
+
   chart: {
     title: "Chart",
     description:
@@ -2218,11 +2372,131 @@ const data = [
 />
 `,
     ],
-    content: `// Source for unified-chart.tsx (see file)`,
-    examples: [],
+    content: `"use client"
+
+import * as React from "react"
+import { BarChart3, LineChart, PieChart, AreaChart as AreaChartIcon } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import { UnifiedChart, ChartType, ChartConfig } from "@/components/ui/unified-chart"
+
+const chartData = [
+  { month: "January", visitors: 186, fill: "var(--color-january)" },
+  { month: "February", visitors: 305, fill: "var(--color-february)" },
+  { month: "March", visitors: 237, fill: "var(--color-march)" },
+  { month: "April", visitors: 73, fill: "var(--color-april)" },
+  { month: "May", visitors: 209, fill: "var(--color-may)" },
+  { month: "June", visitors: 214, fill: "var(--color-june)" },
+]
+
+const pieChartData = [
+  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+  { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
+  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
+  { browser: "other", visitors: 90, fill: "var(--color-other)" },
+]
+
+const chartConfig = {
+  visitors: {
+    label: "Visitors",
+    color: "var(--chart-1)",
   },
+  chrome: { label: "Chrome", color: "#E91E63" },
+  safari: { label: "Safari", color: "var(--chart-2)" },
+  firefox: { label: "Firefox", color: "var(--chart-3)" },
+  edge: { label: "Edge", color: "var(--chart-4)" },
+  other: { label: "Other", color: "var(--chart-5)" },
+  january: { label: "January", color: "var(--chart-1)" },
+  february: { label: "February", color: "var(--chart-2)" },
+  march: { label: "March", color: "var(--chart-3)" },
+  april: { label: "April", color: "var(--chart-4)" },
+  may: { label: "May", color: "var(--chart-5)" },
+  june: { label: "June", color: "var(--chart-1)" },
+} satisfies ChartConfig
+
+export function ChartDemo() {
+  const [type, setType] = React.useState<ChartType>("bar")
+
+  return (
+    <div className="flex w-full flex-col gap-6 p-4">
+      <div className="flex items-center gap-2">
+        <Button 
+            variant={type === "bar" ? "default" : "outline"} 
+            size="sm"
+            onClick={() => setType("bar")}
+        >
+            <BarChart3 className="mr-2 h-4 w-4" /> Bar
+        </Button>
+        <Button 
+            variant={type === "line" ? "default" : "outline"}
+            size="sm" 
+            onClick={() => setType("line")}
+        >
+            <LineChart className="mr-2 h-4 w-4" /> Line
+        </Button>
+         <Button 
+            variant={type === "area" ? "default" : "outline"} 
+            size="sm"
+            onClick={() => setType("area")}
+        >
+            <AreaChartIcon className="mr-2 h-4 w-4" /> Area
+        </Button>
+        <Button 
+            variant={type === "pie" ? "default" : "outline"} 
+            size="sm"
+            onClick={() => setType("pie")}
+        >
+            <PieChart className="mr-2 h-4 w-4" /> Pie
+        </Button>
+      </div>
+
+      <div className="rounded-xl border bg-card text-card-foreground shadow">
+        <div className="p-6 pt-0 mt-6">
+            <UnifiedChart
+                type={type}
+                data={type === "pie" ? pieChartData : chartData}
+                dataKey="visitors"
+                xAxisKey={type === "pie" ? "browser" : "month"}
+                config={chartConfig}
+                title="Website Visitors"
+                description="Jan - June 2024"
+                footer={
+                    <div className="flex w-full items-start gap-2 text-sm">
+                        <div className="grid gap-2">
+                        <div className="flex items-center gap-2 font-medium leading-none">
+                            Trending up by 5.2% this month <LineChart className="h-4 w-4" />
+                        </div>
+                        <div className="flex items-center gap-2 leading-none text-muted-foreground">
+                            Showing total visitors for the last 6 months
+                        </div>
+                        </div>
+                    </div>
+                }
+            />
+        </div>
+      </div>
+    </div>
+  )
+}`,
+    examples: [],
+    args: [
+      {
+        name: "Type of Chart",
+        description: "Type of chart to display.",
+        props: [
+          {
+            prop: "type",
+            type: "bar | line | area | pie",
+            default: "bar",
+          },
+        ],
+      },
+    ],
+  },
+
   "data-table": {
-    title: "Data-table",
+    title: "Data Table",
     description: "Powerful table built using TanStack Table v8.",
     installation: {
       tabs: [{ label: "CLI", active: true }],
@@ -2422,6 +2696,440 @@ export function TableDemo() {
         ],
       },
     ],
+  },
+
+  masonry: {
+    title: "Masonry",
+    description:
+      "A responsive masonry layout component that distributes items across columns.",
+    installation: {
+      tabs: [{ label: "Manual", active: true }],
+      cli: "",
+      manual: "Copy the code from src/components/ui/masonry.tsx",
+    },
+    demo: "masonry",
+    usage: [
+      `import { Masonry } from "@/components/ui/masonry"`,
+      `<Masonry columns={{ 640: 1, 768: 2, 1024: 3 }} gap={4}>
+  {items.map((item) => (
+    <Card key={item.id}>...</Card>
+  ))}
+</Masonry>`,
+    ],
+    content: `import React, { useEffect, useState } from 'react';
+import { cn } from "@/lib/utils";
+
+interface MasonryProps {
+  children: React.ReactNode;
+  columns?: number | { [key: number]: number }; // Number of columns or responsive object { breakPoint: cols }
+  gap?: number;
+  className?: string;
+  columnClassName?: string;
+}
+
+export function Masonry({
+  children,
+  columns = 3,
+  gap = 4,
+  className,
+  columnClassName,
+}: MasonryProps) {
+    const [columnCount, setColumnCount] = useState<number>(3);
+
+    useEffect(() => {
+        const updateColumns = () => {
+            if (typeof columns === 'number') {
+                setColumnCount(columns);
+            } else {
+                 // Sort breakpoints descending
+                const breakpoints = Object.keys(columns).map(Number).sort((a, b) => b - a);
+                const width = window.innerWidth;
+                let count = columns[breakpoints[breakpoints.length - 1]]; // Default to smallest
+
+                for (const point of breakpoints) {
+                    if (width >= point) {
+                        count = columns[point];
+                        break;
+                    }
+                }
+                setColumnCount(count || 3);
+            }
+        };
+
+        updateColumns();
+        window.addEventListener('resize', updateColumns);
+        return () => window.removeEventListener('resize', updateColumns);
+    }, [columns]);
+
+  const childrenArray = React.Children.toArray(children);
+  const columnItems: React.ReactNode[][] = Array.from({ length: columnCount }, () => []);
+
+  childrenArray.forEach((child, index) => {
+    columnItems[index % columnCount].push(child);
+  });
+
+  return (
+    <div
+      className={cn("flex w-full", className)}
+      style={{ gap: \`\${gap * 0.25}rem\` }}
+    >
+      {columnItems.map((col, index) => (
+        <div
+          key={index}
+          className={cn("flex flex-col flex-1", columnClassName)}
+           style={{ gap: \`\${gap * 0.25}rem\` }}
+        >
+          {col}
+        </div>
+      ))}
+    </div>
+  );
+}
+`,
+    args: [
+      {
+        name: "Props",
+        description: "Props for the Masonry component.",
+        props: [
+          {
+            prop: "columns",
+            type: "number | { [key: number]: number }",
+            default: "3",
+          },
+          {
+            prop: "gap",
+            type: "number",
+            default: "4",
+          },
+        ],
+      },
+    ],
+  },
+
+  "radio-group": {
+    title: "Radio Group",
+    description:
+      "A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.",
+    installation: {
+      tabs: [{ label: "CLI", active: true }],
+      cli: "npx shadcn@latest add radio-group",
+    },
+    demo: "radio-group",
+    usage: [
+      `import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+
+export function RadioGroupDemo() {
+  return (
+    <div className="w-full">
+      <RadioGroup defaultValue="card" className="grid grid-cols-3 gap-4">
+        {/* ... options ... */}
+        <div>
+          <RadioGroupItem
+            value="card"
+            id="card"
+            className="peer sr-only"
+          />
+          <Label
+            htmlFor="card"
+            className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              className="mb-3 h-6 w-6"
+            >
+              <rect width="20" height="14" x="2" y="5" rx="2" />
+              <path d="M2 10h20" />
+            </svg>
+            Card
+          </Label>
+        </div>
+        {/* ... more options ... */}
+      </RadioGroup>
+    </div>
+  )
+}`,
+    ],
+    content: `"use client";
+
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
+export function RadioGroupDemo() {
+  return (
+    <div className="w-full">
+      <RadioGroup defaultValue="card" className="grid grid-cols-3 gap-4">
+        <div>
+          <RadioGroupItem value="card" id="card" className="peer sr-only" />
+          <Label
+            htmlFor="card"
+            className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              className="mb-3 h-6 w-6"
+            >
+              <rect width="20" height="14" x="2" y="5" rx="2" />
+              <path d="M2 10h20" />
+            </svg>
+            Card
+          </Label>
+        </div>
+        <div>
+          <RadioGroupItem value="paypal" id="paypal" className="peer sr-only" />
+          <Label
+            htmlFor="paypal"
+            className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              className="mb-3 h-6 w-6"
+            >
+              <rect width="20" height="14" x="2" y="5" rx="2" />
+              <path d="M2 10h20" />
+            </svg>
+            Paypal
+          </Label>
+        </div>
+        <div>
+          <RadioGroupItem value="apple" id="apple" className="peer sr-only" />
+          <Label
+            htmlFor="apple"
+            className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              className="mb-3 h-6 w-6"
+            >
+              <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-8s-3-2.66-3-5.5C19 5.38 21 3.5 21 3.5c-1.92.42-3.48 1.5-4.5 2.05-1.02-.56-2.58-1.63-4.5-2.05L12 3.5C21 3.5 12 20.94 12 20.94z" />
+            </svg>
+            Apple
+          </Label>
+        </div>
+      </RadioGroup>
+      <div className="mt-6 space-y-4">
+        <h4 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          Select a plan
+        </h4>
+        <RadioGroup defaultValue="starter" className="grid gap-2">
+          <div className="flex items-center justify-between space-x-2 rounded-md border p-4 hover:bg-accent hover:text-accent-foreground data-[state=checked]:border-primary">
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="starter" id="r1" />
+              <div className="grid gap-1.5 leading-none">
+                <Label htmlFor="r1" className="font-semibold cursor-pointer">
+                  Starter
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  Perfect for small teams and individuals.
+                </p>
+              </div>
+            </div>
+            <div className="text-sm font-medium">$0</div>
+          </div>
+          <div className="flex items-center justify-between space-x-2 rounded-md border p-4 hover:bg-accent hover:text-accent-foreground data-[state=checked]:border-primary">
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="pro" id="r2" />
+              <div className="grid gap-1.5 leading-none">
+                <Label htmlFor="r2" className="font-semibold cursor-pointer">
+                  Pro
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  Unlock mostly used features for growing business.
+                </p>
+              </div>
+            </div>
+            <div className="text-sm font-medium">$29</div>
+          </div>
+          <div className="flex items-center justify-between space-x-2 rounded-md border p-4 hover:bg-accent hover:text-accent-foreground data-[state=checked]:border-primary">
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="enterprise" id="r3" />
+              <div className="grid gap-1.5 leading-none">
+                <Label htmlFor="r3" className="font-semibold cursor-pointer">
+                  Enterprise
+                </Label>
+                <p className="text-sm text-muted-foreground">
+                  For large scale organizations and enterprise needs.
+                </p>
+              </div>
+            </div>
+            <div className="text-sm font-medium">Custom</div>
+          </div>
+        </RadioGroup>
+      </div>
+    </div>
+  );
+}`,
+    examples: [
+      {
+        title: "Disabled",
+        description: "A radio group with disabled items.",
+        demo: "radio-group-disabled",
+        code: `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Label } from "@/components/ui/label"
+
+export function RadioGroupDisabledDemo() {
+  return (
+    <RadioGroup defaultValue="option-one">
+      <div className="flex items-center space-x-2">
+        <RadioGroupItem value="option-one" id="r_disabled_1" disabled />
+        <Label htmlFor="r_disabled_1">Option One</Label>
+      </div>
+      <div className="flex items-center space-x-2">
+        <RadioGroupItem value="option-two" id="r_disabled_2" disabled />
+        <Label htmlFor="r_disabled_2">Option Two</Label>
+      </div>
+    </RadioGroup>
+  )
+}`,
+      },
+    ],
+  },
+
+  notification: {
+    title: "Notification",
+    description: "Display a notification message globally.",
+    installation: {
+      tabs: [{ label: "CLI", active: true }],
+      cli: "npx shadcn@latest add sonner",
+    },
+    demo: "notification",
+    usage: [
+      `import { notification } from "@/components/ui/notification"
+
+notification.success({
+  message: "Event has been created",
+  description: "Sunday, December 03, 2023 at 9:00 AM",
+  duration: 5000,
+  action: {
+    label: "Undo",
+    onClick: () => console.log("Undo"),
+  },
+})
+// Available positions: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"
+`,
+    ],
+    content: `
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { notification } from "@/components/ui/notification";
+
+export function NotificationDemo() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      <Button
+        variant="outline"
+        onClick={() =>
+          notification.open({
+            message: "Notification Title",
+            description:
+              "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+          })
+        }
+      >
+        Default
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          notification.success({
+            message: "Success Notification",
+            position: "top-left",
+            description: "The action was completed successfully.",
+          })
+        }
+      >
+        Success on top-left
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          notification.info({
+            message: "Info Notification",
+            description: "Here is some useful information for you.",
+          })
+        }
+      >
+        Info
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          notification.warning({
+            message: "Warning Notification",
+            description: "Please be careful with this action.",
+          })
+        }
+      >
+        Warning
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          notification.error({
+            message: "Error Notification",
+            position: "bottom-left",
+            description: "Something went wrong. Please try again.",
+          })
+        }
+      >
+        Error on bottom-left
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          notification.success({
+            message: "Quick Notification",
+            description: "This will disappear in 1s.",
+            duration: 1000,
+          })
+        }
+      >
+        Duration (1s)
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          notification.open({
+            message: "Action Required",
+            description: "Please confirm your email address.",
+            action: {
+              label: "Confirm",
+              onClick: () => console.log("Confirmed"),
+            },
+          })
+        }
+      >
+        With Action
+      </Button>
+    </div>
+  );
+}`,
+    examples: [],
   },
 };
 

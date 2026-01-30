@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "masonry",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/masonry.tsx",
+      "content": "import React, { useEffect, useState, useId } from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface MasonryProps {\r\n  children: React.ReactNode;\r\n  columns?: number | { [key: number]: number };\r\n  gap?: number;\r\n  className?: string;\r\n  columnClassName?: string;\r\n}\r\n\r\nexport function Masonry({\r\n  children,\r\n  columns = 3,\r\n  gap = 4,\r\n  className,\r\n  columnClassName,\r\n}: MasonryProps) {\r\n  const [columnCount, setColumnCount] = useState<number>(3);\r\n\r\n  useEffect(() => {\r\n    const updateColumns = () => {\r\n      if (typeof columns === \"number\") {\r\n        setColumnCount(columns);\r\n      } else {\r\n        const breakpoints = Object.keys(columns)\r\n          .map(Number)\r\n          .sort((a, b) => b - a);\r\n        const width = window.innerWidth;\r\n        let count = columns[breakpoints[breakpoints.length - 1]];\r\n\r\n        for (const point of breakpoints) {\r\n          if (width >= point) {\r\n            count = columns[point];\r\n            break;\r\n          }\r\n        }\r\n        setColumnCount(count || 3);\r\n      }\r\n    };\r\n\r\n    updateColumns();\r\n    window.addEventListener(\"resize\", updateColumns);\r\n    return () => window.removeEventListener(\"resize\", updateColumns);\r\n  }, [columns]);\r\n\r\n  const childrenArray = React.Children.toArray(children);\r\n  const columnItems: React.ReactNode[][] = Array.from(\r\n    { length: columnCount },\r\n    () => [],\r\n  );\r\n\r\n  childrenArray.forEach((child, index) => {\r\n    columnItems[index % columnCount].push(child);\r\n  });\r\n\r\n  return (\r\n    <div\r\n      className={cn(\"flex w-full\", className)}\r\n      style={{ gap: `${gap * 0.25}rem` }}\r\n    >\r\n      {columnItems.map((col, index) => (\r\n        <div\r\n          key={index}\r\n          className={cn(\"flex flex-col flex-1\", columnClassName)}\r\n          style={{ gap: `${gap * 0.25}rem` }}\r\n        >\r\n          {col}\r\n        </div>\r\n      ))}\r\n    </div>\r\n  );\r\n}\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

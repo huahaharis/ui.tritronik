@@ -1,9 +1,9 @@
-"use client"
-import { usePathname } from "next/navigation"
-import Link from "next/link"
+"use client";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export function DocsSidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const sections = [
     {
@@ -26,7 +26,7 @@ export function DocsSidebar() {
         { label: "Dark Mode", href: "/docs/dark-mode" },
         { label: "CLI", href: "/docs/cli" },
         { label: "Monorepo", href: "/docs/monorepo" },
-        { label: "Open in v0", href: "/docs/v0"},
+        { label: "Open in v0", href: "/docs/v0" },
         { label: "Javascript", href: "/docs/js" },
         { label: "Blocks", href: "/docs/blocks" },
         { label: "Figma", href: "/docs/figma" },
@@ -49,9 +49,10 @@ export function DocsSidebar() {
         { label: "Calendar", href: "/docs/components/calendar" },
         { label: "Card", href: "/docs/components/card" },
         { label: "Chart", href: "/docs/components/chart" },
-        // { label: "Carousel", href: "/docs/components/carousel" },
+        { label: "Carousel", href: "/docs/components/carousel" },
         // { label: "Checkbox", href: "/docs/components/checkbox" },
         // { label: "Collapsible", href: "/docs/components/collapsible" },
+        { label: "Color Picker", href: "/docs/components/color-picker" },
         // { label: "Combobox", href: "/docs/components/combobox" },
         // { label: "Command", href: "/docs/components/command" },
         // { label: "Context Menu", href: "/docs/components/context-menu" },
@@ -66,18 +67,20 @@ export function DocsSidebar() {
         // { label: "Form", href: "/docs/components/form" },
         // { label: "Hover Card", href: "/docs/components/hover-card" },
         { label: "Input", href: "/docs/components/input" },
-        // { label: "Input Group", href: "/docs/components/input-group" },
+        { label: "Input Group", href: "/docs/components/input-group" },
         // { label: "Input OTP", href: "/docs/components/input-otp" },
         // { label: "Item", href: "/docs/components/item" },
-        // { label: "Kbd", href: "/docs/components/kbd" },  
+        // { label: "Kbd", href: "/docs/components/kbd" },
         { label: "Kanban", href: "/docs/components/kanban" },
         { label: "Label", href: "/docs/components/label" },
+        { label: "Masonry", href: "/docs/components/masonry" },
         // { label: "Menubar", href: "/docs/components/menubar" },
         // { label: "Navigation Menu", href: "/docs/components/navigation-menu" },
         // { label: "Pagination", href: "/docs/components/pagination" },
+        { label: "Notification", href: "/docs/components/notification" },
         { label: "Popover", href: "/docs/components/popover" },
         { label: "Progress", href: "/docs/components/progress" },
-        // { label: "Radio Group", href: "/docs/components/radio-group" },
+        { label: "Radio Group", href: "/docs/components/radio-group" },
         // { label: "Scroll Area", href: "/docs/components/scroll-area" },
         { label: "Select", href: "/docs/components/select" },
         // { label: "Separator", href: "/docs/components/separator" },
@@ -96,13 +99,15 @@ export function DocsSidebar() {
         // { label: "Tooltip", href: "/docs/components/tooltip" },
       ],
     },
-  ]
+  ];
 
   return (
     <aside className="w-64 overflow-y-auto scrollbar-hide bg-background pl-12 py-8">
       {sections.map((section) => (
         <div key={section.title} className="mb-8">
-          <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{section.title}</h3>
+          <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            {section.title}
+          </h3>
           <ul className="space-y-2">
             {section.items.map((item) => (
               <li key={item.label}>
@@ -119,9 +124,8 @@ export function DocsSidebar() {
               </li>
             ))}
           </ul>
-
         </div>
       ))}
     </aside>
-  )
+  );
 }

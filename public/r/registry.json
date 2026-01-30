@@ -109,6 +109,192 @@
                     "type": "registry:ui"
                 }
             ]
+        },
+        {
+            "name": "input",
+            "type": "registry:ui",
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/input.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "separator",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-separator"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/separator.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "sheet",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-dialog",
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/sheet.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "skeleton",
+            "type": "registry:ui",
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/skeleton.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "tooltip",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-tooltip"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/tooltip.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "masonry",
+            "type": "registry:ui",
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/masonry.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "carousel",
+            "type": "registry:ui",
+            "dependencies": [
+                "embla-carousel-react",
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils",
+                "button"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/carousel.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "kanban",
+            "type": "registry:ui",
+            "dependencies": [
+                "@dnd-kit/core",
+                "@dnd-kit/sortable",
+                "@dnd-kit/utilities"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/kanban.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "chart",
+            "type": "registry:ui",
+            "dependencies": [
+                "chart.js",
+                "react-chartjs-2"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/unified-chart.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "sidebar",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-slot",
+                "class-variance-authority",
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils",
+                "button",
+                "input",
+                "separator",
+                "sheet",
+                "skeleton",
+                "tooltip"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/sidebar.tsx",
+                    "type": "registry:ui"
+                },
+                {
+                    "path": "src/hooks/use-mobile.ts",
+                    "type": "registry:hook"
+                }
+            ]
+        },
+        {
+            "name": "radio-group",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-radio-group",
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/radio-group.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         }
     ]
 }
