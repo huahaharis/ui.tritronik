@@ -70,7 +70,7 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   checkbox: CheckboxDemo,
   "color-picker": ColorPickerDemo,
   combobox: ComboboxDemo,
-  "dropdown-menu": DropdownMenuDemo,
+  dropdownMenu: DropdownMenuDemo,
   progress: ProgressDemo,
   select: SelectDemo,
   sheet: SheetDemo,
