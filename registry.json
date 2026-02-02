@@ -280,6 +280,46 @@
             ]
         },
         {
+            "name": "checkbox",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-checkbox",
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/checkbox.tsx",
+                    "type": "registry:ui"
+                },
+                {
+                    "path": "src/components/ui/checkbox-group.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "combobox",
+            "type": "registry:ui",
+            "dependencies": [
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils",
+                "button",
+                "command",
+                "popover"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/combobox.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
             "name": "input-group",
             "type": "registry:ui",
             "dependencies": [

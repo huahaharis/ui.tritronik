@@ -19,7 +19,7 @@ export function ColorPickerDemo() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 mt-8">
         <Label>Disabled</Label>
         <ColorPicker value="#cccccc" onChange={() => {}} disabled />
       </div>

@@ -1,8 +1,9 @@
-"use client"
+"use client";
 
-import { MoreHorizontal } from "lucide-react"
+import * as React from "react";
+import { MoreHorizontal } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,8 +11,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { DataTable } from "@/components/ui/data-table"
+} from "@/components/ui/dropdown-menu";
+import { DataTable } from "@/components/ui/data-table";
 
 const data: Payment[] = [
   {
@@ -54,7 +55,7 @@ const data: Payment[] = [
     customer_name: "Carmella",
     date: "2024-01-05",
   },
-    {
+  {
     id: "97unjhsa",
     amount: 900,
     status: "success",
@@ -69,58 +70,62 @@ const data: Payment[] = [
     email: "carmella@hotmail.com",
     customer_name: "Carmella",
     date: "2024-01-05",
-  }
-]
+  },
+];
 
 export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
-  customer_name: string
-  date: string
-}
+  id: string;
+  amount: number;
+  status: "pending" | "processing" | "success" | "failed";
+  email: string;
+  customer_name: string;
+  date: string;
+};
 
 const columns = [
   {
-    title: 'Status',
-    dataIndex: 'status',
-    key: 'status',
-    render: (value: any) => <div className="capitalize">{value}</div>
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
+    render: (value: any) => <div className="capitalize">{value}</div>,
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
-    key: 'email',
-    render: (value: any) => <div className="lowercase">{value}</div>
+    title: "Email",
+    dataIndex: "email",
+    key: "email",
+    render: (value: any) => <div className="lowercase">{value}</div>,
   },
   {
-    title: 'Customer',
-    dataIndex: 'customer_name',
-    key: 'customer_name',
-    render: (value: any) => <div className="capitalize">{value}</div>
+    title: "Customer",
+    dataIndex: "customer_name",
+    key: "customer_name",
+    render: (value: any) => <div className="capitalize">{value}</div>,
   },
   {
-    title: 'Amount',
-    dataIndex: 'amount',
-    key: 'amount',
+    title: "Amount",
+    dataIndex: "amount",
+    key: "amount",
     render: (value: any) => {
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-      }).format(value)
-      return <div className="text-right font-medium">{formatted}</div>
-    }
+      }).format(value);
+      return <div className="text-right font-medium">{formatted}</div>;
+    },
   },
   {
-    title: '',
-    dataIndex: 'actions',
-    key: 'actions',
+    title: "",
+    dataIndex: "actions",
+    key: "actions",
     render: (_: any, payment: Payment) => {
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
+            <Button
+              variant="ghost"
+              className="h-8 w-8 p-0"
+              suppressHydrationWarning
+            >
               <span className="sr-only">Open menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
@@ -137,15 +142,34 @@ const columns = [
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
-    }
+      );
+    },
   },
 ];
 
 export function TableDemo() {
+  const [selected, setSelected] = React.useState<Payment[]>([]);
+
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} paginationStyle="numbered" enableSelection={false} />
+    <div className="container mx-auto py-10 flex flex-col gap-4">
+      <DataTable
+        tableClassName="w-[700px]"
+        columns={columns}
+        data={data}
+        paginationStyle="numbered"
+        enableSelection={true}
+        onSelectionChange={(rows) => setSelected(rows)}
+      />
+
+      {/* <div className="rounded-md border p-4 bg-muted/50">
+        <h3 className="font-semibold mb-2">Selection Logic Debug:</h3>
+        <p className="text-sm text-muted-foreground mb-2">
+          Selected Rows Count: {selected.length}
+        </p>
+        <pre className="text-xs bg-black/80 text-white p-4 rounded-md overflow-auto max-h-[200px]">
+          {JSON.stringify(selected, null, 2)}
+        </pre>
+      </div> */}
     </div>
-  )
+  );
 }

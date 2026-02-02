@@ -22,7 +22,9 @@ import { InputDemo } from "./input-demo";
 import { InputGroupDemo } from "./input-group-demo";
 import { TabsDemo } from "./tabs-demo";
 import { CalendarDemo } from "./calendar-demo";
+import { CheckboxDemo } from "./checkbox-demo";
 import { ColorPickerDemo } from "./color-picker-demo";
+import { ComboboxDemo } from "./combobox-demo";
 import { DropdownMenuDemo } from "./dropdown-menu-demo";
 import { ProgressDemo } from "./progress-demo";
 import { SelectDemo } from "./select-demo";
@@ -65,7 +67,9 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   "input-group": InputGroupDemo,
   tabs: TabsDemo,
   calendar: CalendarDemo,
+  checkbox: CheckboxDemo,
   "color-picker": ColorPickerDemo,
+  combobox: ComboboxDemo,
   "dropdown-menu": DropdownMenuDemo,
   progress: ProgressDemo,
   select: SelectDemo,

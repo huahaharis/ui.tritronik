@@ -14,6 +14,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { cn } from "@/lib/utils";
+
 import {
   Table,
   TableBody,
@@ -63,6 +65,10 @@ interface DataTableProps<TData> {
   data: TData[];
   paginationStyle?: "simple" | "numbered";
   enableSelection?: boolean;
+  onSelectionChange?: (selectedRows: TData[]) => void;
+  className?: string;
+  containerClassName?: string;
+  tableClassName?: string;
 }
 
 export function DataTable<TData>({
@@ -70,6 +76,10 @@ export function DataTable<TData>({
   data,
   paginationStyle = "simple",
   enableSelection = false,
+  onSelectionChange,
+  className,
+  containerClassName,
+  tableClassName,
 }: DataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -148,6 +158,21 @@ export function DataTable<TData>({
     },
   });
 
+  const onSelectionChangeRef = React.useRef(onSelectionChange);
+
+  React.useEffect(() => {
+    onSelectionChangeRef.current = onSelectionChange;
+  }, [onSelectionChange]);
+
+  React.useEffect(() => {
+    if (onSelectionChangeRef.current) {
+      const selectedRows = table
+        .getFilteredSelectedRowModel()
+        .rows.map((row) => row.original);
+      onSelectionChangeRef.current(selectedRows);
+    }
+  }, [rowSelection, table]);
+
   const getPaginationItems = () => {
     const currentPage = table.getState().pagination.pageIndex + 1;
     const totalPages = table.getPageCount();
@@ -170,12 +195,16 @@ export function DataTable<TData>({
   };
 
   return (
-    <div className="w-full">
+    <div className={cn("w-full", className)}>
       <div className="flex items-center py-4">
         {/* Placeholder for future global filter if needed, or consumers can pass a filter component */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button
+              variant="outline"
+              className="ml-auto"
+              suppressHydrationWarning
+            >
               Columns <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -200,8 +229,8 @@ export function DataTable<TData>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
-        <Table>
+      <div className={cn("rounded-md border", containerClassName)}>
+        <Table className={tableClassName}>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -270,7 +299,10 @@ export function DataTable<TData>({
                   table.setPageSize(Number(value));
                 }}
               >
-                <SelectTrigger className="h-8 w-[70px]">
+                <SelectTrigger
+                  className="h-8 w-[70px]"
+                  suppressHydrationWarning
+                >
                   <SelectValue
                     placeholder={table.getState().pagination.pageSize}
                   />
