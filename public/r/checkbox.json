@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "dependencies": [
+    "@radix-ui/react-checkbox",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/checkbox.tsx",
+      "content": "'use client'\r\n\r\nimport * as React from 'react'\r\nimport * as CheckboxPrimitive from '@radix-ui/react-checkbox'\r\nimport { CheckIcon } from 'lucide-react'\r\n\r\nimport { cn } from '@/lib/utils'\r\n\r\nfunction Checkbox({\r\n  className,\r\n  ...props\r\n}: React.ComponentProps<typeof CheckboxPrimitive.Root>) {\r\n  return (\r\n    <CheckboxPrimitive.Root\r\n      data-slot=\"checkbox\"\r\n      className={cn(\r\n        'peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',\r\n        className,\r\n      )}\r\n      {...props}\r\n    >\r\n      <CheckboxPrimitive.Indicator\r\n        data-slot=\"checkbox-indicator\"\r\n        className=\"flex items-center justify-center text-current transition-none\"\r\n      >\r\n        <CheckIcon className=\"size-3.5\" />\r\n      </CheckboxPrimitive.Indicator>\r\n    </CheckboxPrimitive.Root>\r\n  )\r\n}\r\n\r\nexport { Checkbox }\r\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "src/components/ui/checkbox-group.tsx",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { Checkbox } from \"@/components/ui/checkbox\";\r\nimport { Label } from \"@/components/ui/label\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ninterface CheckboxGroupContextValue {\r\n  value: string[];\r\n  onValueChange: (value: string[]) => void;\r\n}\r\n\r\nconst CheckboxGroupContext = React.createContext<\r\n  CheckboxGroupContextValue | undefined\r\n>(undefined);\r\n\r\nfunction useCheckboxGroup() {\r\n  const context = React.useContext(CheckboxGroupContext);\r\n  if (!context) {\r\n    throw new Error(\"useCheckboxGroup must be used within a CheckboxGroup\");\r\n  }\r\n  return context;\r\n}\r\n\r\ninterface CheckboxGroupProps extends React.ComponentProps<\"div\"> {\r\n  value?: string[];\r\n  defaultValue?: string[];\r\n  onValueChange?: (value: string[]) => void;\r\n}\r\n\r\nfunction CheckboxGroup({\r\n  value,\r\n  defaultValue,\r\n  onValueChange,\r\n  className,\r\n  children,\r\n  ...props\r\n}: CheckboxGroupProps) {\r\n  const [internalValue, setInternalValue] = React.useState<string[]>(\r\n    defaultValue || [],\r\n  );\r\n\r\n  const finalValue = value !== undefined ? value : internalValue;\r\n  const finalOnValueChange = (newValue: string[]) => {\r\n    if (value === undefined) {\r\n      setInternalValue(newValue);\r\n    }\r\n    onValueChange?.(newValue);\r\n  };\r\n\r\n  return (\r\n    <CheckboxGroupContext.Provider\r\n      value={{ value: finalValue, onValueChange: finalOnValueChange }}\r\n    >\r\n      <div className={cn(\"grid gap-2\", className)} {...props}>\r\n        {children}\r\n      </div>\r\n    </CheckboxGroupContext.Provider>\r\n  );\r\n}\r\n\r\ninterface CheckboxGroupItemProps extends React.ComponentProps<typeof Checkbox> {\r\n  value: string;\r\n  label?: React.ReactNode;\r\n}\r\n\r\nfunction CheckboxGroupItem({\r\n  value,\r\n  label,\r\n  className,\r\n  ...props\r\n}: CheckboxGroupItemProps) {\r\n  const { value: groupValue, onValueChange } = useCheckboxGroup();\r\n  const checked = groupValue.includes(value);\r\n\r\n  return (\r\n    <div className=\"flex items-center space-x-2\">\r\n      <Checkbox\r\n        id={value}\r\n        value={value}\r\n        checked={checked}\r\n        onCheckedChange={(checked) => {\r\n          if (checked) {\r\n            onValueChange([...groupValue, value]);\r\n          } else {\r\n            onValueChange(groupValue.filter((v) => v !== value));\r\n          }\r\n        }}\r\n        className={className}\r\n        {...props}\r\n      />\r\n      {label && (\r\n        <Label\r\n          htmlFor={value}\r\n          className=\"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70\"\r\n        >\r\n          {label}\r\n        </Label>\r\n      )}\r\n    </div>\r\n  );\r\n}\r\n\r\nexport { CheckboxGroup, CheckboxGroupItem };\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
