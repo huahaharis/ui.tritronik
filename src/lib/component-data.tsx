@@ -3002,9 +3002,8 @@ export function TableDemo() {
     description:
       "A responsive masonry layout component that distributes items across columns.",
     installation: {
-      tabs: [{ label: "Manual", active: true }],
-      cli: "",
-      manual: "Copy the code from src/components/ui/masonry.tsx",
+      tabs: [{ label: "CLI", active: true }],
+      cli: "npx shadcn@latest add masonry",
     },
     demo: "masonry",
     usage: [
@@ -3015,72 +3014,67 @@ export function TableDemo() {
   ))}
 </Masonry>`,
     ],
-    content: `import React, { useEffect, useState } from 'react';
-import { cn } from "@/lib/utils";
+    content: `"use client";
 
-interface MasonryProps {
-  children: React.ReactNode;
-  columns?: number | { [key: number]: number }; // Number of columns or responsive object { breakPoint: cols }
-  gap?: number;
-  className?: string;
-  columnClassName?: string;
-}
+import { Masonry } from "@/components/ui/masonry";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useMemo } from "react";
 
-export function Masonry({
-  children,
-  columns = 3,
-  gap = 4,
-  className,
-  columnClassName,
-}: MasonryProps) {
-    const [columnCount, setColumnCount] = useState<number>(3);
+export function MasonryDemo() {
+  const items = useMemo(() => {
+    return Array.from({ length: 12 }).map((_, i) => {
+      const height = 200 + ((i * 75 + 10) % 301);
 
-    useEffect(() => {
-        const updateColumns = () => {
-            if (typeof columns === 'number') {
-                setColumnCount(columns);
-            } else {
-                 // Sort breakpoints descending
-                const breakpoints = Object.keys(columns).map(Number).sort((a, b) => b - a);
-                const width = window.innerWidth;
-                let count = columns[breakpoints[breakpoints.length - 1]]; // Default to smallest
-
-                for (const point of breakpoints) {
-                    if (width >= point) {
-                        count = columns[point];
-                        break;
-                    }
-                }
-                setColumnCount(count || 3);
-            }
-        };
-
-        updateColumns();
-        window.addEventListener('resize', updateColumns);
-        return () => window.removeEventListener('resize', updateColumns);
-    }, [columns]);
-
-  const childrenArray = React.Children.toArray(children);
-  const columnItems: React.ReactNode[][] = Array.from({ length: columnCount }, () => []);
-
-  childrenArray.forEach((child, index) => {
-    columnItems[index % columnCount].push(child);
-  });
+      return {
+        id: i,
+        title: \`Gallery Item \${i + 1}\`,
+        description: \`A random description for item \${i + 1} with varying height.\`,
+        height: height,
+        image: \`https://picsum.photos/600/\${height}?random=\${i}\`,
+      };
+    });
+  }, []);
 
   return (
-    <div
-      className={cn("flex w-full", className)}
-      style={{ gap: \`\${gap * 0.25}rem\` }}
-    >
-      {columnItems.map((col, index) => (
-        <div
-          key={index}
-          className={cn("flex flex-col flex-1", columnClassName)}
-           style={{ gap: \`\${gap * 0.25}rem\` }}
-        >
-          {col}
-        </div>
-      ))}
+    <div className="w-full max-w-6xl mx-auto">
+      <Masonry
+        columns={{
+          640: 1,
+          768: 2,
+          1024: 3,
+        }}
+        gap={6}
+      >
+        {items.map((item) => (
+          <Card
+            key={item.id}
+            className="overflow-hidden border-0 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="relative w-full overflow-hidden rounded-t-lg bg-muted">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-auto object-cover transition-transform hover:scale-105 duration-500"
+                style={{ height: "auto", minHeight: item.height }}
+                loading="lazy"
+              />
+            </div>
+            <CardHeader className="p-4">
+              <CardTitle className="text-lg font-medium tracking-tight">
+                {item.title}
+              </CardTitle>
+              <CardDescription className="text-sm line-clamp-2">
+                {item.description}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        ))}
+      </Masonry>
     </div>
   );
 }
