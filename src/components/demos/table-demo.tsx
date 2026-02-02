@@ -160,7 +160,6 @@ export function TableDemo() {
         enableSelection={true}
         onSelectionChange={(rows) => setSelected(rows)}
       />
-
       {/* <div className="rounded-md border p-4 bg-muted/50">
         <h3 className="font-semibold mb-2">Selection Logic Debug:</h3>
         <p className="text-sm text-muted-foreground mb-2">
