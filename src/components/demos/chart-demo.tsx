@@ -51,7 +51,69 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function ChartDemo() {
-  return <ChartBarDemo />;
+  const [type, setType] = React.useState<ChartType>("bar");
+
+  return (
+    <div className="flex w-full flex-col gap-6 p-4">
+      <div className="flex items-center gap-2">
+        <Button
+          variant={type === "bar" ? "default" : "outline"}
+          size="sm"
+          onClick={() => setType("bar")}
+        >
+          <BarChart3 className="mr-2 h-4 w-4" /> Bar
+        </Button>
+        <Button
+          variant={type === "line" ? "default" : "outline"}
+          size="sm"
+          onClick={() => setType("line")}
+        >
+          <LineChart className="mr-2 h-4 w-4" /> Line
+        </Button>
+        <Button
+          variant={type === "area" ? "default" : "outline"}
+          size="sm"
+          onClick={() => setType("area")}
+        >
+          <AreaChartIcon className="mr-2 h-4 w-4" /> Area
+        </Button>
+        <Button
+          variant={type === "pie" ? "default" : "outline"}
+          size="sm"
+          onClick={() => setType("pie")}
+        >
+          <PieChart className="mr-2 h-4 w-4" /> Pie
+        </Button>
+      </div>
+
+      <div className="rounded-xl border bg-card text-card-foreground shadow">
+        <div className="p-6 pt-0 mt-6">
+          <UnifiedChart
+            type={type}
+            data={type === "pie" ? pieData : barData}
+            dataKey="visitors"
+            xAxisKey={type === "pie" ? "browser" : "month"}
+            config={chartConfig}
+            title="Website Visitors"
+            description="Jan - June 2024"
+            footer={
+              <div className="flex w-full items-start gap-2 text-sm">
+                <div className="grid gap-2">
+                  <div className="flex items-center gap-2 font-medium leading-none">
+                    Trending up by 5.2% this month{" "}
+                    <LineChart className="h-4 w-4" />
+                  </div>
+                  <div className="flex items-center gap-2 leading-none text-muted-foreground">
+                    Showing total visitors for the last 6 months
+                  </div>
+                </div>
+              </div>
+            }
+          />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function ChartBarDemo() {
