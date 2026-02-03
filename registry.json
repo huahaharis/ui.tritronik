@@ -94,6 +94,23 @@
             ]
         },
         {
+            "name": "badge",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-slot",
+                "class-variance-authority"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/badge.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
             "name": "calendar",
             "type": "registry:ui",
             "dependencies": [
@@ -315,6 +332,22 @@
             "files": [
                 {
                     "path": "src/components/ui/combobox.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "drawer",
+            "type": "registry:ui",
+            "dependencies": [
+                "vaul"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/drawer.tsx",
                     "type": "registry:ui"
                 }
             ]
