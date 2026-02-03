@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 import { DataTable } from "@/components/ui/data-table";
 
 const data: Payment[] = [
@@ -87,7 +88,28 @@ const columns = [
     title: "Status",
     dataIndex: "status",
     key: "status",
-    render: (value: any) => <div className="capitalize">{value}</div>,
+    render: (value: any) => {
+      const status = value as Payment["status"];
+      const antStatus =
+        status === "success"
+          ? "success"
+          : status === "processing"
+            ? "processing"
+            : status === "failed"
+              ? "error"
+              : "default";
+
+      const displayText =
+        status === "success"
+          ? "Success"
+          : status === "processing"
+            ? "Processing"
+            : status === "failed"
+              ? "Failed"
+              : "Pending";
+
+      return <Badge status={antStatus} text={displayText} />;
+    },
   },
   {
     title: "Email",
