@@ -124,8 +124,12 @@ export default function ViteInstallationPage() {
             code={`{
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
   ],
   "compilerOptions": {
     "baseUrl": ".",
@@ -149,10 +153,14 @@ export default function ViteInstallationPage() {
             filename="tsconfig.app.json"
             code={`{
   "compilerOptions": {
+    // ...
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
+    // ...
   }
 }`}
             onCopy={copy}
@@ -211,6 +219,15 @@ export default defineConfig({
             copied={copied}
             id="cli"
           />
+
+          <p>
+            You will be asked a few questions to configure{" "}
+            <code>components.json</code>.
+          </p>
+
+          <Note>
+            Which color would you like to use as base color? › Neutral
+          </Note>
 
           <p className="mt-3 text-sm text-muted-foreground">
             Add URL tritronik for install components to registry on
