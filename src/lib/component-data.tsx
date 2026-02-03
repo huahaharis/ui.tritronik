@@ -3230,16 +3230,113 @@ export function ChartDemo() {
     </div>
   )
 }`,
-    examples: [],
+    examples: [
+      {
+        title: "Bar Chart",
+        description: "A standard bar chart for comparing categories.",
+        demo: "chart-bar",
+        code: `
+<UnifiedChart 
+  type="bar" 
+  data={chartData} 
+  dataKey="visitors" 
+  xAxisKey="month" 
+  config={chartConfig} 
+/>
+`,
+      },
+      {
+        title: "Line Chart",
+        description: "A line chart for showing trends over time.",
+        demo: "chart-line",
+        code: `
+<UnifiedChart 
+  type="line" 
+  data={chartData} 
+  dataKey="visitors" 
+  xAxisKey="month" 
+  config={chartConfig} 
+/>
+`,
+      },
+      {
+        title: "Area Chart",
+        description: "An area chart to emphasize magnitude of change.",
+        demo: "chart-area",
+        code: `
+<UnifiedChart 
+  type="area" 
+  data={chartData} 
+  dataKey="visitors" 
+  xAxisKey="month" 
+  config={chartConfig} 
+/>
+`,
+      },
+      {
+        title: "Pie Chart",
+        description: "A pie chart for showing proportions.",
+        demo: "chart-pie",
+        code: `
+<UnifiedChart 
+  type="pie" 
+  data={pieChartData} 
+  dataKey="visitors" 
+  xAxisKey="browser" 
+  config={chartConfig} 
+/>
+`,
+      },
+    ],
     args: [
       {
-        name: "Type of Chart",
-        description: "Type of chart to display.",
+        name: "Props",
+        description: "The primary properties for configuring the UnifiedChart.",
         props: [
           {
             prop: "type",
-            type: "bar | line | area | pie",
-            default: "bar",
+            type: '"bar" | "line" | "area" | "pie"',
+            default: '"bar"',
+          },
+          {
+            prop: "data",
+            type: "any[]",
+            default: "[]",
+          },
+          {
+            prop: "config",
+            type: "ChartConfig",
+            default: "{}",
+          },
+          {
+            prop: "dataKey",
+            type: "string",
+            default: "",
+          },
+          {
+            prop: "xAxisKey",
+            type: "string",
+            default: "",
+          },
+          {
+            prop: "title",
+            type: "string",
+            default: "",
+          },
+          {
+            prop: "description",
+            type: "string",
+            default: "",
+          },
+          {
+            prop: "footer",
+            type: "React.ReactNode",
+            default: "",
+          },
+          {
+            prop: "className",
+            type: "string",
+            default: "",
           },
         ],
       },

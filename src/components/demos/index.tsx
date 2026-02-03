@@ -39,7 +39,13 @@ import {
   KanbanSortable,
 } from "./kanban-demo";
 import { StepperDemo } from "./stepper-demo";
-import { ChartDemo } from "./chart-demo";
+import {
+  ChartAreaDemo,
+  ChartBarDemo,
+  ChartDemo,
+  ChartLineDemo,
+  ChartPieDemo,
+} from "./chart-demo";
 import { TableDemo } from "./table-demo";
 import { NotificationDemo } from "./notification-demo";
 import { RadioGroupDemo, RadioGroupDisabledDemo } from "./radio-group-demo";
@@ -89,6 +95,10 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   dragAndDropGrid: DragAndDropGrid,
   stepper: StepperDemo,
   chart: ChartDemo,
+  "chart-bar": ChartBarDemo,
+  "chart-line": ChartLineDemo,
+  "chart-area": ChartAreaDemo,
+  "chart-pie": ChartPieDemo,
   table: TableDemo,
   notification: NotificationDemo,
   "radio-group": RadioGroupDemo,
