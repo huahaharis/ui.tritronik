@@ -39,7 +39,13 @@ import {
   KanbanSortable,
 } from "./kanban-demo";
 import { StepperDemo } from "./stepper-demo";
-import { ChartDemo } from "./chart-demo";
+import {
+  ChartDemo,
+  ChartBarDemo,
+  ChartLineDemo,
+  ChartAreaDemo,
+  ChartPieDemo,
+} from "./chart-demo";
 import { TableDemo } from "./table-demo";
 import { NotificationDemo } from "./notification-demo";
 import { RadioGroupDemo, RadioGroupDisabledDemo } from "./radio-group-demo";
@@ -97,4 +103,8 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   "drawer-responsive": DrawerResponsiveDemo,
   "drawer-scrollable": DrawerScrollableDemo,
   "drawer-direction": DrawerDirectionDemo,
+  "chart-bar": ChartBarDemo,
+  "chart-line": ChartLineDemo,
+  "chart-area": ChartAreaDemo,
+  "chart-pie": ChartPieDemo,
 };
