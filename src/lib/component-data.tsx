@@ -771,50 +771,102 @@ export function ButtonDemo() {
       `import { Badge } from "@/components/ui/badge"`,
       `<Badge>Badge</Badge>`,
     ],
-    content: `import { BadgeCheckIcon } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+    content: `
+import { Badge } from "@/components/ui/badge";
+import { Clock, Mail } from "lucide-react";
+import React from "react";
+import { Switch } from "@/components/ui/switch";
 
 export function BadgeDemo() {
+  const [show, setShow] = React.useState(true);
+
   return (
-    <div className="flex h-40 items-center justify-center">
-      <div className="flex flex-col items-center gap-2">
-        <div className="flex flex-wrap justify-center gap-2">
-          <Badge>Badge</Badge>
-          <Badge variant="secondary">Secondary</Badge>
-          <Badge variant="destructive">Destructive</Badge>
-          <Badge variant="outline">Outline</Badge>
+    <div className="flex flex-col gap-8 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="flex flex-col gap-4">
+          <h3 className="font-semibold">Basic</h3>
+          <div className="flex gap-6 items-center">
+            <Badge count={5}>
+              <div className="h-10 w-10 bg-muted rounded-md" />
+            </Badge>
+            <Badge count={0} showZero>
+              <div className="h-10 w-10 bg-muted rounded-md" />
+            </Badge>
+             <Badge count={<Clock className="h-3 w-3 text-white" />}>
+              <div className="h-10 w-10 bg-muted rounded-md" />
+            </Badge>
+          </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2">
-          <Badge
-            variant="secondary"
-            className="bg-blue-500 text-white dark:bg-blue-600"
-          >
-            <BadgeCheckIcon className="mr-1 h-3 w-3" />
-            Verified
-          </Badge>
+        <div className="flex flex-col gap-4">
+            <h3 className="font-semibold">Standalone</h3>
+             <div className="flex gap-4 items-center">
+                <Badge count={25} />
+                <Badge count={4} className="bg-white text-slate-500 border-slate-200 shadow-sm" />
+                <Badge count={109} style={{backgroundColor: '#52c41a'}} />
+            </div>
+        </div>
 
-          <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">
-            8
-          </Badge>
+         <div className="flex flex-col gap-4">
+          <h3 className="font-semibold">Overflow Count</h3>
+          <div className="flex gap-6 items-center">
+            <Badge count={99}>
+              <div className="h-10 w-10 bg-muted rounded-md" />
+            </Badge>
+            <Badge count={100}>
+              <div className="h-10 w-10 bg-muted rounded-md" />
+            </Badge>
+            <Badge count={1000} overflowCount={999}>
+              <div className="h-10 w-10 bg-muted rounded-md" />
+            </Badge>
+          </div>
+        </div>
 
-          <Badge
-            variant="destructive"
-            className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums"
-          >
-            99
-          </Badge>
+        <div className="flex flex-col gap-4">
+            <h3 className="font-semibold">Red Badge / Dot</h3>
+             <div className="flex gap-6 items-center">
+                <Badge dot>
+                    <Mail className="h-6 w-6 text-muted-foreground" />
+                </Badge>
+                <Badge dot>
+                    <a href="#">Link something</a>
+                </Badge>
+            </div>
+        </div>
+      
+        <div className="flex flex-col gap-4">
+           <h3 className="font-semibold">Status</h3>
+           <div className="flex flex-col gap-2">
+                <Badge status="success" text="Success" />
+                <Badge status="error" text="Error" />
+                <Badge status="default" text="Default" />
+                <Badge status="processing" text="Processing" />
+                <Badge status="warning" text="Warning" />
+           </div>
+        </div>
+        
+        <div className="flex flex-col gap-4">
+            <h3 className="font-semibold">Classic Variants (Backward Compatibility)</h3>
+            <div className="flex flex-wrap gap-2">
+              <Badge>Default</Badge>
+              <Badge variant="secondary">Secondary</Badge>
+              <Badge variant="destructive">Destructive</Badge>
+              <Badge variant="outline">Outline</Badge>
+            </div>
+        </div>
 
-          <Badge
-            variant="outline"
-            className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums"
-          >
-            20+
-          </Badge>
+         <div className="flex flex-col gap-4">
+           <h3 className="font-semibold">Dynamic</h3>
+            <div className="flex gap-6 items-start">
+                 <Badge dot={show}>
+                    <div className="h-10 w-10 bg-muted rounded-md" />
+                 </Badge>
+                 <Switch checked={show} onCheckedChange={setShow} />
+            </div>
         </div>
       </div>
     </div>
-  )
+  );
 }`,
     examples: ``,
   },
@@ -1181,6 +1233,412 @@ export function DropdownMenuDemo() {
   )
 }`,
     examples: ``,
+  },
+
+  drawer: {
+    title: "Drawer",
+    description: "A drawer component for React.",
+    links: [
+      {
+        label: "Docs",
+        href: "https://vaul.emilkowal.ski/",
+      },
+      {
+        label: "API Reference",
+        href: "https://vaul.emilkowal.ski/api",
+      },
+    ],
+    demo: "drawer",
+    installation: {
+      tabs: [{ label: "CLI", active: true }],
+      cli: "npx shadcn@latest add drawer",
+    },
+    usage: [
+      `import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"`,
+      `<Drawer>
+  <DrawerTrigger>Open</DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+      <DrawerDescription>This action cannot be undone.</DrawerDescription>
+    </DrawerHeader>
+    <DrawerFooter>
+      <Button>Submit</Button>
+      <DrawerClose>
+        <Button variant="outline">Cancel</Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>`,
+    ],
+    content: `import * as React from "react"
+import { Minus, Plus } from "lucide-react"
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js"
+import { Bar } from "react-chartjs-2"
+import { useTheme } from "next-themes"
+
+import { Button } from "@/components/ui/button"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+)
+
+const rawData = [
+  400, 300, 200, 300, 200, 278, 189, 239, 300, 200, 278, 189, 349,
+]
+
+export function DrawerDemo() {
+  const [goal, setGoal] = React.useState(350)
+  const { theme } = useTheme()
+
+  function onClick(adjustment: number) {
+    setGoal(Math.max(200, Math.min(400, goal + adjustment)))
+  }
+
+  const data = {
+    labels: rawData.map((_, i) => i.toString()),
+    datasets: [
+      {
+        data: rawData,
+        backgroundColor: theme === "dark" ? "rgba(255, 255, 255, 0.9)" : "rgba(0, 0, 0, 0.9)",
+        borderRadius: 4,
+        barThickness: 20,
+      },
+    ],
+  }
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        enabled: false,
+      },
+    },
+    scales: {
+      x: {
+        display: false,
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        display: false,
+        grid: {
+          display: false,
+        },
+      },
+    },
+  }
+
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="mx-auto w-full max-w-sm">
+          <DrawerHeader>
+            <DrawerTitle>Move Goal</DrawerTitle>
+            <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+          </DrawerHeader>
+          <div className="p-4 pb-0">
+            <div className="flex items-center justify-center space-x-2">
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-8 w-8 shrink-0 rounded-full"
+                onClick={() => onClick(-10)}
+                disabled={goal <= 200}
+              >
+                <Minus className="h-4 w-4" />
+                <span className="sr-only">Decrease</span>
+              </Button>
+              <div className="flex-1 text-center">
+                <div className="text-7xl font-bold tracking-tighter">
+                  {goal}
+                </div>
+                <div className="text-[0.70rem] uppercase text-muted-foreground">
+                  Calories/day
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-8 w-8 shrink-0 rounded-full"
+                onClick={() => onClick(10)}
+                disabled={goal >= 400}
+              >
+                <Plus className="h-4 w-4" />
+                <span className="sr-only">Increase</span>
+              </Button>
+            </div>
+            <div className="mt-3 h-[120px]">
+              <Bar options={options} data={data} />
+            </div>
+          </div>
+          <DrawerFooter>
+            <Button>Submit</Button>
+            <DrawerClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </div>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+`,
+    examples: [
+      {
+        title: "Responsive Dialog",
+        description: "A responsive dialog that renders a drawer on mobile.",
+        demo: "drawer-responsive",
+        code: `import * as React from "react"
+
+import { cn } from "@/lib/utils"
+import { useMediaQuery } from "@/hooks/use-media-query"
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
+export function DrawerResponsiveDemo() {
+  const [open, setOpen] = React.useState(false)
+  const isDesktop = useMediaQuery("(min-width: 768px)")
+
+  if (isDesktop) {
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button variant="outline">Edit Profile</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit profile</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you're done.
+            </DialogDescription>
+          </DialogHeader>
+          <ProfileForm />
+        </DialogContent>
+      </Dialog>
+    )
+  }
+
+  return (
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Edit Profile</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader className="text-left">
+          <DrawerTitle>Edit profile</DrawerTitle>
+          <DrawerDescription>
+            Make changes to your profile here. Click save when you're done.
+          </DrawerDescription>
+        </DrawerHeader>
+        <ProfileForm className="px-4" />
+        <DrawerFooter className="pt-2">
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+
+function ProfileForm({ className }: React.ComponentProps<"form">) {
+  return (
+    <form className={cn("grid items-start gap-4", className)}>
+      <div className="grid gap-2">
+        <Label htmlFor="email">Email</Label>
+        <Input type="email" id="email" defaultValue="shadcn@example.com" />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="username">Username</Label>
+        <Input id="username" defaultValue="@shadcn" />
+      </div>
+      <Button type="submit">Save changes</Button>
+    </form>
+  )
+}
+`,
+      },
+      {
+        title: "Scrollable",
+        description: "A drawer with scrollable content.",
+        demo: "drawer-scrollable",
+        code: `import * as React from "react"
+
+import { Button } from "@/components/ui/button"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+
+const tags = Array.from({ length: 50 }).map(
+  (_, i, a) => \`v1.2.0-beta.\${a.length - i}\`
+)
+
+export function DrawerScrollableDemo() {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button variant="outline">Open Scrollable Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="mx-auto w-full max-w-sm">
+          <DrawerHeader>
+            <DrawerTitle>Move Goal</DrawerTitle>
+            <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+          </DrawerHeader>
+          <div className="p-4 overflow-y-auto max-h-[60vh]">
+            <div className="flex flex-col gap-4">
+              {tags.map((tag) => (
+                <div
+                  key={tag}
+                  className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0"
+                >
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium leading-none">{tag}</p>
+                    <p className="text-sm text-muted-foreground">
+                      v1.2.0-beta.{Math.floor(Math.random() * 100)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <DrawerFooter>
+            <Button>Submit</Button>
+            <DrawerClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </div>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+`,
+      },
+      {
+        title: "Direction",
+        description: "A drawer that can open from any direction.",
+        demo: "drawer-direction",
+        code: `import * as React from "react"
+
+import { Button } from "@/components/ui/button"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+
+const directions = ["top", "bottom", "left", "right"] as const
+
+export function DrawerDirectionDemo() {
+  return (
+    <div className="flex gap-4 flex-wrap justify-center">
+      {directions.map((direction) => (
+        <Drawer key={direction} direction={direction}>
+          <DrawerTrigger asChild>
+            <Button variant="outline" className="capitalize">
+              {direction}
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <div className="mx-auto w-full max-w-sm">
+              <DrawerHeader>
+                <DrawerTitle>Move Goal</DrawerTitle>
+                <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+              </DrawerHeader>
+              <div className="p-4 pb-0">
+                <div className="flex items-center justify-center space-x-2">
+                    <span className="text-4xl font-bold">Goal: 350</span>
+                </div>
+              </div>
+              <DrawerFooter>
+                <Button>Submit</Button>
+                <DrawerClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      ))}
+    </div>
+  )
+}
+`,
+      },
+    ],
   },
 
   input: {

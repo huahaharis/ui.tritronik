@@ -45,6 +45,12 @@ import { NotificationDemo } from "./notification-demo";
 import { RadioGroupDemo, RadioGroupDisabledDemo } from "./radio-group-demo";
 import { CarouselDemo } from "./carousel-demo";
 import { MasonryDemo } from "./masonry-demo";
+import {
+  DrawerDemo,
+  DrawerDirectionDemo,
+  DrawerResponsiveDemo,
+  DrawerScrollableDemo,
+} from "./drawer-demo";
 
 export const demoRegistry: Record<string, React.ComponentType> = {
   masonry: MasonryDemo,
@@ -87,4 +93,8 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   notification: NotificationDemo,
   "radio-group": RadioGroupDemo,
   "radio-group-disabled": RadioGroupDisabledDemo,
+  drawer: DrawerDemo,
+  "drawer-responsive": DrawerResponsiveDemo,
+  "drawer-scrollable": DrawerScrollableDemo,
+  "drawer-direction": DrawerDirectionDemo,
 };
