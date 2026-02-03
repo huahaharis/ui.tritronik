@@ -48,6 +48,7 @@ import {
 } from "./chart-demo";
 import { TableDemo } from "./table-demo";
 import { NotificationDemo } from "./notification-demo";
+import { PaginationDemo } from "./pagination-demo";
 import { RadioGroupDemo, RadioGroupDisabledDemo } from "./radio-group-demo";
 import { CarouselDemo } from "./carousel-demo";
 import { MasonryDemo } from "./masonry-demo";
@@ -101,6 +102,7 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   "chart-pie": ChartPieDemo,
   table: TableDemo,
   notification: NotificationDemo,
+  pagination: PaginationDemo,
   "radio-group": RadioGroupDemo,
   "radio-group-disabled": RadioGroupDisabledDemo,
   drawer: DrawerDemo,

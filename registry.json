@@ -216,6 +216,23 @@
             ]
         },
         {
+            "name": "pagination",
+            "type": "registry:ui",
+            "dependencies": [
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils",
+                "button"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/pagination.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
             "name": "carousel",
             "type": "registry:ui",
             "dependencies": [

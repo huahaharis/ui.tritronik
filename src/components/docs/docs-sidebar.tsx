@@ -76,7 +76,7 @@ export function DocsSidebar() {
         { label: "Masonry", href: "/docs/components/masonry" },
         // { label: "Menubar", href: "/docs/components/menubar" },
         // { label: "Navigation Menu", href: "/docs/components/navigation-menu" },
-        // { label: "Pagination", href: "/docs/components/pagination" },
+        { label: "Pagination", href: "/docs/components/pagination" },
         { label: "Notification", href: "/docs/components/notification" },
         { label: "Popover", href: "/docs/components/popover" },
         { label: "Progress", href: "/docs/components/progress" },
