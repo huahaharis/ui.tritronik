@@ -21,6 +21,7 @@ export function DocsSidebar() {
       title: "Get Started",
       items: [
         { label: "Installation", href: "/docs/installation" },
+        { label: "Icons", href: "/docs/icons" },
         // { label: "components.json", href: "#" },
         { label: "Theming", href: "/docs/theming" },
         { label: "Dark Mode", href: "/docs/dark-mode" },
@@ -65,6 +66,7 @@ export function DocsSidebar() {
         // { label: "Field", href: "/docs/components/field" },
         // { label: "Form", href: "/docs/components/form" },
         // { label: "Hover Card", href: "/docs/components/hover-card" },
+        { label: "Hover Card", href: "/docs/components/hover-card" },
         { label: "Input", href: "/docs/components/input" },
         { label: "Input Group", href: "/docs/components/input-group" },
         // { label: "Input OTP", href: "/docs/components/input-otp" },
