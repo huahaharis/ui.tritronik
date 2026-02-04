@@ -21,6 +21,7 @@ export function DocsSidebar() {
       title: "Get Started",
       items: [
         { label: "Installation", href: "/docs/installation" },
+        { label: "Icons", href: "/docs/icons" },
         // { label: "components.json", href: "#" },
         { label: "Theming", href: "/docs/theming" },
         { label: "Dark Mode", href: "/docs/dark-mode" },
