@@ -216,6 +216,23 @@
             ]
         },
         {
+            "name": "pagination",
+            "type": "registry:ui",
+            "dependencies": [
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils",
+                "button"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/pagination.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
             "name": "carousel",
             "type": "registry:ui",
             "dependencies": [
@@ -408,6 +425,51 @@
                 {
                     "path": "src/components/ui/radio-group.tsx",
                     "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "data-hooks",
+            "type": "registry:hook",
+            "dependencies": [
+                "@tanstack/react-query",
+                "@tanstack/react-router"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/hooks/index.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/provider.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/router.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/types.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useCustom.tsx",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useInfiniteList.tsx",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useMany.tsx",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useTable.tsx",
+                    "type": "registry:hook"
                 }
             ]
         }

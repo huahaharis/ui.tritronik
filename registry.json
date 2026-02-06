@@ -427,6 +427,51 @@
                     "type": "registry:ui"
                 }
             ]
+        },
+        {
+            "name": "data-hooks",
+            "type": "registry:hook",
+            "dependencies": [
+                "@tanstack/react-query",
+                "@tanstack/react-router"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/hooks/index.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/provider.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/router.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/types.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useCustom.tsx",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useInfiniteList.tsx",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useMany.tsx",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useTable.tsx",
+                    "type": "registry:hook"
+                }
+            ]
         }
     ]
 }

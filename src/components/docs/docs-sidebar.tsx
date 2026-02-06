@@ -22,7 +22,8 @@ export function DocsSidebar() {
       items: [
         { label: "Installation", href: "/docs/installation" },
         { label: "Icons", href: "/docs/icons" },
-        // { label: "components.json", href: "#" },
+        { label: "Hooks", href: "/docs/hooks" },
+        { label: "Router", href: "/docs/router" },
         { label: "Theming", href: "/docs/theming" },
         { label: "Dark Mode", href: "/docs/dark-mode" },
         { label: "CLI", href: "/docs/cli" },

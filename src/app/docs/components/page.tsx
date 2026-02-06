@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import { getComponentsList } from "@/lib/component-data"
-import Link from "next/link"
+import { useState, useEffect, useRef } from "react";
+import { getComponentsList } from "@/lib/component-data";
+import Link from "next/link";
 
 export default function ComponentsPage() {
-  const components = getComponentsList()
+  const components = getComponentsList();
 
   return (
     <>
@@ -13,7 +13,8 @@ export default function ComponentsPage() {
         <div className="mb-12">
           <h1 className="text-4xl font-bold text-foreground">Components</h1>
           <p className="mt-2 text-base text-muted-foreground">
-            A collection of beautifully designed, accessible components built with Radix UI and Tailwind CSS.
+            A collection of beautifully designed, accessible components built
+            with Radix UI and Tailwind CSS.
           </p>
         </div>
 
@@ -30,7 +31,9 @@ export default function ComponentsPage() {
                   <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
                     {component.title}
                   </h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{component.description}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {component.description}
+                  </p>
                 </Link>
               ))}
             </div>
@@ -38,5 +41,5 @@ export default function ComponentsPage() {
         </div>
       </div>
     </>
-  )
+  );
 }
