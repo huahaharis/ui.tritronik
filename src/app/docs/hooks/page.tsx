@@ -1,5 +1,7 @@
 "use client";
 
+import { CodeBlock } from "@/components/docs/code-block";
+
 export default function HooksPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-12 md:px-8">
@@ -23,7 +25,7 @@ export default function HooksPage() {
       </div>
 
       <div className="space-y-16 text-foreground">
-        <section id="installation" className="scroll-mt-20">
+        {/* <section id="installation" className="scroll-mt-20">
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
             Installation & Setup
           </h2>
@@ -39,11 +41,15 @@ export default function HooksPage() {
               <code className="language-tsx">
                 {`// src/app/layout.tsx
 import { DataProviderProvider, defaultDataProvider } from "@/hooks";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+
+// Implement your router...
+const router = createRouter({ routeTree });
 
 export default function RootLayout({ children }) {
   return (
     <DataProviderProvider value={defaultDataProvider}>
-      <body>{children}</body>
+      <RouterProvider router={router} />
     </DataProviderProvider>
   );
 }`}
@@ -55,9 +61,9 @@ export default function RootLayout({ children }) {
             <code>DataProvider</code> object to connect to GraphQL, Firebase, or
             any other backend.
           </p>
-        </section>
+        </section> */}
 
-        <hr className="border-border" />
+        {/* <hr className="border-border" /> */}
 
         <section id="use-infinite-list" className="scroll-mt-20">
           <div className="mb-6">
@@ -72,10 +78,9 @@ export default function RootLayout({ children }) {
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="space-y-4">
               <h3 className="font-semibold text-foreground">Usage</h3>
-              <div className="rounded-lg border bg-zinc-950 p-4 font-mono text-sm text-zinc-50 overflow-x-auto dark:bg-zinc-900">
-                <pre>
-                  <code className="language-tsx">
-                    {`const { 
+              <CodeBlock
+                language="tsx"
+                code={`const { 
   data, 
   isLoading, 
   fetchNextPage, 
@@ -93,9 +98,7 @@ export default function RootLayout({ children }) {
 
 // Accessing data
 const allPosts = data?.pages.flatMap(p => p.data) ?? [];`}
-                  </code>
-                </pre>
-              </div>
+              />
             </div>
 
             <div className="space-y-4">
@@ -223,10 +226,9 @@ const allPosts = data?.pages.flatMap(p => p.data) ?? [];`}
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="space-y-4">
               <h3 className="font-semibold text-foreground">Usage</h3>
-              <div className="rounded-lg border bg-zinc-950 p-4 font-mono text-sm text-zinc-50 overflow-x-auto dark:bg-zinc-900">
-                <pre>
-                  <code className="language-tsx">
-                    {`const { data, isLoading } = useMany({
+              <CodeBlock
+                language="tsx"
+                code={`const { data, isLoading } = useMany({
   resource: "tags",
   ids: [1, 5, 8],
   queryOptions: {
@@ -236,9 +238,7 @@ const allPosts = data?.pages.flatMap(p => p.data) ?? [];`}
 
 // Accessing data
 const tags = data?.data ?? [];`}
-                  </code>
-                </pre>
-              </div>
+              />
             </div>
 
             <div className="space-y-4">
@@ -298,10 +298,9 @@ const tags = data?.data ?? [];`}
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="space-y-4">
               <h3 className="font-semibold text-foreground">Usage</h3>
-              <div className="rounded-lg border bg-zinc-950 p-4 font-mono text-sm text-zinc-50 overflow-x-auto dark:bg-zinc-900">
-                <pre>
-                  <code className="language-tsx">
-                    {`const { data } = useCustom({
+              <CodeBlock
+                language="tsx"
+                code={`const { data } = useCustom({
   url: "https://api.external.com/stats",
   method: "get",
   config: {
@@ -309,9 +308,7 @@ const tags = data?.data ?? [];`}
     query: { period: "30d" }
   }
 });`}
-                  </code>
-                </pre>
-              </div>
+              />
             </div>
 
             <div className="space-y-4">
@@ -373,10 +370,9 @@ const tags = data?.data ?? [];`}
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="space-y-4">
               <h3 className="font-semibold text-foreground">Usage</h3>
-              <div className="rounded-lg border bg-zinc-950 p-4 font-mono text-sm text-zinc-50 overflow-x-auto dark:bg-zinc-900">
-                <pre>
-                  <code className="language-tsx">
-                    {`const { 
+              <CodeBlock
+                language="tsx"
+                code={`const { 
   data, 
   tableState: { current, pageSize }, 
   setPagination 
@@ -388,9 +384,7 @@ const tags = data?.data ?? [];`}
 <button onClick={() => setPagination(2, 20)}>
   Go to Page 2
 </button>`}
-                  </code>
-                </pre>
-              </div>
+              />
             </div>
 
             <div className="space-y-4">
