@@ -111,6 +111,23 @@
             ]
         },
         {
+            "name": "badge",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-slot",
+                "class-variance-authority"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/badge.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
             "name": "calendar",
             "type": "registry:ui",
             "dependencies": [
@@ -211,6 +228,23 @@
             "files": [
                 {
                     "path": "src/components/ui/masonry.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "pagination",
+            "type": "registry:ui",
+            "dependencies": [
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils",
+                "button"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/pagination.tsx",
                     "type": "registry:ui"
                 }
             ]
@@ -337,6 +371,22 @@
             ]
         },
         {
+            "name": "drawer",
+            "type": "registry:ui",
+            "dependencies": [
+                "vaul"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/drawer.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
             "name": "input-group",
             "type": "registry:ui",
             "dependencies": [
@@ -395,7 +445,7 @@
                 }
             ]
         },
-        {
+         {
             "name": "drawer",
             "type": "registry:ui",
             "dependencies": [
@@ -408,6 +458,51 @@
                 {
                     "path": "src/components/ui/drawer.tsx",
                     "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "data-hooks",
+            "type": "registry:hook",
+            "dependencies": [
+                "@tanstack/react-query",
+                "@tanstack/react-router"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/hooks/index.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/provider.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/router.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/types.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useCustom.tsx",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useInfiniteList.tsx",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useMany.tsx",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/useTable.tsx",
+                    "type": "registry:hook"
                 }
             ]
         }

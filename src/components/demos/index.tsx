@@ -40,22 +40,23 @@ import {
 } from "./kanban-demo";
 import { StepperDemo } from "./stepper-demo";
 import {
-  ChartDemo,
-  ChartBarDemo,
-  ChartLineDemo,
   ChartAreaDemo,
+  ChartBarDemo,
+  ChartDemo,
+  ChartLineDemo,
   ChartPieDemo,
 } from "./chart-demo";
 import { TableDemo } from "./table-demo";
 import { NotificationDemo } from "./notification-demo";
+import { PaginationDemo } from "./pagination-demo";
 import { RadioGroupDemo, RadioGroupDisabledDemo } from "./radio-group-demo";
 import { CarouselDemo } from "./carousel-demo";
 import { MasonryDemo } from "./masonry-demo";
 import {
   DrawerDemo,
+  DrawerDirectionDemo,
   DrawerResponsiveDemo,
   DrawerScrollableDemo,
-  DrawerDirectionDemo,
 } from "./drawer-demo";
 
 export const demoRegistry: Record<string, React.ComponentType> = {
@@ -95,16 +96,17 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   dragAndDropGrid: DragAndDropGrid,
   stepper: StepperDemo,
   chart: ChartDemo,
+  "chart-bar": ChartBarDemo,
+  "chart-line": ChartLineDemo,
+  "chart-area": ChartAreaDemo,
+  "chart-pie": ChartPieDemo,
   table: TableDemo,
   notification: NotificationDemo,
+  pagination: PaginationDemo,
   "radio-group": RadioGroupDemo,
   "radio-group-disabled": RadioGroupDisabledDemo,
   drawer: DrawerDemo,
   "drawer-responsive": DrawerResponsiveDemo,
   "drawer-scrollable": DrawerScrollableDemo,
   "drawer-direction": DrawerDirectionDemo,
-  "chart-bar": ChartBarDemo,
-  "chart-line": ChartLineDemo,
-  "chart-area": ChartAreaDemo,
-  "chart-pie": ChartPieDemo,
 };
