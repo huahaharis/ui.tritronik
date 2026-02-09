@@ -1,10 +1,10 @@
 import {
   useQuery,
-  UseQueryOptions,
-  UseQueryResult,
+  type UseQueryOptions,
+  type UseQueryResult,
 } from "@tanstack/react-query";
 import { useDataProvider } from "./provider";
-import { HttpError } from "./types";
+import type { HttpError } from "./types";
 
 interface UseCustomProps<TData = any, TError = HttpError> {
   url: string;

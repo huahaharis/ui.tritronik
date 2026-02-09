@@ -1,10 +1,10 @@
 import {
   useQuery,
-  UseQueryOptions,
-  UseQueryResult,
+  type UseQueryOptions,
+  type UseQueryResult,
 } from "@tanstack/react-query";
 import { useDataProvider } from "./provider";
-import { GetManyResponse, HttpError, BaseKey } from "./types";
+import type { GetManyResponse, HttpError, BaseKey } from "./types";
 
 interface UseManyProps<TData = any, TError = HttpError> {
   resource: string;

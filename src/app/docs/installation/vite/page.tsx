@@ -174,15 +174,20 @@ export default function ViteInstallationPage() {
             pkg={pkg}
             setPkg={setPkg}
             code={{
-              pnpm: "pnpm add -D @types/node",
-              npm: "npm install -D @types/node",
-              yarn: "yarn add -D @types/node",
-              bun: "bun add -D @types/node",
+              pnpm: "pnpm add -D @types/node @tanstack/router-plugin",
+              npm: "npm install -D @types/node @tanstack/router-plugin",
+              yarn: "yarn add -D @types/node @tanstack/router-plugin",
+              bun: "bun add -D @types/node @tanstack/router-plugin",
             }}
             onCopy={copy}
             copied={copied}
             id="types-node"
           />
+
+          <p className="mt-4 mb-2 text-sm text-muted-foreground">
+            We include the <code>TanStackRouterVite</code> plugin to
+            automatically generate routes.
+          </p>
 
           <CodeBlock
             filename="vite.config.ts"
@@ -190,18 +195,64 @@ export default function ViteInstallationPage() {
 import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
+import { tanstackRouter } from '@tanstack/router-plugin/vite'
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    tanstackRouter({ target: 'react', autoCodeSplitting: true }),
+    react(),
+    tailwindcss()
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-})`}
+  })`}
             onCopy={copy}
             copied={copied}
             id="vite-config"
+          />
+
+          <h4 className="font-semibold text-sm mt-6 mb-2">
+            Custom Routes Directory
+          </h4>
+          <p className="text-sm text-muted-foreground mb-3">
+            If you want to use <code>src/pages</code> instead of{" "}
+            <code>src/routes</code>, configure the <code>routesDirectory</code>{" "}
+            option:
+          </p>
+          <CodeBlock
+            filename="vite.config.ts"
+            code={`// ...
+plugins: [
+  tanstackRouter({ 
+    target: 'react', 
+    autoCodeSplitting: true,
+    routesDirectory: "./src/pages", // <--- Custom folder
+    generatedRouteTree: "./src/routeTree.gen.ts", 
+  }),
+  // ...
+]`}
+            onCopy={copy}
+            copied={copied}
+            id="custom-routes-vite"
+          />
+
+          <p className="text-sm text-muted-foreground mt-4 mb-3">
+            Alternatively, creating a <code>tsr.config.json</code> file in your
+            root directory:
+          </p>
+
+          <CodeBlock
+            filename="tsr.config.json"
+            code={`{
+  "routesDirectory": "./src/pages",
+  "generatedRouteTree": "./src/routeTree.gen.ts"
+}`}
+            onCopy={copy}
+            copied={copied}
+            id="tsr-config"
           />
         </Section>
 

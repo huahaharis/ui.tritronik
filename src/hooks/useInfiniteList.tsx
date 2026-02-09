@@ -1,11 +1,11 @@
 import {
-  InfiniteData,
+  type InfiniteData,
   useInfiniteQuery,
-  UseInfiniteQueryOptions,
-  UseInfiniteQueryResult,
+  type UseInfiniteQueryOptions,
+  type UseInfiniteQueryResult,
 } from "@tanstack/react-query";
 import { useDataProvider } from "./provider";
-import {
+import type {
   GetListResponse,
   HttpError,
   Pagination,

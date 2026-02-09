@@ -1,23 +1,50 @@
-import { useEffect } from "react";
 import { useSearch, useNavigate } from "@tanstack/react-router";
 import { useInfiniteList } from "./useInfiniteList";
-import { CrudFilter, CrudSort, Pagination } from "./types";
+import type { CrudFilter, CrudSort, Pagination, HttpError } from "./types";
+import type {
+  UseInfiniteQueryOptions,
+  InfiniteData,
+  UseInfiniteQueryResult,
+} from "@tanstack/react-query";
+import type { GetListResponse } from "./types";
 
-interface UseTableProps {
+export interface UseTableProps<TData = any, TError = HttpError> {
   resource: string;
   pagination?: Pagination;
   filters?: CrudFilter[];
   sorters?: CrudSort[];
   meta?: any;
+  queryOptions?: Omit<
+    UseInfiniteQueryOptions<
+      GetListResponse<TData>,
+      TError,
+      InfiniteData<GetListResponse<TData>>,
+      any,
+      number
+    >,
+    "queryKey" | "queryFn" | "getNextPageParam" | "initialPageParam"
+  >;
 }
 
-export const useTable = ({
+export type UseTableReturnType<
+  TData = any,
+  TError = HttpError,
+> = UseInfiniteQueryResult<InfiniteData<GetListResponse<TData>>, TError> & {
+  tableState: {
+    current: number;
+    pageSize: number;
+  };
+  setPagination: (newCurrent: number, newPageSize?: number) => void;
+};
+
+export const useTable = <TData extends unknown = any, TError = HttpError>({
   resource,
   pagination: initialPagination,
   filters: initialFilters,
   sorters: initialSorters,
   meta,
-}: UseTableProps) => {
+  queryOptions,
+}: UseTableProps<TData, TError>): UseTableReturnType<TData, TError> => {
   const search = useSearch({ strict: false });
   const navigate = useNavigate();
 
@@ -28,7 +55,7 @@ export const useTable = ({
     ? Number((search as any).pageSize)
     : initialPagination?.pageSize || 10;
 
-  const listQuery = useInfiniteList({
+  const listQuery = useInfiniteList<TData, TError>({
     resource,
     pagination: {
       current,
@@ -37,6 +64,7 @@ export const useTable = ({
     filters: initialFilters,
     sorters: initialSorters,
     meta,
+    queryOptions,
   });
   const setPagination = (newCurrent: number, newPageSize?: number) => {
     navigate({

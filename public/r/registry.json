@@ -445,22 +445,96 @@
                 }
             ]
         },
-         {
-            "name": "drawer",
+        {
+            "name": "alert",
             "type": "registry:ui",
-            "dependencies": [
-                "vaul"
-            ],
-            "registryDependencies": [
-                "utils"
-            ],
-            "files": [
-                {
-                    "path": "src/components/ui/drawer.tsx",
-                    "type": "registry:ui"
-                }
-            ]
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/alert.tsx", "type": "registry:ui" }]
         },
+        {
+            "name": "card",
+            "type": "registry:ui",
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/card.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "dialog",
+            "type": "registry:ui",
+            "dependencies": ["@radix-ui/react-dialog", "lucide-react"],
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/dialog.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "dropdown-menu",
+            "type": "registry:ui",
+            "dependencies": ["@radix-ui/react-dropdown-menu", "lucide-react"],
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/dropdown-menu.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "label",
+            "type": "registry:ui",
+            "dependencies": ["@radix-ui/react-label"],
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/label.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "notification",
+            "type": "registry:ui",
+            "dependencies": ["lucide-react"],
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/notification.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "popover",
+            "type": "registry:ui",
+            "dependencies": ["@radix-ui/react-popover"],
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/popover.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "progress",
+            "type": "registry:ui",
+            "dependencies": ["@radix-ui/react-progress"],
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/progress.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "select",
+            "type": "registry:ui",
+            "dependencies": ["@radix-ui/react-select", "lucide-react"],
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/select.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "slider",
+            "type": "registry:ui",
+            "dependencies": ["@radix-ui/react-slider"],
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/slider.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "stepper",
+            "type": "registry:ui",
+            "dependencies": ["lucide-react"],
+            "registryDependencies": ["utils", "button", "separator"],
+            "files": [{ "path": "src/components/ui/stepper.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "data-table",
+            "type": "registry:ui",
+            "dependencies": ["@tanstack/react-table", "lucide-react"],
+            "registryDependencies": ["utils", "table", "button", "input", "select", "dropdown-menu"],
+            "files": [{ "path": "src/components/ui/data-table.tsx", "type": "registry:ui" }]
+        },
+        {
+            "name": "tabs",
+            "type": "registry:ui",
+            "dependencies": ["@radix-ui/react-tabs"],
+            "registryDependencies": ["utils"],
+            "files": [{ "path": "src/components/ui/tabs.tsx", "type": "registry:ui" }]
+        },
+
         {
             "name": "data-hooks",
             "type": "registry:hook",

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "notification",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/notification.tsx",
+      "content": "import { toast } from \"sonner\";\r\nimport { CheckCircle2, Info, AlertTriangle, XCircle } from \"lucide-react\";\r\n\r\nexport type NotificationPosition =\r\n  | \"top-left\"\r\n  | \"top-center\"\r\n  | \"top-right\"\r\n  | \"bottom-left\"\r\n  | \"bottom-center\"\r\n  | \"bottom-right\";\r\n\r\nexport interface NotificationProps {\r\n  message: string;\r\n  description?: string;\r\n  duration?: number;\r\n  position?: NotificationPosition;\r\n  action?: {\r\n    label: string;\r\n    onClick: () => void;\r\n  };\r\n}\r\n\r\nexport const notification = {\r\n  success: ({\r\n    message,\r\n    description,\r\n    duration,\r\n    action,\r\n    position,\r\n  }: NotificationProps) => {\r\n    toast.success(message, {\r\n      description,\r\n      duration,\r\n      position,\r\n      action,\r\n      icon: <CheckCircle2 className=\"h-4 w-4 text-green-500\" />,\r\n    });\r\n  },\r\n  info: ({\r\n    message,\r\n    description,\r\n    duration,\r\n    action,\r\n    position,\r\n  }: NotificationProps) => {\r\n    toast.info(message, {\r\n      description,\r\n      duration,\r\n      position,\r\n      action,\r\n      icon: <Info className=\"h-4 w-4 text-blue-500\" />,\r\n    });\r\n  },\r\n  warning: ({\r\n    message,\r\n    description,\r\n    duration,\r\n    action,\r\n    position,\r\n  }: NotificationProps) => {\r\n    toast.warning(message, {\r\n      description,\r\n      duration,\r\n      position,\r\n      action,\r\n      icon: <AlertTriangle className=\"h-4 w-4 text-yellow-500\" />,\r\n    });\r\n  },\r\n  error: ({\r\n    message,\r\n    description,\r\n    duration,\r\n    action,\r\n    position,\r\n  }: NotificationProps) => {\r\n    toast.error(message, {\r\n      description,\r\n      duration,\r\n      position,\r\n      action,\r\n      icon: <XCircle className=\"h-4 w-4 text-red-500\" />,\r\n    });\r\n  },\r\n  open: ({\r\n    message,\r\n    description,\r\n    duration,\r\n    action,\r\n    position,\r\n  }: NotificationProps) => {\r\n    toast(message, {\r\n      description,\r\n      duration,\r\n      position,\r\n      action,\r\n    });\r\n  },\r\n};\r\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

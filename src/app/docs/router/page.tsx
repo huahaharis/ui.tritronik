@@ -93,29 +93,39 @@ export default function RootLayout({ children }) {
               <TabsContent value="vite" className="mt-4">
                 <p className="text-sm text-muted-foreground mb-2">
                   <code className="text-foreground font-semibold">
-                    src/main.tsx
+                    src/App.tsx
                   </code>{" "}
                   (or entry point)
                 </p>
                 <CodeBlock
                   language="tsx"
-                  code={`import React from 'react'
-import ReactDOM from 'react-dom/client'
+                  code={`// src/App.tsx
 import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { DataProviderProvider, defaultDataProvider } from "@/hooks";
+import { 
+  DataProviderProvider, 
+  createDataProvider,
+  AuthProviderProvider,
+  createAuthProvider
+} from "@/hooks";
 
 // Import your generated route tree
 import { routeTree } from './routeTree.gen'
 
 const router = createRouter({ routeTree })
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <DataProviderProvider value={defaultDataProvider}>
-      <RouterProvider router={router} />
-    </DataProviderProvider>
-  </React.StrictMode>,
-)`}
+// Configure providers with your URLs
+const dataProvider = createDataProvider("https://api.example.com");
+const authProvider = createAuthProvider("https://auth.example.com");
+
+export default function App() {
+  return (
+    <AuthProviderProvider value={authProvider}>
+      <DataProviderProvider value={dataProvider}>
+        <RouterProvider router={router} />
+      </DataProviderProvider>
+    </AuthProviderProvider>
+  )
+}`}
                 />
               </TabsContent>
             </Tabs>
@@ -146,6 +156,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                   <h3 className="font-semibold mb-2">1. Setup (One-time)</h3>
                   <p className="text-sm text-muted-foreground mb-3">
                     You need the TanStack Router CLI to generate the route tree.
+                    By default, it looks for files in <code>src/routes</code>.
                   </p>
                   <div className="relative rounded-lg border bg-zinc-950 p-3 font-mono text-sm text-zinc-50 overflow-x-auto dark:bg-zinc-900 mb-4">
                     npm install -D @tanstack/router-cli
@@ -200,16 +211,24 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="rounded-lg border bg-zinc-950 p-4 font-mono text-sm text-zinc-50 overflow-x-auto dark:bg-zinc-900">
                     <div className="text-xs text-muted-foreground mb-2 border-b border-zinc-800 pb-2">
-                      Your Files (src/routes/)
+                      Your Files (MUST be in <code>src/routes</code>)
                     </div>
                     <div className="grid grid-cols-[1fr_auto] gap-2 items-center">
-                      <span>index.tsx</span>{" "}
+                      <span className="text-amber-400">
+                        src/routes/index.tsx
+                      </span>{" "}
                       <span className="text-zinc-500">→</span>
-                      <span>about.tsx</span>{" "}
+                      <span className="text-amber-400">
+                        src/routes/about.tsx
+                      </span>{" "}
                       <span className="text-zinc-500">→</span>
-                      <span>posts/index.tsx</span>{" "}
+                      <span className="text-amber-400">
+                        src/routes/posts/index.tsx
+                      </span>{" "}
                       <span className="text-zinc-500">→</span>
-                      <span>posts/$id.tsx</span>{" "}
+                      <span className="text-amber-400">
+                        src/routes/posts/$id.tsx
+                      </span>{" "}
                       <span className="text-zinc-500">→</span>
                     </div>
                   </div>

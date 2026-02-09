@@ -25,43 +25,7 @@ export default function HooksPage() {
       </div>
 
       <div className="space-y-16 text-foreground">
-        {/* <section id="installation" className="scroll-mt-20">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            Installation & Setup
-          </h2>
-          <p className="mb-4 text-muted-foreground">
-            To use the hooks, you must wrap your application (or the relevant
-            subtree) with the
-            <code>DataProviderProvider</code>. We provide a default REST
-            implementation that works out of the box.
-          </p>
-
-          <div className="relative rounded-lg border bg-zinc-950 p-4 font-mono text-sm text-zinc-50 overflow-x-auto dark:bg-zinc-900">
-            <pre>
-              <code className="language-tsx">
-                {`// src/app/layout.tsx
-import { DataProviderProvider, defaultDataProvider } from "@/hooks";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-
-// Implement your router...
-const router = createRouter({ routeTree });
-
-export default function RootLayout({ children }) {
-  return (
-    <DataProviderProvider value={defaultDataProvider}>
-      <RouterProvider router={router} />
-    </DataProviderProvider>
-  );
-}`}
-              </code>
-            </pre>
-          </div>
-          <p className="mt-4 text-sm text-muted-foreground">
-            <strong>Note:</strong> You can create your own{" "}
-            <code>DataProvider</code> object to connect to GraphQL, Firebase, or
-            any other backend.
-          </p>
-        </section> */}
+        {/* Installation section moved to /docs/installation/vite */}
 
         {/* <hr className="border-border" /> */}
 
