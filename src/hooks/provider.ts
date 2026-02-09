@@ -43,11 +43,11 @@ export interface DataProvider {
 
 // --- Default REST Implementation (Mock/Configurable) ---
 
-const API_URL = "https://api.fake-rest.refine.dev";
+// --- Default REST Implementation (Mock/Configurable) ---
 
-export const defaultDataProvider: DataProvider = {
+export const createDataProvider = (apiUrl: string): DataProvider => ({
     getList: async ({ resource, pagination, filters, sorters }) => {
-        const url = new URL(`${API_URL}/${resource}`);
+        const url = new URL(`${apiUrl}/${resource}`);
         
         if (pagination) {
             url.searchParams.append("_start", String(((pagination.current || 1) - 1) * (pagination.pageSize || 10)));
@@ -106,7 +106,7 @@ export const defaultDataProvider: DataProvider = {
     },
 
     getMany: async ({ resource, ids }) => {
-        const url = new URL(`${API_URL}/${resource}`);
+        const url = new URL(`${apiUrl}/${resource}`);
         ids.forEach(id => url.searchParams.append("id", id));
         
         const response = await fetch(url.toString());
@@ -117,7 +117,7 @@ export const defaultDataProvider: DataProvider = {
     },
 
     getOne: async ({ resource, id }) => {
-        const response = await fetch(`${API_URL}/${resource}/${id}`);
+        const response = await fetch(`${apiUrl}/${resource}/${id}`);
         if (!response.ok) throw new Error(response.statusText);
         
         const data = await response.json();
@@ -125,7 +125,7 @@ export const defaultDataProvider: DataProvider = {
     },
 
     custom: async ({ url, method, payload, query, headers }) => {
-        let requestUrl = new URL(url.startsWith("http") ? url : `${API_URL}${url}`);
+        let requestUrl = new URL(url.startsWith("http") ? url : `${apiUrl}${url}`);
         
         if (query) {
             Object.keys(query).forEach(key => {
@@ -145,7 +145,10 @@ export const defaultDataProvider: DataProvider = {
         if (!response.ok) throw new Error(response.statusText);
         return await response.json();
     }
-};
+});
+
+// Backward compatibility or default instance
+export const defaultDataProvider = createDataProvider("https://api.fake-rest.refine.dev");
 
 const DataProviderContext = createContext<DataProvider | undefined>(undefined);
 

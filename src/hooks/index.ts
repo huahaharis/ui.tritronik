@@ -5,3 +5,4 @@ export * from "./useMany";
 export * from "./useInfiniteList";
 export * from "./useTable";
 export * from "./router";
+export * from "./auth";

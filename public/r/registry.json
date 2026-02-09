@@ -445,6 +445,22 @@
                 }
             ]
         },
+         {
+            "name": "drawer",
+            "type": "registry:ui",
+            "dependencies": [
+                "vaul"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/drawer.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
         {
             "name": "data-hooks",
             "type": "registry:hook",
@@ -462,6 +478,10 @@
                 },
                 {
                     "path": "src/hooks/provider.ts",
+                    "type": "registry:hook"
+                },
+                {
+                    "path": "src/hooks/auth.tsx",
                     "type": "registry:hook"
                 },
                 {

@@ -481,6 +481,10 @@
                     "type": "registry:hook"
                 },
                 {
+                    "path": "src/hooks/auth.tsx",
+                    "type": "registry:hook"
+                },
+                {
                     "path": "src/hooks/router.ts",
                     "type": "registry:hook"
                 },

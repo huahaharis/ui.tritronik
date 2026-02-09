@@ -148,65 +148,52 @@ const allPosts = data?.pages.flatMap(p => p.data) ?? [];`}
                       <td className="p-3">
                         Array of filter objects{" "}
                         <code>{"{ field, operator, value }"}</code>.<br />
-                        <div className="mt-3">
-                          <p className="text-xs font-semibold mb-1 text-muted-foreground">
-                            Supported Operators:
-                          </p>
-                          <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
-                            <div>
-                              <code>eq</code> (default)
-                            </div>
-                            <div className="text-muted-foreground">
-                              <code>less than</code>
-                            </div>
-
-                            <div>
-                              <code>ne</code>
-                            </div>
-                            <div className="text-muted-foreground">
-                              <code>not equal</code>
-                            </div>
-
-                            <div>
-                              <code>lt</code>
-                            </div>
-                            <div className="text-muted-foreground">
-                              <code>less than</code>
-                            </div>
-
-                            <div>
-                              <code>gt</code>
-                            </div>
-                            <div className="text-muted-foreground">
-                              <code>greater than</code>
-                            </div>
-
-                            <div>
-                              <code>lte</code>
-                            </div>
-                            <div className="text-muted-foreground">
-                              <code>less than or equal to</code>
-                            </div>
-
-                            <div>
-                              <code>gte</code>
-                            </div>
-                            <div className="text-muted-foreground">
-                              <code>greater than or equal to</code>
-                            </div>
-
-                            <div>
-                              <code>contains</code>
-                            </div>
-                            <div className="text-muted-foreground">
-                              <code>like</code>
-                            </div>
-                          </div>
-                        </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
+              </div>
+
+              <div className="mt-4 rounded-lg border bg-card p-4 text-sm">
+                <p className="font-semibold mb-2 text-foreground">
+                  Supported Filter Operators
+                </p>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+                  <div className="flex justify-between border-b pb-1">
+                    <code className="font-mono bg-muted px-1 rounded">eq</code>
+                    <span className="text-muted-foreground">
+                      Equals (default)
+                    </span>
+                  </div>
+                  <div className="flex justify-between border-b pb-1">
+                    <code className="font-mono bg-muted px-1 rounded">ne</code>
+                    <span className="text-muted-foreground">Not equal</span>
+                  </div>
+                  <div className="flex justify-between border-b pb-1">
+                    <code className="font-mono bg-muted px-1 rounded">lt</code>
+                    <span className="text-muted-foreground">Less than</span>
+                  </div>
+                  <div className="flex justify-between border-b pb-1">
+                    <code className="font-mono bg-muted px-1 rounded">gt</code>
+                    <span className="text-muted-foreground">Greater than</span>
+                  </div>
+                  <div className="flex justify-between border-b pb-1">
+                    <code className="font-mono bg-muted px-1 rounded">lte</code>
+                    <span className="text-muted-foreground">Less/Equal</span>
+                  </div>
+                  <div className="flex justify-between border-b pb-1">
+                    <code className="font-mono bg-muted px-1 rounded">gte</code>
+                    <span className="text-muted-foreground">Greater/Equal</span>
+                  </div>
+                  <div className="flex justify-between border-b pb-1">
+                    <code className="font-mono bg-muted px-1 rounded">
+                      contains
+                    </code>
+                    <span className="text-muted-foreground">
+                      Like / Contains
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -425,6 +412,110 @@ const tags = data?.data ?? [];`}
                       <td className="p-3">
                         All props from <code>useInfiniteList</code> (data,
                         isLoading...).
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr className="border-border" />
+
+        <section id="use-auth" className="scroll-mt-20">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold mb-2">useAuth</h2>
+            <p className="text-muted-foreground">
+              Handle authentication, permissions, and identity. Designed to
+              mimic{" "}
+              <a
+                href="https://refine.dev/docs/api-reference/core/providers/auth-provider/"
+                target="_blank"
+                rel="noreferrer"
+                className="underline"
+              >
+                Refine.dev's AuthProvider
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="space-y-4">
+              <h3 className="font-semibold text-foreground">Usage</h3>
+              <CodeBlock
+                language="tsx"
+                code={`// 1. Wrap your app with AuthProvider
+import { 
+  AuthProviderProvider, 
+  createAuthProvider,
+  createDataProvider,
+  DataProviderProvider
+} from "@/hooks";
+
+const authProvider = createAuthProvider("https://monitor.tritronik.com/auth");
+const dataProvider = createDataProvider("https://monitor.tritronik.com/api");
+
+<AuthProviderProvider value={authProvider}>
+  <DataProviderProvider value={dataProvider}>
+    <App />
+  </DataProviderProvider>
+</AuthProviderProvider>
+
+// 2. Use hooks in components
+import { useLogin, useIsAuthenticated, useLogout } from "@/hooks";
+
+const { mutate: login } = useLogin();
+const { mutate: logout } = useLogout();
+const { check } = useIsAuthenticated();
+
+// Login
+login({ email: "user@example.com", password: "123" });`}
+              />
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="font-semibold text-foreground">Available Hooks</h3>
+              <div className="rounded-lg border bg-card text-sm">
+                <table className="w-full text-left">
+                  <thead className="border-b bg-muted/50">
+                    <tr>
+                      <th className="p-3 font-medium">Hook</th>
+                      <th className="p-3 font-medium">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="p-3 font-mono text-xs">useLogin</td>
+                      <td className="p-3">
+                        Calls <code>login</code> method.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-mono text-xs">useLogout</td>
+                      <td className="p-3">
+                        Calls <code>logout</code> method.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-mono text-xs">
+                        useIsAuthenticated
+                      </td>
+                      <td className="p-3">
+                        Calls <code>check</code> method.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-mono text-xs">usePermissions</td>
+                      <td className="p-3">
+                        Calls <code>getPermissions</code> method.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-mono text-xs">useGetIdentity</td>
+                      <td className="p-3">
+                        Calls <code>getIdentity</code> method.
                       </td>
                     </tr>
                   </tbody>
