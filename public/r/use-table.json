@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-table",
+  "registryDependencies": [
+    "data-core",
+    "use-infinite-list"
+  ],
+  "files": [
+    {
+      "path": "src/hooks/useTable.ts",
+      "content": "import { useSearch, useNavigate } from \"@tanstack/react-router\";\r\nimport { useInfiniteList } from \"./useInfiniteList\";\r\nimport type { CrudFilter, CrudSort, Pagination, HttpError } from \"./types\";\r\nimport type {\r\n  UseInfiniteQueryOptions,\r\n  InfiniteData,\r\n  UseInfiniteQueryResult,\r\n} from \"@tanstack/react-query\";\r\nimport type { GetListResponse } from \"./types\";\r\n\r\nexport interface UseTableProps<TData = any, TError = HttpError> {\r\n  resource: string;\r\n  pagination?: Pagination;\r\n  filters?: CrudFilter[];\r\n  sorters?: CrudSort[];\r\n  meta?: any;\r\n  queryOptions?: Omit<\r\n    UseInfiniteQueryOptions<\r\n      GetListResponse<TData>,\r\n      TError,\r\n      InfiniteData<GetListResponse<TData>>,\r\n      any,\r\n      number\r\n    >,\r\n    \"queryKey\" | \"queryFn\" | \"getNextPageParam\" | \"initialPageParam\"\r\n  >;\r\n}\r\n\r\nexport type UseTableReturnType<\r\n  TData = any,\r\n  TError = HttpError,\r\n> = UseInfiniteQueryResult<InfiniteData<GetListResponse<TData>>, TError> & {\r\n  tableState: {\r\n    current: number;\r\n    pageSize: number;\r\n  };\r\n  setPagination: (newCurrent: number, newPageSize?: number) => void;\r\n};\r\n\r\nexport const useTable = <TData extends unknown = any, TError = HttpError>({\r\n  resource,\r\n  pagination: initialPagination,\r\n  filters: initialFilters,\r\n  sorters: initialSorters,\r\n  meta,\r\n  queryOptions,\r\n}: UseTableProps<TData, TError>): UseTableReturnType<TData, TError> => {\r\n  const search = useSearch({ strict: false });\r\n  const navigate = useNavigate();\r\n\r\n  const current = (search as any).current\r\n    ? Number((search as any).current)\r\n    : initialPagination?.current || 1;\r\n  const pageSize = (search as any).pageSize\r\n    ? Number((search as any).pageSize)\r\n    : initialPagination?.pageSize || 10;\r\n\r\n  const listQuery = useInfiniteList<TData, TError>({\r\n    resource,\r\n    pagination: {\r\n      current,\r\n      pageSize,\r\n    },\r\n    filters: initialFilters,\r\n    sorters: initialSorters,\r\n    meta,\r\n    queryOptions,\r\n  });\r\n  const setPagination = (newCurrent: number, newPageSize?: number) => {\r\n    navigate({\r\n      to: \".\",\r\n      search: (prev: any) => ({\r\n        ...prev,\r\n        current: newCurrent,\r\n        pageSize: newPageSize || pageSize,\r\n      }),\r\n      replace: true,\r\n    });\r\n  };\r\n\r\n  return {\r\n    ...listQuery,\r\n    tableState: {\r\n      current,\r\n      pageSize,\r\n    },\r\n    setPagination,\r\n  };\r\n};\r\n",
+      "type": "registry:hook"
+    }
+  ],
+  "type": "registry:hook"
+}

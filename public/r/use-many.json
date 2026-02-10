@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-many",
+  "registryDependencies": [
+    "data-core"
+  ],
+  "files": [
+    {
+      "path": "src/hooks/useMany.ts",
+      "content": "import {\r\n  useQuery,\r\n  type UseQueryOptions,\r\n  type UseQueryResult,\r\n} from \"@tanstack/react-query\";\r\nimport { useDataProvider } from \"./provider\";\r\nimport type { GetManyResponse, HttpError, BaseKey } from \"./types\";\r\n\r\ninterface UseManyProps<TData = any, TError = HttpError> {\r\n  resource: string;\r\n  ids: BaseKey[];\r\n  queryOptions?: Omit<\r\n    UseQueryOptions<GetManyResponse<TData>, TError>,\r\n    \"queryKey\" | \"queryFn\"\r\n  >;\r\n  meta?: any;\r\n}\r\n\r\nexport const useMany = <TData extends unknown = any, TError = HttpError>({\r\n  resource,\r\n  ids,\r\n  queryOptions,\r\n  meta,\r\n}: UseManyProps<TData, TError>): UseQueryResult<\r\n  GetManyResponse<TData>,\r\n  TError\r\n> => {\r\n  const dataProvider = useDataProvider();\r\n\r\n  return useQuery<GetManyResponse<TData>, TError>({\r\n    queryKey: [resource, \"getMany\", ids, meta],\r\n    queryFn: () =>\r\n      dataProvider.getMany<TData>({\r\n        resource,\r\n        ids,\r\n        meta,\r\n      }),\r\n    enabled: ids.length > 0 && (queryOptions?.enabled ?? true),\r\n    ...queryOptions,\r\n  });\r\n};\r\n",
+      "type": "registry:hook"
+    }
+  ],
+  "type": "registry:hook"
+}

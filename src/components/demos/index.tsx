@@ -58,6 +58,7 @@ import {
   DrawerResponsiveDemo,
   DrawerScrollableDemo,
 } from "./drawer-demo";
+import { FormDemo } from "./form-demo";
 
 export const demoRegistry: Record<string, React.ComponentType> = {
   masonry: MasonryDemo,
@@ -109,4 +110,5 @@ export const demoRegistry: Record<string, React.ComponentType> = {
   "drawer-responsive": DrawerResponsiveDemo,
   "drawer-scrollable": DrawerScrollableDemo,
   "drawer-direction": DrawerDirectionDemo,
+  form: FormDemo,
 };

@@ -66,7 +66,7 @@ export function DocsSidebar() {
         { label: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
         // { label: "Empty", href: "/docs/components/empty" },
         // { label: "Field", href: "/docs/components/field" },
-        // { label: "Form", href: "/docs/components/form" },
+        { label: "Form", href: "/docs/components/form" },
         // { label: "Hover Card", href: "/docs/components/hover-card" },
         { label: "Hover Card", href: "/docs/components/hover-card" },
         { label: "Input", href: "/docs/components/input" },

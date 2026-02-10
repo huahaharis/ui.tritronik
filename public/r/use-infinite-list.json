@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-infinite-list",
+  "registryDependencies": [
+    "data-core"
+  ],
+  "files": [
+    {
+      "path": "src/hooks/useInfiniteList.ts",
+      "content": "import {\r\n  type InfiniteData,\r\n  useInfiniteQuery,\r\n  type UseInfiniteQueryOptions,\r\n  type UseInfiniteQueryResult,\r\n} from \"@tanstack/react-query\";\r\nimport { useDataProvider } from \"./provider\";\r\nimport type {\r\n  GetListResponse,\r\n  HttpError,\r\n  Pagination,\r\n  CrudFilter,\r\n  CrudSort,\r\n} from \"./types\";\r\n\r\ninterface UseInfiniteListProps<TData = any, TError = HttpError> {\r\n  resource: string;\r\n  pagination?: Pagination;\r\n  filters?: CrudFilter[];\r\n  sorters?: CrudSort[];\r\n  queryOptions?: Omit<\r\n    UseInfiniteQueryOptions<\r\n      GetListResponse<TData>,\r\n      TError,\r\n      InfiniteData<GetListResponse<TData>>,\r\n      any,\r\n      number\r\n    >,\r\n    \"queryKey\" | \"queryFn\" | \"getNextPageParam\" | \"initialPageParam\"\r\n  >;\r\n  meta?: any;\r\n}\r\n\r\nexport const useInfiniteList = <\r\n  TData extends unknown = any,\r\n  TError = HttpError,\r\n>({\r\n  resource,\r\n  pagination,\r\n  filters,\r\n  sorters,\r\n  queryOptions,\r\n  meta,\r\n}: UseInfiniteListProps<TData, TError>): UseInfiniteQueryResult<\r\n  InfiniteData<GetListResponse<TData>>,\r\n  TError\r\n> => {\r\n  const dataProvider = useDataProvider();\r\n\r\n  return useInfiniteQuery<\r\n    GetListResponse<TData>,\r\n    TError,\r\n    InfiniteData<GetListResponse<TData>>,\r\n    any,\r\n    number\r\n  >({\r\n    queryKey: [\r\n      resource,\r\n      \"list\",\r\n      \"infinite\",\r\n      pagination,\r\n      filters,\r\n      sorters,\r\n      meta,\r\n    ],\r\n    initialPageParam: 1,\r\n    queryFn: async ({ pageParam = 1 }) => {\r\n      return dataProvider.getList<TData>({\r\n        resource,\r\n        pagination: { ...pagination, current: pageParam as number },\r\n        filters,\r\n        sorters,\r\n        meta,\r\n      });\r\n    },\r\n    getNextPageParam: (lastPage, allPages) => {\r\n      const totalPages = Math.ceil(\r\n        (lastPage.total || 0) / (pagination?.pageSize || 10),\r\n      );\r\n      const currentPage = allPages.length;\r\n      return currentPage < totalPages ? currentPage + 1 : undefined;\r\n    },\r\n    ...queryOptions,\r\n  });\r\n};\r\n",
+      "type": "registry:hook"
+    }
+  ],
+  "type": "registry:hook"
+}

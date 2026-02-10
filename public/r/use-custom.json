@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-custom",
+  "registryDependencies": [
+    "data-core"
+  ],
+  "files": [
+    {
+      "path": "src/hooks/useCustom.ts",
+      "content": "import {\r\n  useQuery,\r\n  type UseQueryOptions,\r\n  type UseQueryResult,\r\n} from \"@tanstack/react-query\";\r\nimport { useDataProvider } from \"./provider\";\r\nimport type { HttpError } from \"./types\";\r\n\r\ninterface UseCustomProps<TData = any, TError = HttpError> {\r\n  url: string;\r\n  method: \"get\" | \"post\" | \"put\" | \"patch\" | \"delete\";\r\n  config?: {\r\n    filters?: any[];\r\n    sorters?: any[];\r\n    payload?: any;\r\n    query?: any;\r\n    headers?: any;\r\n  };\r\n  queryOptions?: Omit<UseQueryOptions<TData, TError>, \"queryKey\" | \"queryFn\">;\r\n  meta?: any;\r\n}\r\n\r\nexport const useCustom = <TData extends unknown = any, TError = HttpError>({\r\n  url,\r\n  method,\r\n  config,\r\n  queryOptions,\r\n  meta,\r\n}: UseCustomProps<TData, TError>): UseQueryResult<TData, TError> => {\r\n  const dataProvider = useDataProvider();\r\n\r\n  return useQuery<TData, TError>({\r\n    queryKey: [url, method, config, meta],\r\n    queryFn: () =>\r\n      dataProvider.custom<TData>({\r\n        url,\r\n        method,\r\n        ...config,\r\n        meta,\r\n      }),\r\n    ...queryOptions,\r\n  });\r\n};\r\n",
+      "type": "registry:hook"
+    }
+  ],
+  "type": "registry:hook"
+}

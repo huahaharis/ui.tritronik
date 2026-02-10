@@ -619,6 +619,107 @@ mutate({
 
         <hr className="border-border" />
 
+        <section id="use-form" className="scroll-mt-20">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold mb-2">useForm</h2>
+            <p className="text-muted-foreground">
+              Integrates <code>react-hook-form</code> with <code>useCRUD</code>{" "}
+              operations. It handles form state, validation (via Zod), data
+              fetching for edit mode, default value population, and submission.
+            </p>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="space-y-4">
+              <h3 className="font-semibold text-foreground">Usage</h3>
+              <CodeBlock
+                language="tsx"
+                code={`import { useForm } from "@/hooks/useForm";
+import { z } from "zod";
+
+// 1. Define your schema
+const formSchema = z.object({
+  title: z.string().min(2, "Title is too short"),
+  category: z.string().min(1, "Please select a category"),
+  description: z.string().optional(),
+});
+
+// 2. Use the hook
+const { 
+  onFinish, 
+  formLoading, 
+  saveButtonProps,
+  ...form 
+} = useForm({
+  resource: "posts",
+  action: "create", 
+  schema: formSchema,
+  redirect: "/posts"
+});`}
+              />
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="font-semibold text-foreground">API Reference</h3>
+              <div className="rounded-lg border bg-card text-sm">
+                <table className="w-full text-left">
+                  <thead className="border-b bg-muted/50">
+                    <tr>
+                      <th className="p-3 font-medium">Prop</th>
+                      <th className="p-3 font-medium">Type</th>
+                      <th className="p-3 font-medium">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="p-3 font-mono text-xs">resource</td>
+                      <td className="p-3 text-xs text-muted-foreground">
+                        string
+                      </td>
+                      <td className="p-3">API Resource path.</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-mono text-xs">action</td>
+                      <td className="p-3 text-xs text-muted-foreground">
+                        "create" | "edit"
+                      </td>
+                      <td className="p-3">
+                        Action type. "edit" fetches data by ID.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-mono text-xs">schema</td>
+                      <td className="p-3 text-xs text-muted-foreground">
+                        ZodSchema
+                      </td>
+                      <td className="p-3">Zod validation schema.</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-mono text-xs">id</td>
+                      <td className="p-3 text-xs text-muted-foreground">any</td>
+                      <td className="p-3">
+                        Record ID (required if action="edit").
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-mono text-xs">redirect</td>
+                      <td className="p-3 text-xs text-muted-foreground">
+                        bool | string
+                      </td>
+                      <td className="p-3">
+                        Path to redirect after success. Defaults to `/{"{"}
+                        resource{"}"}`.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr className="border-border" />
+
         <section id="use-auth" className="scroll-mt-20">
           <div className="mb-6">
             <h2 className="text-2xl font-bold mb-2">useAuth</h2>
@@ -712,6 +813,195 @@ login({ email: "user@example.com", password: "123" });`}
                       <td className="p-3 font-mono text-xs">useGetIdentity</td>
                       <td className="p-3">
                         Calls <code>getIdentity</code> method.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 space-y-12">
+            <h3 className="text-scroll-m-20 text-xl font-semibold tracking-tight">
+              Detailed API Reference
+            </h3>
+
+            <div className="space-y-4">
+              <h4 className="font-semibold text-foreground">useLogin</h4>
+              <p className="text-sm text-muted-foreground">
+                Returns a <code>mutate</code> function that calls{" "}
+                <code>authProvider.login</code>.
+              </p>
+              <div className="rounded-lg border bg-card text-sm">
+                <table className="w-full text-left">
+                  <thead className="border-b bg-muted/50">
+                    <tr>
+                      <th className="p-3 font-medium">Function</th>
+                      <th className="p-3 font-medium">Params</th>
+                      <th className="p-3 font-medium">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="p-3 font-mono text-xs">mutate(params)</td>
+                      <td className="p-3 font-mono text-xs">any</td>
+                      <td className="p-3">
+                        Passed directly to <code>login</code> in provider.
+                        Typically <code>{"{ email, password }"}</code>.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="font-semibold text-foreground">useLogout</h4>
+              <p className="text-sm text-muted-foreground">
+                Returns a <code>mutate</code> function that calls{" "}
+                <code>authProvider.logout</code>.
+              </p>
+              <div className="rounded-lg border bg-card text-sm">
+                <table className="w-full text-left">
+                  <thead className="border-b bg-muted/50">
+                    <tr>
+                      <th className="p-3 font-medium">Function</th>
+                      <th className="p-3 font-medium">Params</th>
+                      <th className="p-3 font-medium">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="p-3 font-mono text-xs">mutate(params)</td>
+                      <td className="p-3 font-mono text-xs">any</td>
+                      <td className="p-3">
+                        Passed directly to <code>logout</code> in provider. Uses
+                        redirect path if provided.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="font-semibold text-foreground">useRegister</h4>
+              <p className="text-sm text-muted-foreground">
+                Returns a <code>mutate</code> function that triggers{" "}
+                <code>authProvider.register</code>.
+              </p>
+              <div className="rounded-lg border bg-card text-sm">
+                <table className="w-full text-left">
+                  <thead className="border-b bg-muted/50">
+                    <tr>
+                      <th className="p-3 font-medium">Function</th>
+                      <th className="p-3 font-medium">Params</th>
+                      <th className="p-3 font-medium">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="p-3 font-mono text-xs">mutate(params)</td>
+                      <td className="p-3 font-mono text-xs">any</td>
+                      <td className="p-3">
+                        Passed directly to <code>register</code> in provider.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="font-semibold text-foreground">
+                useIsAuthenticated
+              </h4>
+              <p className="text-sm text-muted-foreground">
+                Returns a <code>check</code> function that verifies if the user
+                is authenticated by calling <code>authProvider.check</code>.
+              </p>
+              <div className="rounded-lg border bg-card text-sm">
+                <table className="w-full text-left">
+                  <thead className="border-b bg-muted/50">
+                    <tr>
+                      <th className="p-3 font-medium">Function</th>
+                      <th className="p-3 font-medium">Returns</th>
+                      <th className="p-3 font-medium">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="p-3 font-mono text-xs">check(params?)</td>
+                      <td className="p-3 font-mono text-xs">
+                        Promise&lt;boolean&gt;
+                      </td>
+                      <td className="p-3">
+                        Resolves <code>true</code> if authenticated,{" "}
+                        <code>false</code> otherwise.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="font-semibold text-foreground">useGetIdentity</h4>
+              <p className="text-sm text-muted-foreground">
+                Returns a <code>getIdentity</code> function to retrieve current
+                user details via <code>authProvider.getIdentity</code>.
+              </p>
+              <div className="rounded-lg border bg-card text-sm">
+                <table className="w-full text-left">
+                  <thead className="border-b bg-muted/50">
+                    <tr>
+                      <th className="p-3 font-medium">Function</th>
+                      <th className="p-3 font-medium">Returns</th>
+                      <th className="p-3 font-medium">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="p-3 font-mono text-xs">getIdentity()</td>
+                      <td className="p-3 font-mono text-xs">
+                        Promise&lt;User&gt;
+                      </td>
+                      <td className="p-3">
+                        Returns user object (e.g.{" "}
+                        <code>{"{ id, name, avatar }"}</code>).
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="font-semibold text-foreground">usePermissions</h4>
+              <p className="text-sm text-muted-foreground">
+                Returns a <code>getPermissions</code> function to retrieve user
+                roles/permissions via <code>authProvider.getPermissions</code>.
+              </p>
+              <div className="rounded-lg border bg-card text-sm">
+                <table className="w-full text-left">
+                  <thead className="border-b bg-muted/50">
+                    <tr>
+                      <th className="p-3 font-medium">Function</th>
+                      <th className="p-3 font-medium">Returns</th>
+                      <th className="p-3 font-medium">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="p-3 font-mono text-xs">
+                        getPermissions()
+                      </td>
+                      <td className="p-3 font-mono text-xs">
+                        Promise&lt;any&gt;
+                      </td>
+                      <td className="p-3">
+                        Typically returns an array of strings (e.g.{" "}
+                        <code>["admin", "editor"]</code>).
                       </td>
                     </tr>
                   </tbody>

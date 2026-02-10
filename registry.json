@@ -486,6 +486,17 @@
             "files": [{ "path": "src/components/ui/notification.tsx", "type": "registry:ui" }]
         },
         {
+            "name": "toast",
+            "type": "registry:ui",
+            "dependencies": ["@radix-ui/react-toast", "lucide-react"],
+            "registryDependencies": ["utils"],
+            "files": [
+                { "path": "src/components/ui/toast.tsx", "type": "registry:ui" },
+                { "path": "src/components/ui/toaster.tsx", "type": "registry:ui" },
+                { "path": "src/hooks/use-toast.ts", "type": "registry:hook" }
+            ]
+        },
+        {
             "name": "popover",
             "type": "registry:ui",
             "dependencies": ["@radix-ui/react-popover"],
@@ -536,7 +547,50 @@
         },
 
         {
-            "name": "data-hooks",
+            "name": "form",
+            "type": "registry:ui",
+            "dependencies": [
+                "@radix-ui/react-label",
+                "@radix-ui/react-slot",
+                "@hookform/resolvers",
+                "zod",
+                "react-hook-form"
+            ],
+            "registryDependencies": [
+                "utils",
+                "button",
+                "label"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/form.tsx",
+                    "type": "registry:ui"
+                }
+            ]
+        },
+        {
+            "name": "useForm",
+            "type": "registry:hook",
+            "dependencies": [
+                "react-hook-form",
+                "zod",
+                "@hookform/resolvers",
+                "@tanstack/react-router",
+                "sonner"
+            ],
+            "registryDependencies": [
+                "utils",
+                "use-crud"
+            ],
+            "files": [
+                {
+                    "path": "src/hooks/useForm.ts",
+                    "type": "registry:hook"
+                }
+            ]
+        },
+        {
+            "name": "data-core",
             "type": "registry:hook",
             "dependencies": [
                 "@tanstack/react-query",
@@ -551,15 +605,7 @@
                     "type": "registry:hook"
                 },
                 {
-                    "path": "src/hooks/useCRUD.ts",
-                    "type": "registry:hook"
-                },
-                {
                     "path": "src/hooks/provider.ts",
-                    "type": "registry:hook"
-                },
-                {
-                    "path": "src/hooks/auth.ts",
                     "type": "registry:hook"
                 },
                 {
@@ -569,21 +615,107 @@
                 {
                     "path": "src/hooks/types.ts",
                     "type": "registry:hook"
-                },
+                }
+            ]
+        },
+        {
+            "name": "use-crud",
+            "type": "registry:hook",
+            "registryDependencies": [
+                "data-core"
+            ],
+            "files": [
+                {
+                    "path": "src/hooks/useCRUD.ts",
+                    "type": "registry:hook"
+                }
+            ]
+        },
+        {
+            "name": "use-custom",
+            "type": "registry:hook",
+            "registryDependencies": [
+                "data-core"
+            ],
+            "files": [
                 {
                     "path": "src/hooks/useCustom.ts",
                     "type": "registry:hook"
-                },
+                }
+            ]
+        },
+        {
+            "name": "use-infinite-list",
+            "type": "registry:hook",
+            "registryDependencies": [
+                "data-core"
+            ],
+            "files": [
                 {
                     "path": "src/hooks/useInfiniteList.ts",
                     "type": "registry:hook"
-                },
+                }
+            ]
+        },
+        {
+            "name": "use-many",
+            "type": "registry:hook",
+            "registryDependencies": [
+                "data-core"
+            ],
+            "files": [
                 {
                     "path": "src/hooks/useMany.ts",
                     "type": "registry:hook"
-                },
+                }
+            ]
+        },
+        {
+            "name": "use-list",
+            "type": "registry:hook",
+            "registryDependencies": [
+                "data-core"
+            ],
+            "files": [
+                {
+                    "path": "src/hooks/useGetList.ts",
+                    "type": "registry:hook"
+                }
+            ]
+        },
+        {
+            "name": "use-table",
+            "type": "registry:hook",
+            "registryDependencies": [
+                "data-core",
+                "use-infinite-list"
+            ],
+            "files": [
                 {
                     "path": "src/hooks/useTable.ts",
+                    "type": "registry:hook"
+                }
+            ]
+        },
+        {
+            "name": "use-auth",
+            "type": "registry:hook",
+             "registryDependencies": [
+                "data-core"
+            ],
+            "files": [
+                {
+                    "path": "src/hooks/auth.ts",
+                    "type": "registry:hook"
+                }
+            ]
+        },
+        {
+            "name": "use-mobile",
+            "type": "registry:hook",
+            "files": [
+                {
+                    "path": "src/hooks/use-mobile.ts",
                     "type": "registry:hook"
                 }
             ]
