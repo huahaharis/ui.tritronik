@@ -65,6 +65,7 @@ interface DataTableProps<TData> {
   data: TData[];
   paginationStyle?: "simple" | "numbered";
   enableSelection?: boolean;
+  enableColumnVisibility?: boolean;
   onSelectionChange?: (selectedRows: TData[]) => void;
   className?: string;
   containerClassName?: string;
@@ -76,6 +77,7 @@ export function DataTable<TData>({
   data,
   paginationStyle = "simple",
   enableSelection = false,
+  enableColumnVisibility = false,
   onSelectionChange,
   className,
   containerClassName,
@@ -198,36 +200,38 @@ export function DataTable<TData>({
     <div className={cn("w-full", className)}>
       <div className="flex items-center py-4">
         {/* Placeholder for future global filter if needed, or consumers can pass a filter component */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              className="ml-auto"
-              suppressHydrationWarning
-            >
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {enableColumnVisibility && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="ml-auto"
+                suppressHydrationWarning
+              >
+                Columns <ChevronDown className="ml-2 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
       <div className={cn("rounded-md border", containerClassName)}>
         <Table className={tableClassName}>

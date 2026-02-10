@@ -26,6 +26,7 @@ export function DocsSidebar() {
         { label: "Router", href: "/docs/router" },
         { label: "Theming", href: "/docs/theming" },
         { label: "Dark Mode", href: "/docs/dark-mode" },
+        // { label: "Layout", href: "/docs/layout" },
         // { label: "CLI", href: "/docs/cli" },
         // { label: "Monorepo", href: "/docs/monorepo" },
         // { label: "Open in v0", href: "/docs/v0" },

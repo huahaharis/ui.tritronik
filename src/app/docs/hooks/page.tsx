@@ -387,6 +387,238 @@ const tags = data?.data ?? [];`}
 
         <hr className="border-border" />
 
+        <section id="use-crud" className="scroll-mt-20">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold mb-2">useCRUD</h2>
+            <p className="text-muted-foreground">
+              A suite of simplified hooks including <code>useOne</code>,{" "}
+              <code>useCreate</code>, <code>useUpdate</code>, and{" "}
+              <code>useDelete</code>. These hooks belong to the{" "}
+              <code>useCRUD</code> family and are designed to standardize and
+              simplify common Data Provider operations.
+            </p>
+          </div>
+
+          <div className="space-y-12">
+            {/* useOne */}
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">useOne</h3>
+                <p className="text-sm text-muted-foreground">
+                  Fetch a single record by its ID.
+                </p>
+                <CodeBlock
+                  language="tsx"
+                  code={`const { data, isLoading } = useOne({
+  resource: "products",
+  id: 123
+});`}
+                />
+              </div>
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">
+                  API Reference (useOne)
+                </h3>
+                <div className="rounded-lg border bg-card text-sm">
+                  <table className="w-full text-left">
+                    <thead className="border-b bg-muted/50">
+                      <tr>
+                        <th className="p-3 font-medium">Prop</th>
+                        <th className="p-3 font-medium">Type</th>
+                        <th className="p-3 font-medium">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y">
+                      <tr>
+                        <td className="p-3 font-mono text-xs">resource</td>
+                        <td className="p-3 text-xs text-muted-foreground">
+                          string
+                        </td>
+                        <td className="p-3">Resource path.</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-mono text-xs">id</td>
+                        <td className="p-3 text-xs text-muted-foreground">
+                          any
+                        </td>
+                        <td className="p-3">Record ID.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            {/* useCreate */}
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">useCreate</h3>
+                <p className="text-sm text-muted-foreground">
+                  Create a new record.
+                </p>
+                <CodeBlock
+                  language="tsx"
+                  code={`const { mutate } = useCreate();
+
+mutate({
+  resource: "products",
+  variables: { 
+    name: "New Product",
+    price: 100 
+  }
+});`}
+                />
+              </div>
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">
+                  API Reference (useCreate)
+                </h3>
+                <div className="rounded-lg border bg-card text-sm">
+                  <table className="w-full text-left">
+                    <thead className="border-b bg-muted/50">
+                      <tr>
+                        <th className="p-3 font-medium">Prop</th>
+                        <th className="p-3 font-medium">Type</th>
+                        <th className="p-3 font-medium">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y">
+                      <tr>
+                        <td className="p-3 font-mono text-xs">resource</td>
+                        <td className="p-3 text-xs text-muted-foreground">
+                          string
+                        </td>
+                        <td className="p-3">
+                          Resource path (optional if provided in hook).
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-mono text-xs">variables</td>
+                        <td className="p-3 text-xs text-muted-foreground">
+                          object
+                        </td>
+                        <td className="p-3">The payload to create.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            {/* useUpdate */}
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">useUpdate</h3>
+                <p className="text-sm text-muted-foreground">
+                  Update an existing record.
+                </p>
+                <CodeBlock
+                  language="tsx"
+                  code={`const { mutate } = useUpdate();
+
+mutate({
+  resource: "products",
+  id: 123,
+  variables: { price: 150 }
+});`}
+                />
+              </div>
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">
+                  API Reference (useUpdate)
+                </h3>
+                <div className="rounded-lg border bg-card text-sm">
+                  <table className="w-full text-left">
+                    <thead className="border-b bg-muted/50">
+                      <tr>
+                        <th className="p-3 font-medium">Prop</th>
+                        <th className="p-3 font-medium">Type</th>
+                        <th className="p-3 font-medium">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y">
+                      <tr>
+                        <td className="p-3 font-mono text-xs">resource</td>
+                        <td className="p-3 text-xs text-muted-foreground">
+                          string
+                        </td>
+                        <td className="p-3">Resource path.</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-mono text-xs">id</td>
+                        <td className="p-3 text-xs text-muted-foreground">
+                          any
+                        </td>
+                        <td className="p-3">Record ID to update.</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-mono text-xs">variables</td>
+                        <td className="p-3 text-xs text-muted-foreground">
+                          object
+                        </td>
+                        <td className="p-3">Fields to update.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            {/* useDelete */}
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">useDelete</h3>
+                <p className="text-sm text-muted-foreground">
+                  Delete a record by ID.
+                </p>
+                <CodeBlock
+                  language="tsx"
+                  code={`const { mutate } = useDelete();
+
+mutate({
+  resource: "products",
+  id: 123
+});`}
+                />
+              </div>
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">
+                  API Reference (useDelete)
+                </h3>
+                <div className="rounded-lg border bg-card text-sm">
+                  <table className="w-full text-left">
+                    <thead className="border-b bg-muted/50">
+                      <tr>
+                        <th className="p-3 font-medium">Prop</th>
+                        <th className="p-3 font-medium">Type</th>
+                        <th className="p-3 font-medium">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y">
+                      <tr>
+                        <td className="p-3 font-mono text-xs">resource</td>
+                        <td className="p-3 text-xs text-muted-foreground">
+                          string
+                        </td>
+                        <td className="p-3">Resource path.</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-mono text-xs">id</td>
+                        <td className="p-3 text-xs text-muted-foreground">
+                          any
+                        </td>
+                        <td className="p-3">Record ID to delete.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr className="border-border" />
+
         <section id="use-auth" className="scroll-mt-20">
           <div className="mb-6">
             <h2 className="text-2xl font-bold mb-2">useAuth</h2>

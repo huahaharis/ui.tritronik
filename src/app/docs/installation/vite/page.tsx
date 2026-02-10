@@ -12,7 +12,7 @@ import {
 } from "@/components/docs/code-block";
 
 export default function ViteInstallationPage() {
-  const [pkg, setPkg] = useState<Pkg>("yarn");
+  const [pkg, setPkg] = useState<Pkg>("pnpm");
   const [copied, setCopied] = useState<string | null>(null);
 
   function copy(text: string, id: string) {

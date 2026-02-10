@@ -37,6 +37,21 @@ export interface GetOneResponse<TData = BaseRecord> {
     [key: string]: any;
 }
 
+export interface CreateResponse<TData = BaseRecord> {
+    data: TData;
+    [key: string]: any;
+}
+
+export interface UpdateResponse<TData = BaseRecord> {
+    data: TData;
+    [key: string]: any;
+}
+
+export interface DeleteOneResponse<TData = BaseRecord> {
+    data: TData;
+    [key: string]: any;
+}
+
 export type CrudOperators =
   | "eq"
   | "ne"

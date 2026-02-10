@@ -1,9 +1,4 @@
 import { createContext, useContext, useMemo } from "react";
-
-/**
- * Common interface for authentication providers.
- * Modeled after Refine.dev's AuthProvider.
- */
 export interface AuthProvider {
   login: (params: any) => Promise<any>;
   logout: (params: any) => Promise<any>;

@@ -5,7 +5,10 @@ import type {
     GetOneResponse, 
     CrudFilter, 
     CrudSort, 
-    Pagination 
+    Pagination,
+    CreateResponse,
+    UpdateResponse,
+    DeleteOneResponse
 } from "./types";
 
 export interface DataProvider {
@@ -29,6 +32,25 @@ export interface DataProvider {
         meta?: any;
     }) => Promise<GetOneResponse<TData>>;
 
+    create: <TData = any, TVariables = any>(params: {
+        resource: string;
+        variables: TVariables;
+        meta?: any;
+    }) => Promise<CreateResponse<TData>>;
+
+    update: <TData = any, TVariables = any>(params: {
+        resource: string;
+        id: any;
+        variables: TVariables;
+        meta?: any;
+    }) => Promise<UpdateResponse<TData>>;
+
+    deleteOne: <TData = any>(params: {
+        resource: string;
+        id: any;
+        meta?: any;
+    }) => Promise<DeleteOneResponse<TData>>;
+
     custom: <TData = any>(params: {
         url: string;
         method: "get" | "post" | "put" | "patch" | "delete";
@@ -40,10 +62,6 @@ export interface DataProvider {
         meta?: any;
     }) => Promise<TData>;
 }
-
-// --- Default REST Implementation (Mock/Configurable) ---
-
-// --- Default REST Implementation (Mock/Configurable) ---
 
 export const createDataProvider = (apiUrl: string): DataProvider => ({
     getList: async ({ resource, pagination, filters, sorters }) => {
@@ -124,6 +142,47 @@ export const createDataProvider = (apiUrl: string): DataProvider => ({
         return { data };
     },
 
+    create: async ({ resource, variables }) => {
+        const response = await fetch(`${apiUrl}/${resource}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(variables),
+        });
+
+        if (!response.ok) throw new Error(response.statusText);
+
+        const data = await response.json();
+        return { data };
+    },
+
+    update: async ({ resource, id, variables }) => {
+        const response = await fetch(`${apiUrl}/${resource}/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(variables),
+        });
+
+        if (!response.ok) throw new Error(response.statusText);
+
+        const data = await response.json();
+        return { data };
+    },
+
+    deleteOne: async ({ resource, id }) => {
+        const response = await fetch(`${apiUrl}/${resource}/${id}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) throw new Error(response.statusText);
+
+        const data = await response.json();
+        return { data };
+    },
+
     custom: async ({ url, method, payload, query, headers }) => {
         let requestUrl = new URL(url.startsWith("http") ? url : `${apiUrl}${url}`);
         
@@ -147,7 +206,6 @@ export const createDataProvider = (apiUrl: string): DataProvider => ({
     }
 });
 
-// Backward compatibility or default instance
 export const defaultDataProvider = createDataProvider("https://api.fake-rest.refine.dev");
 
 const DataProviderContext = createContext<DataProvider | undefined>(undefined);

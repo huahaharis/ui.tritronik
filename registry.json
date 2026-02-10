@@ -524,7 +524,7 @@
             "name": "data-table",
             "type": "registry:ui",
             "dependencies": ["@tanstack/react-table", "lucide-react"],
-            "registryDependencies": ["utils", "table", "button", "input", "select", "dropdown-menu"],
+            "registryDependencies": ["utils", "table", "button", "input", "select", "dropdown-menu", "pagination", "drawer", "checkbox"],
             "files": [{ "path": "src/components/ui/data-table.tsx", "type": "registry:ui" }]
         },
         {
@@ -551,11 +551,15 @@
                     "type": "registry:hook"
                 },
                 {
+                    "path": "src/hooks/useCRUD.ts",
+                    "type": "registry:hook"
+                },
+                {
                     "path": "src/hooks/provider.ts",
                     "type": "registry:hook"
                 },
                 {
-                    "path": "src/hooks/auth.tsx",
+                    "path": "src/hooks/auth.ts",
                     "type": "registry:hook"
                 },
                 {
@@ -567,19 +571,19 @@
                     "type": "registry:hook"
                 },
                 {
-                    "path": "src/hooks/useCustom.tsx",
+                    "path": "src/hooks/useCustom.ts",
                     "type": "registry:hook"
                 },
                 {
-                    "path": "src/hooks/useInfiniteList.tsx",
+                    "path": "src/hooks/useInfiniteList.ts",
                     "type": "registry:hook"
                 },
                 {
-                    "path": "src/hooks/useMany.tsx",
+                    "path": "src/hooks/useMany.ts",
                     "type": "registry:hook"
                 },
                 {
-                    "path": "src/hooks/useTable.tsx",
+                    "path": "src/hooks/useTable.ts",
                     "type": "registry:hook"
                 }
             ]
