@@ -378,7 +378,7 @@ export function AlertDemo() {
       cli: "npx shadcn@latest add alert-dialog",
       // manual: "@radix-ui/react-alert-dialog",
     },
-    demo: "alertDialog",
+    demo: "alert-dialog",
     usage: [
       `import {
   AlertDialog,
@@ -448,7 +448,7 @@ export function AlertDialogDemo() {
         title: "Basic",
         description:
           "A modal dialog that interrupts the user with important content and expects a response.",
-        demo: "alertDialog",
+        demo: "alert-dialog",
         code: `
 import {
   AlertDialog,
@@ -490,7 +490,7 @@ export function AlertDialogDemo() {
         title: "Small",
         description:
           "A modal dialog that interrupts the user with important content and expects a response.",
-        demo: "alertDialogSmall",
+        demo: "alert-dialog-small",
         code: `import {
   AlertDialog,
   AlertDialogAction,
@@ -530,7 +530,7 @@ export function AlertDialogSmall() {
         title: "Media",
         description:
           "A modal dialog that interrupts the user with important content and expects a response.",
-        demo: "alertDialogWithMedia",
+        demo: "alert-dialog-with-media",
         code: `import {
   AlertDialog,
   AlertDialogAction,
@@ -573,7 +573,7 @@ export function AlertDialogWithMedia() {
         title: "Small with media",
         description:
           "A modal dialog that interrupts the user with important content and expects a response.",
-        demo: "alertDialogSmallWithMedia",
+        demo: "alert-dialog-small-with-media",
         code: `import {
   AlertDialog,
   AlertDialogAction,
@@ -619,7 +619,7 @@ export function AlertDialogSmallWithMedia() {
         title: "Destructive",
         description:
           "A modal dialog that interrupts the user with important content and expects a response.",
-        demo: "alertDialogDestructive",
+        demo: "alert-dialog-destructive",
         code: `import {
   AlertDialog,
   AlertDialogAction,
