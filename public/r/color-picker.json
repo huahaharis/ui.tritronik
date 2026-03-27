@@ -2,14 +2,14 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "color-picker",
   "dependencies": [
-    "react-colorful",
-    "lucide-react"
+    "sonner"
   ],
   "registryDependencies": [
-    "utils",
     "button",
+    "input",
     "popover",
-    "input"
+    "tabs",
+    "utils"
   ],
   "files": [
     {

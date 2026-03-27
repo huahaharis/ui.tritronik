@@ -2,10 +2,8 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "accordion",
   "dependencies": [
-    "@radix-ui/react-accordion"
-  ],
-  "registryDependencies": [
-    "utils"
+    "@radix-ui/react-accordion",
+    "lucide-react"
   ],
   "files": [
     {

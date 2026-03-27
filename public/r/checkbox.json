@@ -6,6 +6,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
+    "label",
     "utils"
   ],
   "files": [

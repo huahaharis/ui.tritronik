@@ -1,9 +1,9 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "use-table",
-  "registryDependencies": [
-    "data-core",
-    "use-infinite-list"
+  "dependencies": [
+    "@tanstack/react-query",
+    "@tanstack/react-router"
   ],
   "files": [
     {

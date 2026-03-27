@@ -2,8 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "chart",
   "dependencies": [
-    "chart.js",
-    "react-chartjs-2"
+    "chart.js"
   ],
   "registryDependencies": [
     "utils"

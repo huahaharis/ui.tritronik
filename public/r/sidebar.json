@@ -7,13 +7,14 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "utils",
     "button",
     "input",
     "separator",
     "sheet",
     "skeleton",
-    "tooltip"
+    "tooltip",
+    "use-mobile",
+    "utils"
   ],
   "files": [
     {

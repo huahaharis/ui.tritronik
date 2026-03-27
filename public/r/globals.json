@@ -1,6 +1,10 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "globals",
+  "dependencies": [
+    "tailwindcss",
+    "tw-animate-css"
+  ],
   "files": [
     {
       "path": "src/app/globals.css",

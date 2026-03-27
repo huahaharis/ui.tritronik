@@ -11,6 +11,10 @@
                     "path": "src/app/globals.css",
                     "type": "registry:style"
                 }
+            ],
+            "dependencies": [
+                "tailwindcss",
+                "tw-animate-css"
             ]
         },
         {
@@ -49,7 +53,8 @@
             "type": "registry:ui",
             "dependencies": [
                 "@radix-ui/react-slot",
-                "class-variance-authority"
+                "class-variance-authority",
+                "lucide-react"
             ],
             "registryDependencies": [
                 "utils"
@@ -71,10 +76,8 @@
                 }
             ],
             "dependencies": [
-                "@radix-ui/react-accordion"
-            ],
-            "registryDependencies": [
-                "utils"
+                "@radix-ui/react-accordion",
+                "lucide-react"
             ]
         },
         {
@@ -82,10 +85,6 @@
             "type": "registry:ui",
             "dependencies": [
                 "@radix-ui/react-alert-dialog"
-            ],
-            "registryDependencies": [
-                "utils",
-                "button"
             ],
             "files": [
                 {
@@ -131,11 +130,11 @@
             "name": "calendar",
             "type": "registry:ui",
             "dependencies": [
-                "react-day-picker"
+                "lucide-react"
             ],
             "registryDependencies": [
-                "utils",
-                "button"
+                "button",
+                "utils"
             ],
             "files": [
                 {
@@ -289,8 +288,7 @@
             "name": "chart",
             "type": "registry:ui",
             "dependencies": [
-                "chart.js",
-                "react-chartjs-2"
+                "chart.js"
             ],
             "registryDependencies": [
                 "utils"
@@ -311,13 +309,14 @@
                 "lucide-react"
             ],
             "registryDependencies": [
-                "utils",
                 "button",
                 "input",
                 "separator",
                 "sheet",
                 "skeleton",
-                "tooltip"
+                "tooltip",
+                "use-mobile",
+                "utils"
             ],
             "files": [
                 {
@@ -338,6 +337,7 @@
                 "lucide-react"
             ],
             "registryDependencies": [
+                "label",
                 "utils"
             ],
             "files": [
@@ -358,10 +358,11 @@
                 "lucide-react"
             ],
             "registryDependencies": [
-                "utils",
+                "badge",
                 "button",
                 "command",
-                "popover"
+                "popover",
+                "utils"
             ],
             "files": [
                 {
@@ -393,9 +394,10 @@
                 "class-variance-authority"
             ],
             "registryDependencies": [
-                "utils",
                 "button",
-                "input"
+                "input",
+                "textarea",
+                "utils"
             ],
             "files": [
                 {
@@ -408,14 +410,14 @@
             "name": "color-picker",
             "type": "registry:ui",
             "dependencies": [
-                "react-colorful",
-                "lucide-react"
+                "sonner"
             ],
             "registryDependencies": [
-                "utils",
                 "button",
+                "input",
                 "popover",
-                "input"
+                "tabs",
+                "utils"
             ],
             "files": [
                 {
@@ -448,118 +450,255 @@
         {
             "name": "alert",
             "type": "registry:ui",
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/alert.tsx", "type": "registry:ui" }]
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/alert.tsx",
+                    "type": "registry:ui"
+                }
+            ],
+            "dependencies": [
+                "class-variance-authority"
+            ]
         },
         {
             "name": "card",
             "type": "registry:ui",
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/card.tsx", "type": "registry:ui" }]
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/card.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "dialog",
             "type": "registry:ui",
-            "dependencies": ["@radix-ui/react-dialog", "lucide-react"],
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/dialog.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "@radix-ui/react-dialog",
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/dialog.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "dropdown-menu",
             "type": "registry:ui",
-            "dependencies": ["@radix-ui/react-dropdown-menu", "lucide-react"],
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/dropdown-menu.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "@radix-ui/react-dropdown-menu",
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/dropdown-menu.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "label",
             "type": "registry:ui",
-            "dependencies": ["@radix-ui/react-label"],
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/label.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "@radix-ui/react-label"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/label.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "notification",
             "type": "registry:ui",
-            "dependencies": ["lucide-react"],
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/notification.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "lucide-react",
+                "sonner"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/notification.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "toast",
             "type": "registry:ui",
-            "dependencies": ["@radix-ui/react-toast", "lucide-react"],
-            "registryDependencies": ["utils"],
+            "dependencies": [
+                "@radix-ui/react-toast",
+                "class-variance-authority",
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
             "files": [
-                { "path": "src/components/ui/toast.tsx", "type": "registry:ui" },
-                { "path": "src/components/ui/toaster.tsx", "type": "registry:ui" },
-                { "path": "src/hooks/use-toast.ts", "type": "registry:hook" }
+                {
+                    "path": "src/components/ui/toast.tsx",
+                    "type": "registry:ui"
+                },
+                {
+                    "path": "src/components/ui/toaster.tsx",
+                    "type": "registry:ui"
+                },
+                {
+                    "path": "src/hooks/use-toast.ts",
+                    "type": "registry:hook"
+                }
             ]
         },
         {
             "name": "popover",
             "type": "registry:ui",
-            "dependencies": ["@radix-ui/react-popover"],
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/popover.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "@radix-ui/react-popover"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/popover.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "progress",
             "type": "registry:ui",
-            "dependencies": ["@radix-ui/react-progress"],
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/progress.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "@radix-ui/react-progress"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/progress.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "select",
             "type": "registry:ui",
-            "dependencies": ["@radix-ui/react-select", "lucide-react"],
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/select.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "@radix-ui/react-select",
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/select.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "slider",
             "type": "registry:ui",
-            "dependencies": ["@radix-ui/react-slider"],
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/slider.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "@radix-ui/react-slider"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/slider.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "stepper",
             "type": "registry:ui",
-            "dependencies": ["lucide-react"],
-            "registryDependencies": ["utils", "button", "separator"],
-            "files": [{ "path": "src/components/ui/stepper.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/stepper.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "data-table",
             "type": "registry:ui",
-            "dependencies": ["@tanstack/react-table", "lucide-react"],
-            "registryDependencies": ["utils", "table", "button", "input", "select", "dropdown-menu", "pagination", "drawer", "checkbox"],
-            "files": [{ "path": "src/components/ui/data-table.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "@tanstack/react-table",
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "button",
+                "checkbox",
+                "dropdown-menu",
+                "pagination",
+                "select",
+                "table",
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/data-table.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
         {
             "name": "tabs",
             "type": "registry:ui",
-            "dependencies": ["@radix-ui/react-tabs"],
-            "registryDependencies": ["utils"],
-            "files": [{ "path": "src/components/ui/tabs.tsx", "type": "registry:ui" }]
+            "dependencies": [
+                "@radix-ui/react-tabs"
+            ],
+            "registryDependencies": [
+                "utils"
+            ],
+            "files": [
+                {
+                    "path": "src/components/ui/tabs.tsx",
+                    "type": "registry:ui"
+                }
+            ]
         },
-
         {
             "name": "form",
             "type": "registry:ui",
             "dependencies": [
+                "@hookform/resolvers",
                 "@radix-ui/react-label",
                 "@radix-ui/react-slot",
-                "@hookform/resolvers",
-                "zod",
-                "react-hook-form"
+                "react-hook-form",
+                "zod"
             ],
             "registryDependencies": [
-                "utils",
-                "button",
-                "label"
+                "label",
+                "utils"
             ],
             "files": [
                 {
@@ -572,15 +711,10 @@
             "name": "useForm",
             "type": "registry:hook",
             "dependencies": [
-                "react-hook-form",
-                "zod",
                 "@hookform/resolvers",
                 "@tanstack/react-router",
-                "sonner"
-            ],
-            "registryDependencies": [
-                "utils",
-                "use-crud"
+                "sonner",
+                "zod"
             ],
             "files": [
                 {
@@ -593,11 +727,7 @@
             "name": "data-core",
             "type": "registry:hook",
             "dependencies": [
-                "@tanstack/react-query",
                 "@tanstack/react-router"
-            ],
-            "registryDependencies": [
-                "utils"
             ],
             "files": [
                 {
@@ -621,88 +751,85 @@
         {
             "name": "use-crud",
             "type": "registry:hook",
-            "registryDependencies": [
-                "data-core"
-            ],
             "files": [
                 {
                     "path": "src/hooks/useCRUD.ts",
                     "type": "registry:hook"
                 }
+            ],
+            "dependencies": [
+                "@tanstack/react-query"
             ]
         },
         {
             "name": "use-custom",
             "type": "registry:hook",
-            "registryDependencies": [
-                "data-core"
-            ],
             "files": [
                 {
                     "path": "src/hooks/useCustom.ts",
                     "type": "registry:hook"
                 }
+            ],
+            "dependencies": [
+                "@tanstack/react-query"
             ]
         },
         {
             "name": "use-infinite-list",
             "type": "registry:hook",
-            "registryDependencies": [
-                "data-core"
-            ],
             "files": [
                 {
                     "path": "src/hooks/useInfiniteList.ts",
                     "type": "registry:hook"
                 }
+            ],
+            "dependencies": [
+                "@tanstack/react-query"
             ]
         },
         {
             "name": "use-many",
             "type": "registry:hook",
-            "registryDependencies": [
-                "data-core"
-            ],
             "files": [
                 {
                     "path": "src/hooks/useMany.ts",
                     "type": "registry:hook"
                 }
+            ],
+            "dependencies": [
+                "@tanstack/react-query"
             ]
         },
         {
             "name": "use-list",
             "type": "registry:hook",
-            "registryDependencies": [
-                "data-core"
-            ],
             "files": [
                 {
                     "path": "src/hooks/useGetList.ts",
                     "type": "registry:hook"
                 }
+            ],
+            "dependencies": [
+                "@tanstack/react-query"
             ]
         },
         {
             "name": "use-table",
             "type": "registry:hook",
-            "registryDependencies": [
-                "data-core",
-                "use-infinite-list"
-            ],
             "files": [
                 {
                     "path": "src/hooks/useTable.ts",
                     "type": "registry:hook"
                 }
+            ],
+            "dependencies": [
+                "@tanstack/react-query",
+                "@tanstack/react-router"
             ]
         },
         {
             "name": "use-auth",
             "type": "registry:hook",
-             "registryDependencies": [
-                "data-core"
-            ],
             "files": [
                 {
                     "path": "src/hooks/auth.ts",

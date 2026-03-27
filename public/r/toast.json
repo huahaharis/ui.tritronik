@@ -3,6 +3,7 @@
   "name": "toast",
   "dependencies": [
     "@radix-ui/react-toast",
+    "class-variance-authority",
     "lucide-react"
   ],
   "registryDependencies": [

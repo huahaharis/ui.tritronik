@@ -5,9 +5,7 @@
     "lucide-react"
   ],
   "registryDependencies": [
-    "utils",
-    "button",
-    "separator"
+    "utils"
   ],
   "files": [
     {

@@ -156,7 +156,14 @@ export default function App() {
                   <h3 className="font-semibold mb-2">1. Setup (One-time)</h3>
                   <p className="text-sm text-muted-foreground mb-3">
                     You need the TanStack Router CLI to generate the route tree.
-                    By default, it looks for files in <code>src/routes</code>.
+                    By default, it looks for files in <code>src/routes</code> (
+                    <a
+                      href="#custom-configuration"
+                      className="text-primary hover:underline font-medium"
+                    >
+                      learn how to change this
+                    </a>
+                    ).
                   </p>
                   <div className="relative rounded-lg border bg-zinc-950 p-3 font-mono text-sm text-zinc-50 overflow-x-auto dark:bg-zinc-900 mb-4">
                     npm install -D @tanstack/router-cli
@@ -303,6 +310,66 @@ const router = createRouter({ routeTree })`}
                 />
               </TabsContent>
             </Tabs>
+          </div>
+        </section>
+
+        <hr className="border-border" />
+
+        <section id="custom-configuration" className="scroll-mt-20">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold mb-2">Custom Configuration</h2>
+            <p className="text-muted-foreground">
+              By default, TanStack Router looks for files in{" "}
+              <code>src/routes</code>. You can customize this to support{" "}
+              <code>src/pages</code> or a modular <code>src/features</code>{" "}
+              architecture.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="rounded-lg border bg-card p-6">
+              <h3 className="font-semibold mb-4 text-lg text-foreground">
+                Using tsr.config.json
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Create a <code>tsr.config.json</code> in your project root to
+                override standard settings. This is useful for changing the
+                source directory or the output file location.
+              </p>
+              <CodeBlock
+                language="json"
+                code={`{
+  "routesDirectory": "src/pages",
+  "generatedRouteTree": "src/routeTree.gen.ts"
+}`}
+              />
+            </div>
+
+            <div className="rounded-lg border bg-card p-6">
+              <h3 className="font-semibold mb-4 text-lg text-foreground">
+                Feature-Based Structure
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                To use a modular approach like{" "}
+                <code>src/features/auth/login/index.tsx</code>, you can set your{" "}
+                <code>routesDirectory</code> to <code>src/features</code> and
+                use ignore patterns to skip non-route files (components, hooks,
+                etc.).
+              </p>
+              <CodeBlock
+                language="json"
+                code={`{
+  "routesDirectory": "src/features",
+  "routeFileIgnorePattern": "((^|/)\\\\.(?!well-known))|((^|/)(components|hooks|api|types|utils)/)"
+}`}
+              />
+              <div className="mt-4 p-3 rounded bg-blue-500/10 border border-blue-500/20 text-sm text-blue-400">
+                <strong>Pro Tip:</strong> Setting a robust{" "}
+                <code>routeFileIgnorePattern</code> allows you to co-locate your
+                routing logic directly inside your feature modules without
+                polluting your URL structure.
+              </div>
+            </div>
           </div>
         </section>
 

@@ -2,16 +2,15 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "form",
   "dependencies": [
+    "@hookform/resolvers",
     "@radix-ui/react-label",
     "@radix-ui/react-slot",
-    "@hookform/resolvers",
-    "zod",
-    "react-hook-form"
+    "react-hook-form",
+    "zod"
   ],
   "registryDependencies": [
-    "utils",
-    "button",
-    "label"
+    "label",
+    "utils"
   ],
   "files": [
     {

@@ -2,11 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "data-core",
   "dependencies": [
-    "@tanstack/react-query",
     "@tanstack/react-router"
-  ],
-  "registryDependencies": [
-    "utils"
   ],
   "files": [
     {

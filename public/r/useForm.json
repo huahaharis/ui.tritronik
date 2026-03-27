@@ -2,15 +2,10 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "useForm",
   "dependencies": [
-    "react-hook-form",
-    "zod",
     "@hookform/resolvers",
     "@tanstack/react-router",
-    "sonner"
-  ],
-  "registryDependencies": [
-    "utils",
-    "use-crud"
+    "sonner",
+    "zod"
   ],
   "files": [
     {
